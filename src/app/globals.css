@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0B0B0F;
+  --color-foreground: #FFFFFF;
+  --color-primary: #FF5A00;
+  --color-secondary: #00F0FF;
+  --color-accent: #D1D1D6;
+  --color-obsidian: #0D0D12;
+  --color-deep: #16161D;
+
+  --font-inter: "Inter", sans-serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --background: #0B0B0F;
+  --foreground: #FFFFFF;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+}
+
+@utility glass {
+  backdrop-filter: blur(24px);
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+@utility glass-dark {
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility neon-glow-primary {
+  box-shadow: 0 0 40px rgba(255, 90, 0, 0.15);
+}
+
+@utility neon-glow-secondary {
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+}
+
+@utility perspective-1000 {
+  perspective: 1000px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+@utility rotate-x-180 {
+  transform: rotateX(180deg);
+}
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
