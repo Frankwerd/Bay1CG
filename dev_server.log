@@ -1,0 +1,12 @@
+
+> temp-app@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 516ms
+
+○ Compiling / ...
+ GET / 200 in 7.5s (next.js: 6.5s, application-code: 993ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
