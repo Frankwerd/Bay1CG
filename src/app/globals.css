@@ -1,71 +1,152 @@
 @import "tailwindcss";
 
+/* Tokens mirror DESIGN.md. Change both together. */
 @theme {
-  --color-background: #0B0B0F;
-  --color-foreground: #FFFFFF;
-  --color-primary: #FF5A00;
-  --color-secondary: #00F0FF;
-  --color-accent: #D1D1D6;
-  --color-obsidian: #0D0D12;
-  --color-deep: #16161D;
+  --color-carbon: #14110f;
+  --color-carbon-2: #1d1916;
+  --color-line: #2a2522;
+  --color-stone: #8c8379;
+  --color-bone: #ece6dc;
+  --color-bone-2: #ded6ca;
+  --color-ash: #5e5750;
+  --color-signal: #e2471b;
+  --color-signal-deep: #b5360f;
 
-  --font-inter: "Inter", sans-serif;
-  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+  /* Theme-aware colors, flipped by [data-theme] on <html>. */
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-raised: var(--raised);
+  --color-accent-text: var(--accent-text);
 
-  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-display: var(--font-martian), ui-monospace, monospace;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
+  --font-sans: var(--font-schibsted), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-:root {
-  --background: #0B0B0F;
-  --foreground: #FFFFFF;
+:root,
+:root[data-theme="dark"] {
+  --bg: var(--color-carbon);
+  --fg: var(--color-bone);
+  --muted: var(--color-stone);
+  --rule: var(--color-line);
+  --raised: var(--color-carbon-2);
+  --accent-text: var(--color-signal);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: var(--color-bone);
+  --fg: var(--color-carbon);
+  --muted: var(--color-ash);
+  --rule: var(--color-bone-2);
+  --raised: var(--color-bone-2);
+  --accent-text: var(--color-signal-deep);
+  color-scheme: light;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  transition:
+    background-color 0.7s var(--ease-out-expo),
+    color 0.7s var(--ease-out-expo);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter);
+  background: transparent;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-@utility glass {
-  backdrop-filter: blur(24px);
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+::selection {
+  background: var(--color-signal);
+  color: var(--color-carbon);
 }
 
-@utility glass-dark {
-  backdrop-filter: blur(12px);
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-@utility neon-glow-primary {
-  box-shadow: 0 0 40px rgba(255, 90, 0, 0.15);
+@utility display {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 88;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
 }
 
-@utility neon-glow-secondary {
-  box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
-@utility perspective-1000 {
-  perspective: 1000px;
+@utility wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (width >= 48rem) {
+    padding-inline: 32px;
+  }
 }
 
-@utility preserve-3d {
-  transform-style: preserve-3d;
+/* Line-mask reveal. JS adds .is-in; without JS, or with reduced motion, lines show as-is. */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.js-motion .reveal-line > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 0.9s var(--ease-out-expo);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js-motion .is-in .reveal-line > span {
+  transform: none;
 }
 
-@utility backface-hidden {
-  backface-visibility: hidden;
+.fade-up {
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+}
+.js-motion .fade-up:not(.is-in) {
+  opacity: 0;
+  transform: translateY(24px);
 }
 
-@utility rotate-x-180 {
-  transform: rotateX(180deg);
-}
-
-@layer base {
-  * {
-    border-color: rgba(255, 255, 255, 0.1);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    transition: none;
+  }
+  .js-motion .reveal-line > span,
+  .js-motion .fade-up:not(.is-in) {
+    transform: none;
+    opacity: 1;
+    transition: none;
   }
 }

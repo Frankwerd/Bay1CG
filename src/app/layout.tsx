@@ -1,40 +1,53 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import type { Metadata, Viewport } from "next";
+import { Martian_Mono, Schibsted_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import Motion from "@/components/Motion";
+import { site } from "@/lib/site";
+import "./globals.css";
 
-const inter = Inter({
+const martian = Martian_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
+  axes: ["wdth"],
+  variable: "--font-martian",
+});
+
+const schibsted = Schibsted_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-schibsted",
 });
 
 export const metadata: Metadata = {
-  title: "Bay1 Consulting Group | Enterprise Systems & AI Strategy",
-  description: "Advanced systems automation, operational efficiency, and scalable technical architecture for the modern enterprise.",
+  title: {
+    default: `${site.name} | AI training, AI strategy and web development`,
+    template: `%s | ${site.short}`,
+  },
+  description: site.description,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: "#14110f",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" data-theme="dark" className={`${martian.variable} ${schibsted.variable}`} suppressHydrationWarning>
       <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+        {/* Hide reveal targets before first paint so they animate in instead of flashing. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.add('js-motion')",
+          }}
         />
       </head>
-      <body
-        className={`${inter.variable} font-inter antialiased min-h-screen flex flex-col bg-background text-foreground`}
-      >
-        <Navbar />
-        <main className="flex-grow pt-24">
-          {children}
-        </main>
+      <body className="min-h-screen">
+        <a href="#main" className="label sr-only z-[60] bg-signal p-3 text-carbon focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
+          Skip to content
+        </a>
+        <Nav />
+        <Motion />
+        <main id="main">{children}</main>
         <Footer />
         <Analytics />
       </body>

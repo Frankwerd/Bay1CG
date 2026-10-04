@@ -1,47 +1,78 @@
-import Link from 'next/link';
+import Link from "next/link";
+import { nav, site } from "@/lib/site";
+import { Mark } from "./Logo";
 
-const Footer = () => {
+const socialLabels: Record<keyof typeof site.social, string> = {
+  linkedin: "LinkedIn",
+  facebook: "Facebook",
+  instagram: "Instagram",
+  github: "GitHub",
+};
+
+export default function Footer() {
+  const socials = (Object.keys(site.social) as (keyof typeof site.social)[]).filter((k) => site.social[k]);
+
   return (
-    <footer className="border-t border-white/10 pt-24 pb-12 px-6 md:px-12 bg-background relative overflow-hidden">
-      {/* Subtle Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24 max-w-7xl mx-auto relative z-10">
-        <div className="md:col-span-2">
-          <h2 className="text-2xl font-bold tracking-tighter text-white mb-8">
-            Bay<span className="text-primary">1</span> <span className="text-white/40 font-light">Consulting Group</span>
-          </h2>
-          <p className="text-white/50 max-w-sm font-light leading-relaxed">
-            Architecting the future of enterprise operations through advanced systems automation, technical strategy, and bespoke software infrastructure.
-          </p>
+    <footer data-theme="dark" className="relative z-10 bg-carbon text-bone">
+      <div className="wrap grid gap-12 border-t border-line pt-16 pb-10 md:grid-cols-12">
+        <div className="md:col-span-6">
+          <p className="label text-stone">Start a project</p>
+          <a
+            href={`mailto:${site.email}`}
+            className="display mt-4 block text-[7vw] break-all transition-colors hover:text-signal md:text-[3vw]"
+          >
+            {site.email}
+          </a>
+          <p className="mt-6 max-w-sm text-stone">{site.location}. Working with teams across the US.</p>
         </div>
-        <div>
-          <h3 className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase mb-8 text-white/30">Quick Links</h3>
-          <ul className="space-y-4 text-[13px] font-medium">
-            <li><Link href="/about" className="text-white/60 hover:text-primary transition-colors">About</Link></li>
-            <li><Link href="/services" className="text-white/60 hover:text-primary transition-colors">Services</Link></li>
-            <li><Link href="/case-studies" className="text-white/60 hover:text-primary transition-colors">Case Studies</Link></li>
-            <li><Link href="/projects" className="text-white/60 hover:text-primary transition-colors">Projects</Link></li>
+
+        <div className="md:col-span-3">
+          <p className="label text-stone">Pages</p>
+          <ul className="mt-4 space-y-2">
+            {[...nav, { href: "/contact", label: "Contact" }].map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="transition-colors hover:text-signal">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
-        <div>
-          <h3 className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase mb-8 text-white/30">Connect</h3>
-          <ul className="space-y-4 text-[13px] font-medium">
-            <li><Link href="/contact" className="text-white/60 hover:text-primary transition-colors">Contact Us</Link></li>
-            <li><Link href="/privacy" className="text-white/60 hover:text-primary transition-colors">Privacy Policy</Link></li>
-            <li className="flex space-x-4 pt-4">
-               <span className="material-symbols-outlined text-white/40 cursor-pointer hover:text-primary transition-colors">alternate_email</span>
-               <span className="material-symbols-outlined text-white/40 cursor-pointer hover:text-primary transition-colors">share</span>
-            </li>
+
+        <div className="md:col-span-3">
+          <p className="label text-stone">Elsewhere</p>
+          <ul className="mt-4 space-y-2">
+            {socials.map((k) => (
+              <li key={k}>
+                <a href={site.social[k]} target="_blank" rel="noreferrer" className="transition-colors hover:text-signal">
+                  {socialLabels[k]}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 max-w-7xl mx-auto w-full relative z-10">
-        <p>© 2026 Bay1 Consulting Group. All rights reserved.</p>
-        <p className="mt-4 md:mt-0 text-primary/40">Architecting Resilience</p>
+
+      <div className="wrap overflow-hidden">
+        <p className="display flex items-end gap-[0.15em] text-[24vw] leading-[0.8] text-bone/95 select-none" aria-hidden>
+          <Mark className="mb-[0.06em] h-[0.7em] w-auto" />
+          Bay1
+        </p>
+      </div>
+
+      <div className="wrap flex flex-col gap-3 border-t border-line py-6 text-sm text-stone md:flex-row md:justify-between">
+        <p>
+          &copy; {new Date().getFullYear()} {site.name}
+        </p>
+        <div className="flex gap-6">
+          <Link href="/privacy" className="hover:text-bone">
+            Privacy policy
+          </Link>
+          <Link href="/terms" className="hover:text-bone">
+            Terms of service
+          </Link>
+        </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

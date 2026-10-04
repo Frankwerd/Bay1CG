@@ -1,59 +1,61 @@
 export interface Service {
   id: string;
+  index: string;
   title: string;
-  description: string;
-  tools: string[];
-  outcomes: string[];
-  icon: string;
+  /** Two display lines for the big heading. */
+  heading: [string, string];
+  summary: string;
+  forWho: string;
+  deliverables: string[];
 }
 
 export const services: Service[] = [
   {
-    id: "ai-architecture",
-    title: "AI & System Architecture",
-    description: "Designing end-to-end serverless solutions leveraging LLMs (GPT-4, Gemini, Groq) and Human-in-the-Loop workflows to automate complex business problems.",
-    tools: ["GPT-4", "Gemini", "Vercel AI SDK", "Multi-LLM HITL"],
-    outcomes: ["95% Manual Effort Reduction", "Modular Architecture", "System Resilience"],
-    icon: "psychology"
+    id: "ai-training",
+    index: "01",
+    title: "AI training",
+    heading: ["AI training", "for your team"],
+    summary:
+      "Hands-on sessions built around the work your team already does. People leave with prompts, workflows and habits they use the next morning.",
+    forWho:
+      "Teams that pay for ChatGPT, Claude or Copilot seats and still do most of the work by hand.",
+    deliverables: [
+      "Workshops run on your team's real tasks and documents",
+      "Role-specific playbooks for sales, operations and admin",
+      "A shared prompt library your team can keep adding to",
+      "Follow-up office hours for the questions that come up after",
+    ],
   },
   {
-    id: "full-stack-dev",
-    title: "Full-Stack Development",
-    description: "Engineering scalable web applications and Chrome extensions with robust backends using Google Apps Script and modern frontend frameworks.",
-    tools: ["Next.js", "React", "Chrome Extension APIs", "Docker"],
-    outcomes: ["Custom ERP Solutions", "Automated OMS Workflows", "Dynamic UI/UX"],
-    icon: "code"
+    id: "ai-strategy",
+    index: "02",
+    title: "AI strategy",
+    heading: ["AI strategy", "that ships"],
+    summary:
+      "We map how work moves through your business, find where AI saves real hours, and say plainly where it doesn't belong.",
+    forWho:
+      "Owners and operators who know AI matters and want a plan they can act on this quarter.",
+    deliverables: [
+      "A workflow audit with time spent per task",
+      "An opportunity map ranked by hours saved and risk",
+      "Tool picks, data rules and privacy guardrails",
+      "A 90-day rollout plan with owners and checkpoints",
+    ],
   },
   {
-    id: "data-analytics",
-    title: "Data Analysis & BI",
-    description: "Translating complex data into actionable insights through SQL-based forecasting, Tableau dashboards, and advanced modeling.",
-    tools: ["Tableau", "SQL", "Python", "JSON-LD"],
-    outcomes: ["KPI Reporting", "Financial Forecasting", "AEO/GEO Optimization"],
-    icon: "monitoring"
+    id: "web-development",
+    index: "03",
+    title: "Web development",
+    heading: ["Websites", "that do work"],
+    summary:
+      "Fast sites built to be found in search and in AI answers, wired into the tools you run on so they keep working after launch.",
+    forWho:
+      "Local and growing businesses whose site looks fine and brings in nothing.",
+    deliverables: [
+      "Marketing sites built for search and AI answer engines",
+      "Automated content systems for blogs and Google Business Profile",
+      "Integrations with HubSpot, Slack and Google Workspace",
+      "Internal tools that replace spreadsheets and copy-paste",
+    ],
   },
-  {
-    id: "project-mgmt",
-    title: "Project & Product Management",
-    description: "Leading cross-functional teams using Agile methodologies (Scrum, Kanban) to deliver high-stakes projects on time and on budget.",
-    tools: ["JIRA", "Asana", "Agile", "Roadmapping"],
-    outcomes: ["$2M+ Grant Portfolios", "100% On-time Submission", "Workflow Optimization"],
-    icon: "account_tree"
-  },
-  {
-    id: "biz-strategy",
-    title: "Business Strategy & Ops",
-    description: "Validating product-market fit, conducting market analysis, and architecting operational frameworks for early-stage startups.",
-    tools: ["Shopify Liquid", "HubSpot CRM", "Zapier", "Market Analysis"],
-    outcomes: ["Market Penetration", "Scalability Assessment", "Operational Efficiency"],
-    icon: "strategy"
-  },
-  {
-    id: "leadership",
-    title: "Leadership & Communication",
-    description: "Managing cross-functional teams, directing philanthropic strategy, and facilitating executive-level stakeholder reporting.",
-    tools: ["Public Speaking", "Grant Writing", "Team Leadership"],
-    outcomes: ["$2M+ Managed Portfolio", "Strategic Partnerships", "Team Mentorship"],
-    icon: "groups"
-  }
 ];
