@@ -19,6 +19,12 @@ export const experience: Role[] = [
     note: "Guided international startups on US market entry through a government-backed accelerator.",
   },
   {
+    company: "Handshake AI",
+    role: "AI Model Training & Evaluation Specialist",
+    period: "2024 to 2025",
+    note: "Expert work evaluating large language models: writing task prompts to expose reasoning weaknesses, grading model responses against detailed rubrics, and documenting failure patterns.",
+  },
+  {
     company: "CareerSuite.ai",
     role: "Founder and full-stack engineer",
     period: "2025",

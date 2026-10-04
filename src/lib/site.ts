@@ -5,13 +5,12 @@ export const site = {
   email: "francis@bay1cg.com",
   location: "Bayonne, NJ",
   description:
-    "Bay1 Consulting Group is the bridge between your business and AI that works: team training, AI strategy, and websites that bring in work.",
-  /** The one lead offer for now. Requests go to `email`. */
+    "Bay1 Consulting Group designs and builds fast, good-looking websites for small businesses, and adds practical AI tools when they save real time.",
+  /** The primary lead offer. Requests go to `email`. */
   offer: {
-    label: "Request a website review",
-    subject: "Website review request",
+    label: "Start a project",
+    subject: "New project",
   },
-  // Links render only when set.
   social: {
     linkedin: "",
     facebook: "",

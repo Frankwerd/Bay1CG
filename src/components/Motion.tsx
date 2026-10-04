@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-/** Smooth scroll, one-shot reveals, and the dark/light theme that follows the section at mid-screen. */
+/** Smooth scroll and spring reveals for elements entering the viewport below fold. */
 export default function Motion() {
   const pathname = usePathname();
 
@@ -32,40 +32,34 @@ export default function Motion() {
   }, []);
 
   useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     window.__lenis?.scrollTo(0, { immediate: true });
 
+    if (!("IntersectionObserver" in window)) return;
+
+    const fold = window.innerHeight;
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          e.target.classList.add("is-in");
-          io.unobserve(e.target);
-        }
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("go-in");
+            io.unobserve(e.target);
+          }
+        });
       },
-      { rootMargin: "0px 0px -10% 0px" },
+      { rootMargin: "0px 0px 12% 0px" },
     );
-    document.querySelectorAll(".reveal, .fade-up").forEach((el) => io.observe(el));
 
-    const root = document.documentElement;
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("body [data-theme]"));
-    const update = () => {
-      const mid = window.innerHeight * 0.5;
-      for (const s of sections) {
-        const r = s.getBoundingClientRect();
-        if (r.top <= mid && r.bottom > mid) {
-          const theme = s.dataset.theme;
-          if (theme && root.dataset.theme !== theme) root.dataset.theme = theme;
-          return;
-        }
+    const targets = document.querySelectorAll(".rv");
+    targets.forEach((el) => {
+      if (el.getBoundingClientRect().top > fold) {
+        io.observe(el);
       }
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    });
+
     return () => {
       io.disconnect();
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
     };
   }, [pathname]);
 

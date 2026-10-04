@@ -1,61 +1,82 @@
+export interface ServiceItem {
+  title: string;
+  note: string;
+}
+
 export interface Service {
   id: string;
   index: string;
   title: string;
-  /** Two display lines for the big heading. */
   heading: [string, string];
   summary: string;
+  primary: boolean;
   forWho: string;
   deliverables: string[];
+  items: ServiceItem[];
 }
 
 export const services: Service[] = [
   {
-    id: "ai-strategy",
-    index: "01",
-    title: "AI strategy",
-    heading: ["Survey the ground", "before you build."],
-    summary:
-      "We map how work moves through your business, find where AI saves real hours, and say plainly where it doesn't belong.",
-    forWho:
-      "Owners and operators who know AI matters and want a plan they can act on this quarter.",
-    deliverables: [
-      "A workflow audit with time spent per task",
-      "An opportunity map ranked by hours saved and risk",
-      "Tool picks, data rules and privacy guardrails",
-      "A 90-day rollout plan with owners and checkpoints",
-    ],
-  },
-  {
-    id: "ai-training",
-    index: "02",
-    title: "AI training",
-    heading: ["Train the people", "who carry the load."],
-    summary:
-      "Hands-on sessions built around the work your team already does. People leave with prompts, workflows and habits they use the next morning.",
-    forWho:
-      "Teams that pay for ChatGPT, Claude or Copilot seats and still do most of the work by hand.",
-    deliverables: [
-      "Workshops run on your team's real tasks and documents",
-      "Role-specific playbooks for sales, operations and admin",
-      "A shared prompt library your team can keep adding to",
-      "Follow-up office hours for the questions that come up after",
-    ],
-  },
-  {
     id: "web-development",
-    index: "03",
-    title: "Web development",
-    heading: ["A website that", "brings in the work."],
+    index: "01",
+    title: "Web design and development",
+    heading: ["Web design and", "development"],
     summary:
-      "Fast sites built to be found in search and in AI answers, wired into the tools you run on so they keep working after launch.",
-    forWho:
-      "Local and growing businesses whose site looks fine and brings in nothing.",
+      "Custom websites that look as good as your work, load fast on any phone, and turn visitors into calls and booked jobs.",
+    primary: true,
+    forWho: "Small businesses looking for a fast, modern website that generates real leads.",
     deliverables: [
-      "Marketing sites built for search and AI answer engines",
-      "Automated content systems for blogs and Google Business Profile",
-      "Integrations with HubSpot, Slack and Google Workspace",
-      "Internal tools that replace spreadsheets and copy-paste",
+      "Custom website design built around your business",
+      "Booking and quote forms straight to your inbox or CRM",
+      "Rebuilds of tired sites on modern framework",
+      "Care plans for ongoing updates and fixes",
+    ],
+    items: [
+      {
+        title: "Custom website design",
+        note: "Built around your business",
+      },
+      {
+        title: "Booking and quote forms",
+        note: "Straight to your inbox or CRM",
+      },
+      {
+        title: "Rebuilds of tired sites",
+        note: "Same domain, new engine",
+      },
+      {
+        title: "Care plans",
+        note: "Updates, fixes and small changes",
+      },
+    ],
+  },
+  {
+    id: "ai-add-ons",
+    index: "02",
+    title: "AI add-ons",
+    heading: ["AI add-ons for", "your workflow"],
+    summary:
+      "When it saves real time, we add AI tools to your site and back office, built around how your business already runs.",
+    primary: false,
+    forWho: "Businesses wanting to automate content, intake, or routine office tasks.",
+    deliverables: [
+      "Content systems for blogs and profile updates",
+      "Quote and intake assistants for quick drafts",
+      "Internal tools replacing spreadsheets and copy-paste",
+    ],
+    items: [
+      {
+        title: "Content systems",
+        note: "Blog and Google posts on schedule",
+      },
+      {
+        title: "Quote and intake assistants",
+        note: "Drafts in seconds, you approve",
+      },
+      {
+        title: "Internal tools",
+        note: "Replace copy-paste and spreadsheets",
+      },
     ],
   },
 ];

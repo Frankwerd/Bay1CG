@@ -1,99 +1,116 @@
 import type { Metadata } from "next";
-import { ButtonLink, DisplayHeading, Section, Tag } from "@/components/ui";
 import { services } from "@/data/services";
-import { site } from "@/lib/site";
+import { ButtonLink } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "AI training, AI strategy, and web development for growing businesses.",
+  description:
+    "Web design and development for small businesses, plus practical AI add-ons that save real time.",
 };
 
 export default function ServicesPage() {
+  const webDev = services[0];
+  const aiAddons = services[1];
+
   return (
-    <>
-      {/* Intro Header */}
-      <Section theme="dark" className="pt-32 pb-16 md:pt-48 md:pb-24">
+    <main id="top" className="pt-0">
+      {/* Page Header */}
+      <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
         <div className="wrap">
-          <Tag>What we do</Tag>
-          <DisplayHeading lines={["Clear services", "real outcomes"]} className="mt-6" />
-          <p className="fade-up mt-8 max-w-2xl text-lg md:text-xl text-stone">
-            We don&apos;t sell generic consulting or endless slide decks. We train your people, map your workflows, and build the software that keeps work moving.
+          <div className="label text-steel-lt">Services</div>
+          <h1 className="text-[var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+            Web design first. AI when it saves real time.
+          </h1>
+          <p className="text-[var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
+            We build websites that look as good as your work and bring in new customers, then add custom AI tools when they simplify how your business runs.
           </p>
         </div>
-      </Section>
+      </section>
 
-      {/* Service Blocks */}
-      {services.map((service, index) => {
-        const isDark = index % 2 === 0;
-        return (
-          <Section
-            key={service.id}
-            id={service.id}
-            theme={isDark ? "dark" : "light"}
-            className="py-24 md:py-32 border-t border-line"
-          >
-            <div className="wrap grid gap-12 md:grid-cols-12">
-              <div className="md:col-span-5">
-                <Tag tone={isDark ? "signal" : "plain"}>
-                  {service.index} / {service.title}
-                </Tag>
-                <DisplayHeading lines={service.heading} className="mt-6" />
-                <p className={`fade-up mt-6 text-lg ${isDark ? "text-stone" : "text-ash"}`}>
-                  {service.summary}
-                </p>
-                <div className="fade-up mt-8">
-                  <p className="label text-fg">Who it&apos;s for</p>
-                  <p className={`mt-2 ${isDark ? "text-stone" : "text-ash"}`}>{service.forWho}</p>
-                </div>
+      {/* Web design and development (Primary) */}
+      <section id="web-development" className="py-[clamp(60px,8vw,120px)] border-b border-mist">
+        <div className="wrap">
+          <div className="max-w-[46rem]">
+            <div className="label text-ember font-semibold">Primary service</div>
+            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+              {webDev.title}
+            </h2>
+            <p className="text-steel text-[var(--lead)] mt-4 leading-relaxed">
+              {webDev.summary}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {webDev.items.map((item) => (
+              <div key={item.title} className="p-6 rounded-[10px] bg-off border border-mist">
+                <h3 className="text-[var(--h3)] font-semibold tracking-tight">{item.title}</h3>
+                <p className="text-steel mt-2 text-[0.95rem]">{item.note}</p>
               </div>
+            ))}
+          </div>
 
-              <div className="md:col-span-7 flex flex-col justify-between">
-                <div>
-                  <p className="label text-fg">Deliverables</p>
-                  <ol className="mt-6 space-y-4">
-                    {service.deliverables.map((item, i) => (
-                      <li key={i} className={`flex gap-4 ${isDark ? "text-stone" : "text-ash"}`}>
-                        <span className={`label ${isDark ? "text-signal" : "text-signal-deep"}`}>
-                          0{i + 1}
-                        </span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-
-                <div className="mt-12 pt-8 border-t border-line">
-                  <ButtonLink href="/contact" variant="solid">
-                    Book {service.title}
-                  </ButtonLink>
-                </div>
-              </div>
-            </div>
-          </Section>
-        );
-      })}
-
-      {/* CTA Section */}
-      <Section theme="dark" className="py-24 md:py-32 border-t border-line">
-        <div className="wrap max-w-3xl">
-          <Tag>Next steps</Tag>
-          <DisplayHeading lines={["Not sure which", "you need?"]} className="mt-6" />
-          <p className="fade-up mt-6 text-lg text-stone">
-            We start every engagement with a short conversation. Tell us where the time goes in your team and we&apos;ll tell you which track makes sense.
-          </p>
-          <div className="fade-up mt-8 flex flex-wrap items-center gap-6">
-            <ButtonLink href="/contact" variant="solid">
-              Book a call
-            </ButtonLink>
-            <a
-              href={`mailto:${site.email}`}
-              className="label text-stone transition-colors hover:text-signal"
-            >
-              {site.email}
-            </a>
+          <div className="mt-12 p-8 rounded-[10px] bg-paper border border-mist">
+            <h3 className="text-[var(--h3)] font-semibold">What&apos;s included in every web build</h3>
+            <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-steel">
+              <li className="flex gap-3 items-baseline">
+                <span className="text-ember font-bold">—</span>
+                <span>Fast, responsive design tuned for mobile and desktop</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="text-ember font-bold">—</span>
+                <span>Clear copy focused on calls and quote requests</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="text-ember font-bold">—</span>
+                <span>Contact and quote forms wired to your email or CRM</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="text-ember font-bold">—</span>
+                <span>Search and social preview optimization</span>
+              </li>
+            </ul>
           </div>
         </div>
-      </Section>
-    </>
+      </section>
+
+      {/* AI Add-ons (Secondary) */}
+      <section id="ai-add-ons" className="bg-off py-[clamp(60px,8vw,120px)] border-b border-mist">
+        <div className="wrap">
+          <div className="max-w-[46rem]">
+            <div className="label text-steel font-semibold">Secondary add-on</div>
+            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+              {aiAddons.title}
+            </h2>
+            <p className="text-steel text-[var(--lead)] mt-4 leading-relaxed">
+              {aiAddons.summary}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            {aiAddons.items.map((item) => (
+              <div key={item.title} className="p-6 rounded-[10px] bg-paper border border-mist">
+                <h3 className="text-[1.2rem] font-semibold tracking-tight">{item.title}</h3>
+                <p className="text-steel mt-2 text-[0.95rem]">{item.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
+        <div className="wrap flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div>
+            <div className="label text-steel-lt">Ready to start?</div>
+            <h2 className="text-[var(--h2)] mt-2 font-semibold tracking-[-0.035em]">
+              Let&apos;s build a website that works for you.
+            </h2>
+          </div>
+          <ButtonLink href="/contact" variant="ember" className="shrink-0">
+            Start a project
+          </ButtonLink>
+        </div>
+      </section>
+    </main>
   );
 }

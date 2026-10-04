@@ -1,12 +1,15 @@
 export interface CaseStudy {
   id: string;
   client: string;
-  /** Two display lines for the big heading. */
+  title: string;
   heading: [string, string];
   sector: string;
   services: string[];
   summary: string;
-  problem: string;
+  featured?: boolean;
+  facts?: { label: string; text: string }[];
+  note?: string;
+  problem?: string;
   approach: string[];
   stack: string[];
   outcomes: string[];
@@ -16,63 +19,53 @@ export const cases: CaseStudy[] = [
   {
     id: "luminous",
     client: "Luminous Electric",
+    title: "Luminous Electric has a website that stays fresh every week.",
     heading: ["Luminous", "Electric"],
     sector: "Licensed electrical contractor, New Jersey",
-    services: ["Web development", "AI strategy"],
+    services: ["Web design and development", "AI add-ons"],
+    featured: true,
     summary:
-      "A weekly content system that turns real search demand and real jobs into blog and Google Business Profile posts, with no one at a keyboard.",
-    problem:
-      "Luminous does good work across North Jersey, but posting about it took time the crew didn't have. The site and Google profile went quiet for weeks at a time.",
-    approach: [
-      "Each week the system reads 28 days of search demand from Google Analytics and the recent job history from HubSpot.",
-      "It picks a topic people are searching for that matches work Luminous actually did, then writes one blog post and one to three Google Business Profile posts.",
-      "Every draft is checked against the client's content rulebook before anything goes out. Banned claims, service area and tone are enforced in code.",
-      "Posts publish to WordPress and Google Business Profile through a locked-down gateway with weekly caps, and the owner gets a report by email.",
+      "A New Jersey electrician's website, kept current by an AI content system. It turns what customers search for and the jobs the crew actually finished into a blog post and Google updates every week, checked against the owner's rules before anything goes live.",
+    facts: [
+      { label: "1", text: "blog post written and published every week" },
+      { label: "3", text: "Google Business Profile updates, at most, each week" },
+      { label: "Rules", text: "banned claims and service area enforced before publishing" },
+      { label: "Report", text: "a plain summary emailed to the owner after every run" },
     ],
-    stack: ["Claude", "Google Apps Script", "WordPress", "Google Business Profile", "GA4", "HubSpot"],
+    note: "Results figures to be added once confirmed with the client.",
+    problem:
+      "Luminous does good work across North Jersey, but posting about it took time the crew didn't have.",
+    approach: [
+      "Each week the system reads search demand from Google Analytics and recent job history.",
+      "It picks a topic people search for matching real work completed, drafting blog and profile updates.",
+      "Every draft is checked against content rules before anything goes out.",
+      "Posts publish automatically and a summary report is emailed to the owner.",
+    ],
+    stack: ["Next.js", "WordPress", "Google Business Profile", "GA4", "Claude"],
     outcomes: [
       "One blog post and up to three profile posts every week",
       "Topics tied to real search demand and real completed jobs",
-      "Dry-run by default, with guards that block off-brand claims",
-    ],
-  },
-  {
-    id: "handshake",
-    client: "Handshake AI",
-    heading: ["Training", "the models"],
-    sector: "AI model training",
-    services: ["AI training"],
-    summary:
-      "Expert work training and evaluating large language models through Handshake AI. It's where our training practice learned how models fail.",
-    problem:
-      "Frontier models need people who can write hard tasks, judge answers against a rubric, and explain exactly where a response goes wrong.",
-    approach: [
-      "Wrote task prompts designed to expose weak reasoning and shallow answers.",
-      "Graded model responses against detailed rubrics and wrote the reasoning behind each score.",
-      "Documented recurring failure patterns so they could be trained out.",
-    ],
-    stack: ["Rubric design", "Model evaluation", "Prompt writing"],
-    outcomes: [
-      "First-hand knowledge of where today's models are strong and where they break",
-      "The same evaluation habits we now teach client teams",
+      "Guards that block off-brand or unverified claims",
     ],
   },
   {
     id: "careersuite",
     client: "CareerSuite.ai",
+    title: "CareerSuite.ai: AI job application toolkit",
     heading: ["CareerSuite", ".ai"],
-    sector: "Our own product",
-    services: ["Web development", "AI strategy"],
+    sector: "Product development",
+    services: ["Web design and development", "AI add-ons"],
+    featured: false,
     summary:
-      "A full-stack AI toolkit for job seekers: a Chrome extension, a Google Apps Script backend, and AI email parsing that tracks applications on its own.",
+      "A full-stack AI toolkit for job seekers: a Chrome extension, a Google Apps Script backend, and AI email parsing that tracks applications automatically.",
     problem:
-      "Job seekers lose hours a week logging applications by hand and rewriting resumes for every posting.",
+      "Job seekers lose hours a week logging applications by hand and rewriting resumes.",
     approach: [
-      "Built a Chrome extension that captures applications as you submit them.",
-      "Parsed confirmation and rejection emails with AI to keep the tracker current.",
-      "Shipped seven releases on schedule as a solo founder and engineer.",
+      "Built a browser extension capturing applications as submitted.",
+      "Parsed confirmation and rejection emails with AI to maintain tracker status.",
+      "Shipped seven releases on schedule.",
     ],
     stack: ["Next.js", "TypeScript", "Gemini API", "Google Workspace APIs"],
-    outcomes: ["95% less manual data entry", "5+ hours saved per user each week"],
+    outcomes: ["Automated tracking for applications", "Hours saved per user each week"],
   },
 ];

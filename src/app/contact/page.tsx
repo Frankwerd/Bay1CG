@@ -1,161 +1,215 @@
 "use client";
 
-import { useState } from "react";
-import { DisplayHeading, Section, Tag } from "@/components/ui";
+import { useState, FormEvent } from "react";
 import { site } from "@/lib/site";
+import { Button } from "@/components/ui";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    company: "",
-    service: "AI training",
-    message: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [business, setBusiness] = useState("");
+  const [need, setNeed] = useState("A new website");
+  const [details, setDetails] = useState("");
+  const [error, setError] = useState("");
+  const [copyLabel, setCopyLabel] = useState("Copy email");
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const errs: Record<string, string> = {};
-    if (!form.name.trim()) errs.name = "Name is required.";
-    if (!form.email.trim()) {
-      errs.email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      errs.email = "Invalid email address.";
-    }
-    if (!form.message.trim()) errs.message = "Message is required.";
-    return errs;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const errs = validate();
-    setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
 
-    const subject = encodeURIComponent(`Inquiry from ${form.name} (${form.service})`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\n\nMessage:\n${form.message}`
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (!email.trim() || !email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!details.trim()) {
+      setError("Please provide a few details about your project.");
+      return;
+    }
+
+    setError("");
+
+    const subject = encodeURIComponent(
+      business.trim() ? `New project: ${business}` : "New project request",
     );
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nBusiness: ${business || "N/A"}\nNeed: ${need}\n\nProject Details:\n${details}`,
+    );
+
     window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
   };
 
-  return (
-    <>
-      <Section theme="dark" className="pt-32 pb-16 md:pt-48 md:pb-24">
-        <div className="wrap grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-6">
-            <Tag>Get in touch</Tag>
-            <DisplayHeading lines={["Let's talk", "about AI"]} className="mt-6" />
-            <p className="fade-up mt-8 text-lg text-stone">
-              Tell us about your team, your current tools, or what you want to automate. We reply within one business day.
-            </p>
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(site.email).then(
+      () => {
+        setCopyLabel("Copied");
+        setTimeout(() => setCopyLabel("Copy email"), 1400);
+      },
+      () => {
+        setCopyLabel("Copied");
+        setTimeout(() => setCopyLabel("Copy email"), 1400);
+      },
+    );
+  };
 
-            <div className="fade-up mt-12 space-y-6 border-t border-line pt-8">
-              <div>
-                <p className="label text-stone">Email</p>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="mt-1 block text-xl text-fg transition-colors hover:text-signal"
-                >
-                  {site.email}
-                </a>
+  return (
+    <main id="top" className="pt-0">
+      {/* Header Band */}
+      <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
+        <div className="wrap">
+          <div className="label text-steel-lt">Contact</div>
+          <h1 className="text-[var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+            Start a project
+          </h1>
+          <p className="text-[var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
+            Tell us about your business and what you want to build. You&apos;ll get a plain response directly from Francis within 24 hours.
+          </p>
+        </div>
+      </section>
+
+      {/* Main Form and Info */}
+      <section className="py-[clamp(60px,8vw,120px)]">
+        <div className="wrap grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Form */}
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="lg:col-span-7 bg-paper border border-mist rounded-[10px] p-[clamp(24px,3vw,40px)] space-y-6"
+          >
+            <div>
+              <label htmlFor="name" className="block font-semibold text-[0.9rem] mb-2">
+                Your name <span className="text-ember">*</span>
+              </label>
+              <input
+                id="name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setError("");
+                }}
+                className="w-full font-inherit text-[1rem] text-ink bg-off border-[1.5px] border-mist rounded-[8px] p-[14px] focus:outline-none focus:border-ember transition-colors"
+                placeholder="Jane Smith"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block font-semibold text-[0.9rem] mb-2">
+                Email address <span className="text-ember">*</span>
+              </label>
+              <input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError("");
+                }}
+                className="w-full font-inherit text-[1rem] text-ink bg-off border-[1.5px] border-mist rounded-[8px] p-[14px] focus:outline-none focus:border-ember transition-colors"
+                placeholder="jane@mybusiness.com"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="business" className="block font-semibold text-[0.9rem] mb-2">
+                Business name
+              </label>
+              <input
+                id="business"
+                type="text"
+                value={business}
+                onChange={(e) => setBusiness(e.target.value)}
+                className="w-full font-inherit text-[1rem] text-ink bg-off border-[1.5px] border-mist rounded-[8px] p-[14px] focus:outline-none focus:border-ember transition-colors"
+                placeholder="Smith Electrical Services"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="need" className="block font-semibold text-[0.9rem] mb-2">
+                What do you need?
+              </label>
+              <select
+                id="need"
+                value={need}
+                onChange={(e) => setNeed(e.target.value)}
+                className="w-full font-inherit text-[1rem] text-ink bg-off border-[1.5px] border-mist rounded-[8px] p-[14px] focus:outline-none focus:border-ember transition-colors"
+              >
+                <option value="A new website">A new website</option>
+                <option value="A website rebuild">A website rebuild</option>
+                <option value="A care plan">A care plan</option>
+                <option value="An AI add-on">An AI add-on</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="details" className="block font-semibold text-[0.9rem] mb-2">
+                Project details <span className="text-ember">*</span>
+              </label>
+              <textarea
+                id="details"
+                rows={5}
+                required
+                value={details}
+                onChange={(e) => {
+                  setDetails(e.target.value);
+                  setError("");
+                }}
+                className="w-full font-inherit text-[1rem] text-ink bg-off border-[1.5px] border-mist rounded-[8px] p-[14px] resize-y focus:outline-none focus:border-ember transition-colors"
+                placeholder="Tell us about your timeline, current website, or what you'd like to achieve..."
+              />
+            </div>
+
+            {error && (
+              <div className="text-[#B42318] text-[0.88rem] font-medium" role="alert">
+                {error}
               </div>
-              <div>
-                <p className="label text-stone">Location</p>
-                <p className="mt-1 text-lg text-fg">{site.location}</p>
-              </div>
+            )}
+
+            <Button type="submit" variant="ember" className="w-full">
+              Send message
+            </Button>
+          </form>
+
+          {/* Side Info */}
+          <div className="lg:col-span-5 space-y-8 bg-off p-[clamp(24px,3vw,40px)] rounded-[10px] border border-mist">
+            <div>
+              <span className="label text-steel block mb-2">Direct email</span>
+              <code className="text-[1.1rem] font-semibold text-ink select-all block mb-3">
+                {site.email}
+              </code>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="bg-paper border border-mist rounded-[6px] px-3 py-1.5 font-semibold text-xs text-ink cursor-pointer hover:border-steel-lt transition-colors"
+              >
+                {copyLabel}
+              </button>
+            </div>
+
+            <div className="border-t border-mist pt-6">
+              <span className="label text-steel block mb-2">Location</span>
+              <p className="text-[1.1rem] font-semibold text-ink">
+                Based in {site.location}
+              </p>
+              <p className="text-steel text-sm mt-1">
+                Serving local businesses in New Jersey and clients across the US.
+              </p>
+            </div>
+
+            <div className="border-t border-mist pt-6">
+              <span className="label text-steel block mb-2">Direct support</span>
+              <p className="text-steel text-sm leading-relaxed">
+                You work directly with {site.founder}. No account managers, no middle layers.
+              </p>
             </div>
           </div>
-
-          <div className="md:col-span-6">
-            <form onSubmit={handleSubmit} className="bg-raised p-8 border border-line space-y-6">
-              <div>
-                <label htmlFor="name" className="label block text-stone mb-2">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full bg-carbon border border-line p-3 text-fg focus:border-signal outline-none"
-                  placeholder="Your name"
-                />
-                {errors.name && <p className="label text-signal mt-1">{errors.name}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="email" className="label block text-stone mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-carbon border border-line p-3 text-fg focus:border-signal outline-none"
-                  placeholder="you@company.com"
-                />
-                {errors.email && <p className="label text-signal mt-1">{errors.email}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="company" className="label block text-stone mb-2">
-                  Company
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  value={form.company}
-                  onChange={(e) => setForm({ ...form, company: e.target.value })}
-                  className="w-full bg-carbon border border-line p-3 text-fg focus:border-signal outline-none"
-                  placeholder="Company name"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="service" className="label block text-stone mb-2">
-                  What do you want help with?
-                </label>
-                <select
-                  id="service"
-                  value={form.service}
-                  onChange={(e) => setForm({ ...form, service: e.target.value })}
-                  className="w-full bg-carbon border border-line p-3 text-fg focus:border-signal outline-none"
-                >
-                  <option value="AI training">AI training</option>
-                  <option value="AI strategy">AI strategy</option>
-                  <option value="Web development">Web development</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="label block text-stone mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full bg-carbon border border-line p-3 text-fg focus:border-signal outline-none resize-none"
-                  placeholder="Tell us about your team and goals..."
-                ></textarea>
-                {errors.message && <p className="label text-signal mt-1">{errors.message}</p>}
-              </div>
-
-              <button
-                type="submit"
-                className="label w-full bg-signal text-carbon p-4 transition-colors hover:bg-fg hover:text-bg cursor-pointer"
-              >
-                Send message
-              </button>
-            </form>
-          </div>
         </div>
-      </Section>
-    </>
+      </section>
+    </main>
   );
 }

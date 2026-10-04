@@ -1,165 +1,193 @@
 import type { Metadata } from "next";
-import { ButtonLink, DisplayHeading, Section, Tag } from "@/components/ui";
 import { cases } from "@/data/work";
 import { projects } from "@/data/projects";
+import { ButtonLink } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Work & Builds",
-  description: "Case studies and open-source builds from Bay1 Consulting Group.",
+  title: "Work",
+  description:
+    "Client case studies and recent builds by Bay1 Consulting Group.",
 };
 
 export default function WorkPage() {
+  const luminous = cases.find((c) => c.id === "luminous") || cases[0];
+  const careersuite = cases.find((c) => c.id === "careersuite") || cases[1];
+
   return (
-    <>
-      {/* Intro Header */}
-      <Section theme="dark" className="pt-32 pb-16 md:pt-48 md:pb-24">
+    <main id="top" className="pt-0">
+      {/* Header Band */}
+      <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
         <div className="wrap">
-          <Tag>Selected work</Tag>
-          <DisplayHeading lines={["Systems built", "results delivered"]} className="mt-6" />
-          <p className="fade-up mt-8 max-w-2xl text-lg md:text-xl text-stone">
-            Detailed breakdowns of production AI automation, model evaluation work, and open-source software built for real businesses and developers.
+          <div className="label text-steel-lt">Work</div>
+          <h1 className="text-[var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+            Recent projects and client systems.
+          </h1>
+          <p className="text-[var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
+            From electrician websites to custom AI application backends, here is what we&apos;ve built and how it runs.
           </p>
         </div>
-      </Section>
+      </section>
 
-      {/* Case Studies */}
-      {cases.map((caseStudy, index) => {
-        const isDark = index % 2 === 0;
-        return (
-          <Section
-            key={caseStudy.id}
-            id={caseStudy.id}
-            theme={isDark ? "dark" : "light"}
-            className="py-24 md:py-32 border-t border-line"
-          >
-            <div className="wrap grid gap-12 md:grid-cols-12">
-              <div className="md:col-span-5">
-                <Tag tone={isDark ? "signal" : "plain"}>{caseStudy.client}</Tag>
-                <DisplayHeading lines={caseStudy.heading} className="mt-6" />
-                <p className={`fade-up mt-2 label ${isDark ? "text-stone" : "text-ash"}`}>
-                  {caseStudy.sector}
-                </p>
-                <p className={`fade-up mt-6 text-lg ${isDark ? "text-stone" : "text-ash"}`}>
-                  {caseStudy.summary}
-                </p>
+      {/* Case 1: Luminous Electric */}
+      <section id="luminous" className="py-[clamp(60px,8vw,120px)] border-b border-mist">
+        <div className="wrap grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-7">
+            <div className="label text-ember font-semibold">Featured case study</div>
+            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+              {luminous.title}
+            </h2>
+            <p className="text-steel text-[0.95rem] mt-2 font-medium">{luminous.sector}</p>
+            <p className="text-steel text-[var(--lead)] mt-6 leading-relaxed">
+              {luminous.summary}
+            </p>
 
-                <div className="fade-up mt-8">
-                  <p className="label text-fg">Services provided</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {caseStudy.services.map((s) => (
-                      <span
-                        key={s}
-                        className={`label border px-2 py-1 ${
-                          isDark ? "border-line text-stone" : "border-bone-2 text-ash"
-                        }`}
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="mt-8">
+              <h3 className="font-semibold text-[1.1rem]">Approach</h3>
+              <ul className="mt-3 space-y-2 text-steel">
+                {luminous.approach.map((step, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="text-ember font-bold">{i + 1}.</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                <div className="fade-up mt-8">
-                  <p className="label text-fg">Stack</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {caseStudy.stack.map((item) => (
-                      <span
-                        key={item}
-                        className={`label border px-2 py-1 ${
-                          isDark ? "border-line text-stone" : "border-bone-2 text-ash"
-                        }`}
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:col-span-7 space-y-10">
-                <div className="fade-up">
-                  <p className="label text-fg">The Problem</p>
-                  <p className={`mt-3 ${isDark ? "text-stone" : "text-ash"}`}>{caseStudy.problem}</p>
-                </div>
-
-                <div className="fade-up">
-                  <p className="label text-fg">Approach</p>
-                  <ol className="mt-4 space-y-3">
-                    {caseStudy.approach.map((step, i) => (
-                      <li key={i} className={`flex gap-4 ${isDark ? "text-stone" : "text-ash"}`}>
-                        <span className={`label ${isDark ? "text-signal" : "text-signal-deep"}`}>
-                          0{i + 1}
-                        </span>
-                        <span>{step}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-
-                <div className="fade-up">
-                  <p className="label text-fg">Outcomes</p>
-                  <ul className="mt-3 space-y-2">
-                    {caseStudy.outcomes.map((outcome, i) => (
-                      <li key={i} className={isDark ? "text-stone" : "text-ash"}>
-                        — {outcome}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="mt-8">
+              <h3 className="font-semibold text-[1.1rem]">Tech Stack</h3>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {luminous.stack.map((t) => (
+                  <span key={t} className="px-3 py-1 rounded-full bg-off border border-mist text-steel text-sm font-medium">
+                    {t}
+                  </span>
+                ))}
               </div>
             </div>
-          </Section>
-        );
-      })}
+          </div>
 
-      {/* Full Builds Index */}
-      <Section theme="dark" className="py-24 md:py-32 border-t border-line">
-        <div className="wrap">
-          <Tag>Builds index</Tag>
-          <DisplayHeading lines={["Open source", "and tools"]} className="mt-6" />
-          <p className="fade-up mt-6 max-w-2xl text-lg text-stone">
-            Standalone automation tools, API bridges, and AI packages written and maintained by Bay1 Consulting Group.
-          </p>
-
-          <div className="fade-up mt-12 border-t border-line">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="group flex flex-col md:flex-row md:items-center justify-between border-b border-line py-6 gap-4"
-              >
-                <div className="max-w-2xl">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-xl font-normal text-fg transition-colors group-hover:text-signal">
-                      {project.title}
-                    </h3>
-                    <span className="label text-stone">{project.category}</span>
+          <div className="lg:col-span-5 flex flex-col justify-between p-8 rounded-[10px] bg-off border border-mist">
+            <div>
+              <h3 className="text-[1.2rem] font-semibold mb-4">Client Facts</h3>
+              <div className="space-y-4">
+                {luminous.facts?.map((fact) => (
+                  <div key={fact.label} className="border-b border-mist pb-3">
+                    <b className="text-[1.3rem] text-ink block font-semibold">{fact.label}</b>
+                    <span className="text-steel text-sm">{fact.text}</span>
                   </div>
-                  <p className="mt-2 text-stone">{project.description}</p>
-                  <p className="label text-stone mt-3">{project.techStack.join(" · ")}</p>
+                ))}
+              </div>
+            </div>
+            <p className="text-steel text-[0.8rem] mt-6 italic">
+              {luminous.note || "Results figures to be added once confirmed with the client."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Case 2: CareerSuite.ai */}
+      <section id="careersuite" className="bg-off py-[clamp(60px,8vw,120px)] border-b border-mist">
+        <div className="wrap">
+          <div className="max-w-[46rem]">
+            <div className="label text-steel font-semibold">Product case study</div>
+            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+              {careersuite.title}
+            </h2>
+            <p className="text-steel text-[var(--lead)] mt-4 leading-relaxed">
+              {careersuite.summary}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+            <div className="p-6 rounded-[10px] bg-paper border border-mist">
+              <h3 className="font-semibold text-[1.1rem] mb-3">Approach</h3>
+              <ul className="space-y-2 text-steel">
+                {careersuite.approach.map((step, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-ember font-bold">—</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="p-6 rounded-[10px] bg-paper border border-mist">
+              <h3 className="font-semibold text-[1.1rem] mb-3">Outcomes</h3>
+              <ul className="space-y-2 text-steel">
+                {careersuite.outcomes.map((outcome, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-ember font-bold">—</span>
+                    <span>{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Open Source & Recent Builds Table */}
+      <section id="builds" className="py-[clamp(60px,8vw,120px)]">
+        <div className="wrap">
+          <div className="sec-head mb-10">
+            <div className="label text-steel">Open Source & Tools</div>
+            <h2 className="text-[var(--h2)] font-semibold tracking-[-0.035em]">
+              Recent builds and repositories
+            </h2>
+          </div>
+
+          <div className="border-t border-mist divide-y divide-mist">
+            {projects.map((project) => (
+              <div key={project.id} className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline">
+                <div className="md:col-span-5">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-[1.1rem] hover:text-ember transition-colors inline-flex items-center gap-2"
+                  >
+                    {project.title}
+                    <span className="text-xs font-normal text-steel">↗</span>
+                  </a>
+                  <p className="text-steel text-sm mt-1">{project.description}</p>
                 </div>
-                {project.link && (
-                  <div className="shrink-0">
+                <div className="md:col-span-4">
+                  <span className="text-steel text-xs font-medium uppercase tracking-wider block mb-1">
+                    {project.category}
+                  </span>
+                  <p className="text-steel text-xs">{project.techStack.join(" · ")}</p>
+                </div>
+                <div className="md:col-span-3 md:text-right">
+                  {project.link && (
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="label inline-flex items-center gap-2 text-fg hover:text-signal transition-colors"
+                      className="text-xs font-semibold text-ember underline hover:text-ember-ink"
                     >
-                      GitHub →
+                      View on GitHub
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             ))}
           </div>
-
-          <div className="fade-up mt-16">
-            <ButtonLink href="/contact" variant="solid">
-              Discuss a custom build
-            </ButtonLink>
-          </div>
         </div>
-      </Section>
-    </>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
+        <div className="wrap flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div>
+            <div className="label text-steel-lt">Have a project in mind?</div>
+            <h2 className="text-[var(--h2)] mt-2 font-semibold tracking-[-0.035em]">
+              Let&apos;s build something that lasts.
+            </h2>
+          </div>
+          <ButtonLink href="/contact" variant="ember" className="shrink-0">
+            Start a project
+          </ButtonLink>
+        </div>
+      </section>
+    </main>
   );
 }

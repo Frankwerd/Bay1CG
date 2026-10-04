@@ -3,99 +3,103 @@ import type { ComponentProps, ReactNode } from "react";
 
 const cx = (...c: (string | false | undefined)[]) => c.filter(Boolean).join(" ");
 
-/** Bracketed mono label, e.g. [ 01 / AI TRAINING ]. */
-export function Tag({ children, tone = "signal", className }: { children: ReactNode; tone?: "signal" | "plain"; className?: string }) {
+export function Tag({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+  tone?: string;
+}) {
   return (
-    <span
-      className={cx(
-        "label inline-flex items-center gap-2 px-2 py-1",
-        tone === "signal" ? "bg-signal text-carbon" : "text-muted",
-        className,
-      )}
-    >
-      <span aria-hidden>[</span>
+    <div className={cx("label text-steel", className)}>
       {children}
-      <span aria-hidden>]</span>
-    </span>
+    </div>
   );
 }
 
-const sizes = {
-  xl: "text-[13vw] md:text-[8.4vw]",
-  lg: "text-[11vw] md:text-[6vw]",
-  md: "text-[9vw] md:text-[4.2vw]",
-  sm: "text-[7vw] md:text-[2.6vw]",
-} as const;
-
-/**
- * Display heading set as explicit lines. Lines after the first are indented behind a short rule,
- * drawn in CSS so the copy never contains a dash character.
- */
 export function DisplayHeading({
+  children,
   lines,
   as: As = "h2",
-  size = "lg",
   className,
 }: {
-  lines: readonly string[];
-  as?: "h1" | "h2" | "h3" | "p";
-  size?: keyof typeof sizes;
+  children?: ReactNode;
+  lines?: readonly string[];
+  as?: "h1" | "h2" | "h3" | "h4" | "p";
+  size?: string;
   className?: string;
 }) {
   return (
-    <As className={cx("display reveal", sizes[size], className)} aria-label={lines.join(" ")}>
-      {lines.map((line, i) => (
-        <span key={i} className="reveal-line" aria-hidden style={{ ["--i" as string]: i }}>
-          <span className={cx(i > 0 && "flex items-center gap-[0.35em] pl-[0.6em]")}>
-            {i > 0 && <span className="inline-block h-[0.08em] w-[0.9em] shrink-0 bg-current" />}
-            {line}
-          </span>
-        </span>
-      ))}
+    <As className={cx("text-[var(--h2)] font-semibold tracking-[-0.035em] leading-[1.02]", className)}>
+      {lines ? lines.join(" ") : children}
     </As>
   );
 }
 
+export function Section({
+  id,
+  className,
+  children,
+}: {
+  id?: string;
+  className?: string;
+  theme?: string;
+  stage?: number;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className={cx("py-[clamp(72px,9vw,140px)]", className)}>
+      {children}
+    </section>
+  );
+}
+
 export function ButtonLink({
-  variant = "solid",
+  variant = "ember",
   className,
   children,
   ...props
-}: ComponentProps<typeof Link> & { variant?: "solid" | "line" }) {
+}: ComponentProps<typeof Link> & { variant?: "ember" | "line" | "ink" | "solid" }) {
+  const base =
+    "inline-flex items-center justify-center gap-2 h-12 px-5 rounded-[6px] font-semibold text-[0.95rem] transition-[transform,background,color,box-shadow] duration-200 active:scale-[96%] cursor-pointer select-none text-center";
+
+  const resolvedVariant = variant === "solid" ? "ember" : variant;
+
+  const styles = {
+    ember: "bg-ember text-navy hover:bg-[#F0682F]",
+    line: "bg-transparent text-[#F7F7F4] shadow-[inset_0_0_0_1.5px_rgba(169,182,198,0.55)] hover:shadow-[inset_0_0_0_1.5px_#F7F7F4]",
+    ink: "bg-navy text-white hover:bg-navy-2",
+  };
+
   return (
-    <Link
-      {...props}
-      className={cx(
-        "label inline-flex h-12 items-center justify-center px-6 text-[12px] transition-colors duration-300",
-        variant === "solid"
-          ? "bg-signal text-carbon hover:bg-fg hover:text-bg"
-          : "border border-current text-fg hover:border-signal hover:text-signal",
-        className,
-      )}
-    >
+    <Link {...props} className={cx(base, styles[resolvedVariant], className)}>
       {children}
     </Link>
   );
 }
 
-/** Top-level page section. Every section declares the theme the page should ease into. */
-export function Section({
-  theme,
-  stage,
-  id,
+export function Button({
+  variant = "ember",
   className,
   children,
-}: {
-  theme: "dark" | "light";
-  stage?: number;
-  id?: string;
-  className?: string;
-  children: ReactNode;
-}) {
+  ...props
+}: ComponentProps<"button"> & { variant?: "ember" | "line" | "ink" | "solid" }) {
+  const base =
+    "inline-flex items-center justify-center gap-2 h-12 px-5 rounded-[6px] font-semibold text-[0.95rem] transition-[transform,background,color,box-shadow] duration-200 active:scale-[96%] cursor-pointer select-none text-center border-0";
+
+  const resolvedVariant = variant === "solid" ? "ember" : variant;
+
+  const styles = {
+    ember: "bg-ember text-navy hover:bg-[#F0682F]",
+    line: "bg-transparent text-[#F7F7F4] shadow-[inset_0_0_0_1.5px_rgba(169,182,198,0.55)] hover:shadow-[inset_0_0_0_1.5px_#F7F7F4]",
+    ink: "bg-navy text-white hover:bg-navy-2",
+  };
+
   return (
-    <section id={id} data-theme={theme} data-stage={stage} className={cx("relative", className)}>
+    <button {...props} className={cx(base, styles[resolvedVariant], className)}>
       {children}
-    </section>
+    </button>
   );
 }
 
