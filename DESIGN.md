@@ -5,72 +5,95 @@ This file is the source of truth for how bay1cg looks, moves and sounds. Code to
 
 ## Brand in one line
 
-Bay1 helps small and mid-sized businesses put AI to work: we train teams, plan where AI fits, and build the
-websites and systems that run it. The site should feel like an engineering studio, calm and exact, with one
-bright signal color doing all the pointing.
+Bay1 is the bridge between a business and AI that works: we train teams, plan where AI fits, and build the
+websites that bring in work. The site should feel composed and established, closer to a private bank or a
+fine hotel than a tech startup. Calm, generous space, classic type, one warm ember accent.
 
-## Color: "Signal"
+## Color: "Crown & Ember"
 
-| Token          | Hex       | Use                                                                 |
-| -------------- | --------- | ------------------------------------------------------------------- |
-| `carbon`       | `#14110F` | Dark section background, text on light sections                      |
-| `carbon-2`     | `#1D1916` | Raised surface on dark (form fields, media frames)                  |
-| `line`         | `#2A2522` | Hairlines and dividers on dark                                      |
-| `stone`        | `#8C8379` | Secondary text on dark, metadata                                    |
-| `bone`         | `#ECE6DC` | Light section background, text on dark                              |
-| `bone-2`       | `#DED6CA` | Raised surface and hairlines on light                               |
-| `ash`          | `#5E5750` | Secondary text on light                                             |
-| `signal`       | `#E2471B` | The one accent: tags, primary button, the 3D mark's lit slats        |
-| `signal-deep`  | `#B5360F` | Signal used as small text on `bone` (passes AA where `signal` fails) |
+| Token        | Hex       | Use                                                                  |
+| ------------ | --------- | -------------------------------------------------------------------- |
+| `midnight`   | `#0E1626` | Dark sections, text on light sections                                |
+| `harbor`     | `#1B2740` | Raised surface on dark (fields, water in the scene)                  |
+| `ivory`      | `#F5EFE3` | Light sections, text on dark                                         |
+| `parchment`  | `#E6DCC8` | Raised surface and hairlines on light                                |
+| `brass`      | `#B8935A` | Hairlines, small labels on dark, bridge cables. Never body text      |
+| `brass-deep` | `#8A6A35` | Brass used as small text on ivory (passes AA)                        |
+| `ember`      | `#E8531E` | The action color: primary buttons, the logo mark, the bridge deck edge |
+| `slate`      | `#9AA3B2` | Secondary text on dark                                               |
+| `ink-soft`   | `#4A5468` | Secondary text on light                                              |
 
 Rules
 
-- One accent. Signal is the only saturated color on the site. No second accent, no cyan, no purple.
-- Sections alternate `carbon` and `bone`. Each `<section>` sets `data-theme="dark"` or `data-theme="light"`
-  and the page background eases between them as you scroll (`ThemeController`).
-- Never pure white (`#fff`) or pure black (`#000`) as a surface.
-- No gradients on UI. The only soft color falloff allowed is lighting inside the 3D scene.
+- Ember means "act". It appears on the logo mark, the primary button and the bridge deck. Nowhere else.
+- Brass is metal, not paint: thin rules, cable lines, small caps labels. Never fills larger than a button
+  border.
+- Sections alternate `midnight` and `ivory`; each `<section>` sets `data-theme="dark"` or `"light"` and the page
+  eases between them as you scroll.
+- Never pure white or pure black. No gradients on UI.
+
+## Logo
+
+- Mark: `public/brand/bay1-mark.svg`, traced from the original (`public/brand/source/`). It uses
+  `currentColor`; render it in `ember` on both themes.
+- Lockup: mark, then `BAY1` in Cormorant Garamond 600, tracking 0.14em, with `CONSULTING GROUP` below in Jost
+  500, 0.42em tracking, at about a quarter of the BAY1 cap height, in `brass` (dark) or `brass-deep` (light).
+- No drop shadow, no stacked "Consulting / Group", no orange wordmark text.
+- Minimum clear space: the height of the B's top stripe on all sides.
 
 ## Type
 
-| Role     | Family             | Notes                                                             |
-| -------- | ------------------ | ----------------------------------------------------------------- |
-| Display  | Martian Mono       | Uppercase, tight leading (0.95), slight positive tracking          |
-| Labels   | Martian Mono       | 11 to 12px, uppercase, tracking 0.08em, inside `[ brackets ]`      |
-| Body     | Schibsted Grotesk  | 17 to 20px, leading 1.55, sentence case                           |
+| Role     | Family              | Notes                                                              |
+| -------- | ------------------- | ------------------------------------------------------------------ |
+| Display  | Cormorant Garamond  | 500 or 600. Sentence case. Leading 1.0. Italic for the second line of a hero headline |
+| Labels   | Jost                | 11 to 12px, 500, uppercase, tracking 0.32em, brass on dark          |
+| Body     | Jost                | 17 to 19px, 400, leading 1.6                                       |
 
-- Display headings are set as explicit lines. The second line is indented and led by a short rule
-  (`<DisplayHeading lines={["What we", "do"]} />` renders the rule; never type a dash character for it).
-- Banned families: Inter, Geist, Space Grotesk, Poppins, Roboto.
+- Headlines are short, two lines, the second often in italic: "Your bridge to AI / *that actually works.*"
+- Banned families: Inter, Geist, Space Grotesk, Poppins, Roboto, Martian Mono.
 
 ## Shape and space
 
-- Corners are square (`0` radius) everywhere except the 2px focus ring.
-- No drop shadows, no glass, no blur panels.
-- 12-column grid, 16px gutter on phones, 32px on desktop. Section padding 120 to 200px vertical on desktop.
-- Lists use mono indices (`01`, `02`), not checkmarks or icons.
+- Square corners. 1px brass hairlines for structure. No shadows, no glass, no blur.
+- Generous space: section padding 140 to 220px on desktop, 96px on phones. Max line length 62ch.
+- Ornament is limited to thin rules and the small centered "·" separator in label rows.
 
-## Motion
+## Motion: the bridge
 
-The home page is one continuous 3D scene: the Bay1 mark, a stack of slanted signal and carbon slats, rebuilds
-itself section by section as you scroll (hero stack, service formations, Luminous wall, process staircase,
-final stack). Everything else stays still enough to read.
+The home page is one continuous 3D scene of a suspension bridge across a bay at night, built from simple
+geometry (no imported models): water, two towers, two main cables, hangers, a deck, shore lights. Scrolling
+builds it, one service per part, then crosses it.
 
-- Stack: `three` + `@react-three/fiber` + `drei` for the scene, Lenis for smooth scroll. Home sections carry
-  `data-stage="n"`; the scene reads their positions in `useFrame` and blends between poses in
-  `src/components/scene/poses.ts`. Scroll never goes through React state.
-- Text enters once with a line mask reveal (`RevealLines`), 0.9s, `expo.out`, 0.08s stagger. No re-trigger
-  on scroll back.
-- Hover is color only (text to signal, or fill swap). No scaling, lifting, tilting or animated arrows.
-- `prefers-reduced-motion: reduce` turns off Lenis, scrub and reveals and renders the mark in its hero pose.
-- Phones get the same scene at capped DPR (1.5) with fewer slats.
+| Stage | Section          | Scene                                                                 |
+| ----- | ---------------- | --------------------------------------------------------------------- |
+| 0     | Hero             | Night. Far shore lights, faint tower outlines. Slow drift              |
+| 1     | The gap          | Camera low over the water, looking across the empty span               |
+| 2     | AI strategy      | First tower rises out of the water                                    |
+| 3     | AI training      | Second tower rises; main cables draw across, hangers drop in          |
+| 4     | Web development  | The deck slides out from both shores and meets in the middle; ember edge line lights |
+| 5     | Luminous         | Small lights travel across the deck                                   |
+| 6     | Proof            | Camera rises for a wide, calm view of the whole bridge                |
+| 7     | Website review   | Scene dims to sit quietly behind the form                             |
+| 8     | Final call       | Camera moves onto the deck and travels toward the far shore           |
+
+- Lenis for smooth scroll. Sections carry `data-stage="n"`; the scene reads their positions in `useFrame` and
+  blends between stage parameters. Scroll never goes through React state.
+- Text reveals once (line mask, 0.9s, ease-out). Hover is color only.
+- `prefers-reduced-motion`: no smooth scroll or reveals; the scene renders the finished bridge, static.
+- Phones: same scene at DPR 1.5, fewer hangers, dimmed behind text after the hero.
 
 ## Voice
 
-- Plain, specific, first person plural ("we"). Say what the thing does and for whom.
-- No em dashes in copy. No "it's not X, it's Y". No "seamless", "leverage", "unlock", "sovereign",
-  "architect" as a verb, "unreasonable".
-- Numbers only when they are real and sourced from the data files.
+- Composed, warm, specific. First person plural. Short sentences.
+- Say what the reader gets. No em dashes. No "it's not X, it's Y". No "seamless", "leverage", "unlock",
+  "revolutionize", "cutting-edge", "game-changer".
+- Numbers only when they are real and in the data files.
+
+## Leads
+
+One offer for now: a website review. Every page has a way to request it; the primary button says
+"Request a website review". Requests go to `site.email` (francis@bay1cg.com) by email until a CRM form is
+wired in. Do not add pricing tiers, chat widgets or popups.
 
 ## The "looks vibecoded" list (never ship these)
 
@@ -83,6 +106,6 @@ colors. Basic pastel colors.
 
 ## Open items
 
-- Real screenshots or screen recordings of client work (Luminous site, content reports) for `/work`. Until then,
-  work entries are text-only; do not use stock photos or mock dashboards in their place.
+- Real screenshots of client work for `/work`. Until then, text only; no stock photos or mock dashboards.
 - Facebook and Instagram URLs go in `src/lib/site.ts` (`social`). Links render only when set.
+- Booking calendar and HubSpot form: later. For now, email.

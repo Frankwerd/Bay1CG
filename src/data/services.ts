@@ -11,26 +11,10 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: "ai-training",
-    index: "01",
-    title: "AI training",
-    heading: ["AI training", "for your team"],
-    summary:
-      "Hands-on sessions built around the work your team already does. People leave with prompts, workflows and habits they use the next morning.",
-    forWho:
-      "Teams that pay for ChatGPT, Claude or Copilot seats and still do most of the work by hand.",
-    deliverables: [
-      "Workshops run on your team's real tasks and documents",
-      "Role-specific playbooks for sales, operations and admin",
-      "A shared prompt library your team can keep adding to",
-      "Follow-up office hours for the questions that come up after",
-    ],
-  },
-  {
     id: "ai-strategy",
-    index: "02",
+    index: "01",
     title: "AI strategy",
-    heading: ["AI strategy", "that ships"],
+    heading: ["Survey the ground", "before you build."],
     summary:
       "We map how work moves through your business, find where AI saves real hours, and say plainly where it doesn't belong.",
     forWho:
@@ -43,10 +27,26 @@ export const services: Service[] = [
     ],
   },
   {
+    id: "ai-training",
+    index: "02",
+    title: "AI training",
+    heading: ["Train the people", "who carry the load."],
+    summary:
+      "Hands-on sessions built around the work your team already does. People leave with prompts, workflows and habits they use the next morning.",
+    forWho:
+      "Teams that pay for ChatGPT, Claude or Copilot seats and still do most of the work by hand.",
+    deliverables: [
+      "Workshops run on your team's real tasks and documents",
+      "Role-specific playbooks for sales, operations and admin",
+      "A shared prompt library your team can keep adding to",
+      "Follow-up office hours for the questions that come up after",
+    ],
+  },
+  {
     id: "web-development",
     index: "03",
     title: "Web development",
-    heading: ["Websites", "that do work"],
+    heading: ["A website that", "brings in the work."],
     summary:
       "Fast sites built to be found in search and in AI answers, wired into the tools you run on so they keep working after launch.",
     forWho:
