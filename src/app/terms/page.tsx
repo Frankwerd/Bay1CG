@@ -39,7 +39,7 @@ export default function TermsPage() {
           <section className="space-y-4">
             <h2 className="display text-2xl text-fg">Disclaimer & Limitation of Liability</h2>
             <p>
-              This website is provided &quot;as is&quot; without warranties of any kind, express or implied. Bay1 shall not be liable for any indirect, incidental, or consequential damages arising from your use of this site.
+              This website is provided &quot;as is&quot; without warranties of any kind, express or implied. Bay1 Consulting Group shall not be liable for any indirect, incidental, or consequential damages arising from your use of this site.
             </p>
           </section>
 

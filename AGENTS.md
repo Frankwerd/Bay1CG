@@ -1,6 +1,6 @@
 # Agent guide: bay1cg site
 
-Marketing site for Bay1 Consulting Group (AI training, AI strategy, web development). Next.js 16 App Router,
+Marketing site for Bay1 Consulting Group (AI strategy, AI training, web development). Never call it "Bay1" alone; use the full name or "bay1cg". Next.js 16 App Router,
 React 19, Tailwind 4, deployed on Vercel from `main`.
 
 Read `DESIGN.md` before touching anything visual or writing copy. It is binding.

@@ -22,6 +22,25 @@ Already done for you: `DESIGN.md`, `src/lib/site.ts` (email `francis@bay1cg.com`
 - Replace every `signal`, `carbon`, `bone`, `stone`, `ash`, `line` class across `src/` with the new tokens.
   `grep -rnE "signal|carbon|bone|stone|\bash\b|\bline\b"` must come back clean except unrelated words.
 
+### Fluid type (the last version was too small and static on desktop)
+
+- Add the fluid type scale from DESIGN.md ("Fluid type scale") to `@theme` as `--text-hero`, `--text-h2`,
+  `--text-h3`, `--text-lead`, `--text-body`, `--text-small`, `--text-label` with matching line heights
+  (hero/h2 1.0, h3 1.1, lead 1.45, body 1.6).
+- `DisplayHeading` sizes map to these: `xl` → `text-hero`, `lg` → `text-h2`, `md` → `text-h3`. Remove every
+  bare `text-[..vw]` class in the codebase, and every arbitrary px font size except inside the scene.
+- Body copy uses `text-body`, intros use `text-lead`, labels use `text-label`.
+- `wrap`: max width 1440px, 1680px at `min-width: 1920px`. Section padding:
+  `padding-block: clamp(5rem, 3rem + 7vw, 13rem)`.
+- Check 360, 768, 1280, 1440 and 1920px wide. At 1440 and 1920 the hero headline should fill most of the left
+  column; nothing should look like a phone layout floating in the middle of a desktop.
+
+### Naming
+
+Always "Bay1 Consulting Group" or "bay1cg", never "Bay1" alone in any text, alt text, aria-label or metadata.
+`site.short` is now `"bay1cg"`. The only exception is the logo lockup (BAY1 over CONSULTING GROUP).
+`grep -rnw "Bay1" src` should only match the lockup and "Bay1 Consulting Group".
+
 ## 2. Components
 
 - `ui.tsx`:

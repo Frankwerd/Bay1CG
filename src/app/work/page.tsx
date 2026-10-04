@@ -118,7 +118,7 @@ export default function WorkPage() {
           <Tag>Builds index</Tag>
           <DisplayHeading lines={["Open source", "and tools"]} className="mt-6" />
           <p className="fade-up mt-6 max-w-2xl text-lg text-stone">
-            Standalone automation tools, API bridges, and AI packages written and maintained by Bay1.
+            Standalone automation tools, API bridges, and AI packages written and maintained by Bay1 Consulting Group.
           </p>
 
           <div className="fade-up mt-12 border-t border-line">

@@ -1,6 +1,6 @@
 export const site = {
   name: "Bay1 Consulting Group",
-  short: "Bay1",
+  short: "bay1cg",
   founder: "Francis John Libutti",
   email: "francis@bay1cg.com",
   location: "Bayonne, NJ",
