@@ -1,0 +1,585 @@
+<title>bay1cg Motion Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap">
+<style>
+/* Layout: navy hero with the one bridge moment, then light working sections; motion is spring-based and only where it means something. Single committed look. */
+:root{
+  --navy:#0F1E33; --navy-2:#16294A; --steel:#5C6B7E; --steel-lt:#A9B6C6;
+  --mist:#E3E7EC; --paper:#FFFFFF; --off:#F5F6F4; --ink:#0F1E33; --ember:#E8531E; --ember-ink:#B33A0F;
+  --sans:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --spring:cubic-bezier(.34,1.56,.64,1); --settle:cubic-bezier(.22,1,.36,1);
+  --gut:clamp(16px, 4vw, 48px); --max:1320px;
+  --h1:clamp(2.6rem, 1.4rem + 5.2vw, 6.4rem); --h2:clamp(2rem, 1.3rem + 2.8vw, 3.9rem); --h3:clamp(1.35rem, 1.1rem + .9vw, 1.9rem);
+  --lead:clamp(1.06rem, .98rem + .45vw, 1.4rem); --body:clamp(1rem, .96rem + .18vw, 1.12rem);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.035em;line-height:1.02;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.label{font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:4px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--navy) 96%,transparent);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#F7F7F4}
+.brand svg{height:26px;width:auto;color:var(--ember)}
+.brand b{font-weight:700;letter-spacing:.08em;font-size:.95rem}
+.brand span{font-weight:500;letter-spacing:.14em;font-size:.62rem;color:var(--steel-lt);display:block;margin-top:2px}
+.links{display:flex;align-items:center;gap:28px;font-size:.92rem;color:var(--steel-lt)}
+.links a{text-decoration:none;transition:color .2s}
+.links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:6px;font:600 .95rem var(--sans);text-decoration:none;cursor:pointer;border:0;transition:transform .45s var(--spring),background .2s,color .2s;will-change:transform}
+.btn-ember{background:var(--ember);color:var(--navy)}
+.btn-ember:hover{background:#F0682F}
+.btn-line{background:transparent;color:#F7F7F4;box-shadow:inset 0 0 0 1.5px rgba(169,182,198,.55)}
+.btn-line:hover{box-shadow:inset 0 0 0 1.5px #F7F7F4}
+.btn-ink{background:var(--navy);color:#fff}
+.btn:active{transform:scale(.96)}
+.nav .btn{height:40px;padding:0 16px;font-size:.88rem}
+@media (max-width:820px){.links a.hide-sm{display:none}}
+
+/* hero */
+.hero{background:var(--navy);color:#F7F7F4;overflow:hidden}
+.hero .wrap{padding-block:clamp(56px,8vw,112px) 0}
+.hero .label{color:var(--steel-lt)}
+.hero h1{font-size:var(--h1);margin-top:22px;max-width:15ch}
+.rot{display:block;position:relative;height:1.06em;overflow:hidden;color:var(--ember)}
+.rot span{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(110%);opacity:0;transition:transform .7s var(--spring),opacity .3s}
+.rot span.on{transform:none;opacity:1}
+.rot span.out{transform:translateY(-110%);opacity:0;transition:transform .5s var(--settle),opacity .3s}
+.hero p.lead{font-size:var(--lead);color:var(--steel-lt);max-width:38rem;margin-top:24px;line-height:1.5}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.bridge{display:block;width:100%;height:auto;margin-top:clamp(36px,6vw,72px)}
+.bridge .arch{fill:none;stroke:#8EA2B9;stroke-linecap:round}
+.bridge .truss{fill:none;stroke:#6F849C}
+.bridge .hanger{stroke:#6F849C;transform-box:fill-box;transform-origin:top}
+.bridge .deck{fill:#F7F7F4}
+.bridge .glow{fill:var(--ember)}
+.bridge .water{fill:var(--navy-2)}
+.bridge .pier{fill:#2B3F5E}
+/* the one orchestrated moment */
+.play .arch{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.6s var(--settle) .2s forwards}
+.play .truss{opacity:0;animation:fade .6s ease 1.3s forwards}
+.play .hanger{transform:scaleY(0);animation:drop .8s var(--spring) forwards;animation-delay:calc(1.35s + var(--i) * 45ms)}
+.play .deck-l{transform:translateX(-102%);animation:slide .95s var(--spring) 1.9s forwards}
+.play .deck-r{transform:translateX(102%);animation:slide .95s var(--spring) 1.9s forwards}
+.play .glow{transform:scaleX(0);transform-box:fill-box;transform-origin:center;animation:grow .7s var(--settle) 2.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+@keyframes drop{to{transform:scaleY(1)}}
+@keyframes slide{to{transform:none}}
+@keyframes grow{to{transform:scaleX(1)}}
+.replay{background:none;border:0;color:var(--steel-lt);font:500 .8rem var(--sans);cursor:pointer;padding:8px 0;margin-top:6px}
+.replay:hover{color:#fff}
+
+/* pinned logo story */
+.story{background:var(--navy);color:#F7F7F4;height:420vh;padding:0;position:relative}
+.story-pin{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px);height:calc(100vh - 68px);display:flex;align-items:center;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(20px,4vw,64px);align-items:center;width:100%}
+.story h2{font-size:var(--h2);margin-top:16px;max-width:13ch}
+.story .label{color:var(--steel-lt)}
+.steps{list-style:none;margin:clamp(20px,3vw,36px) 0 0;padding:0;display:grid;gap:4px;counter-reset:s}
+.steps li{counter-increment:s;padding:12px 0 12px 44px;position:relative;border-top:1px solid rgba(169,182,198,.18);color:var(--steel-lt);transition:color .3s}
+.steps li::before{content:"0" counter(s);position:absolute;left:0;top:13px;font-size:.8rem;font-weight:600;letter-spacing:.06em;transition:color .3s}
+.steps li b{font-size:var(--h3);font-weight:600;letter-spacing:-.025em;display:block;line-height:1.15;transition:transform .55s var(--spring);transform-origin:left}
+.steps li p{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--settle),opacity .3s,margin .3s;max-width:30rem}
+.steps li.on{color:#F7F7F4}
+.steps li.on::before{color:var(--ember)}
+.steps li.on b{transform:scale(1.04)}
+.steps li.on p{max-height:6em;opacity:1;margin-top:6px;color:var(--steel-lt)}
+.meter{height:3px;background:rgba(169,182,198,.18);border-radius:2px;margin-top:22px;overflow:hidden;max-width:30rem}
+.meter i{display:block;height:100%;width:0;background:var(--ember);transition:width .2s linear}
+.stage{position:relative;height:min(72vh,640px);min-height:300px}
+.stage canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
+.stage-fallback{position:absolute;inset:18%;width:64%;height:auto;color:var(--ember)}
+.stage.gl .stage-fallback{display:none}
+@media (max-width:820px){
+  .story-pin{align-items:stretch}
+  .story-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:0;padding-block:20px}
+  .story h2{font-size:clamp(1.6rem,6vw,2.2rem)}
+  .stage{order:-1;height:36vh;min-height:220px}
+  .steps li p{font-size:.95rem}
+}
+
+/* sections */
+section{padding-block:clamp(72px,9vw,140px)}
+.off{background:var(--off)}
+.sec-head{display:grid;gap:16px;max-width:46rem;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head h2{font-size:var(--h2)}
+.sec-head p{font-size:var(--lead);color:var(--steel);line-height:1.5}
+
+/* demo */
+.demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,3vw,40px);align-items:start}
+@media (max-width:900px){.demo{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--paper);border:1px solid var(--mist);border-radius:10px;padding:clamp(20px,2.4vw,32px)}
+.off .panel{background:var(--paper)}
+.field{display:grid;gap:8px;margin-top:20px}
+.field:first-child{margin-top:0}
+.field label{font-weight:600;font-size:.9rem}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--off);border:1.5px solid var(--mist);border-radius:8px;padding:14px;resize:vertical;transition:border-color .2s}
+textarea:focus,input:focus{outline:none;border-color:var(--ember)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--mist);background:var(--paper);color:var(--ink);font:500 .9rem var(--sans);padding:9px 14px;border-radius:999px;cursor:pointer;transition:transform .45s var(--spring),border-color .2s,background .2s}
+.chip:hover{border-color:var(--steel-lt)}
+.chip[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff;transform:scale(1.04)}
+.chip:active{transform:scale(.94)}
+.presets{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;color:var(--steel)}
+.presets button{background:none;border:0;padding:0;font:inherit;color:var(--ember-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.go{margin-top:24px;width:100%}
+.err{color:#B42318;font-size:.88rem;min-height:1.2em}
+.out-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--mist)}
+.out-head strong{font-size:1rem}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;color:var(--steel)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mist);transition:background .3s}
+.busy .dot{background:var(--ember);animation:pulse 1s ease-in-out infinite}
+.done .dot{background:#2E9E6A}
+@keyframes pulse{50%{transform:scale(1.6);opacity:.5}}
+.out{white-space:pre-wrap;font-size:1rem;line-height:1.65;min-height:15em;padding-top:16px}
+.out .cursor{display:inline-block;width:2px;height:1.1em;background:var(--ember);vertical-align:-2px;margin-left:1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.out-foot{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center;border-top:1px solid var(--mist);padding-top:14px;margin-top:16px;font-size:.82rem;color:var(--steel)}
+.copy{background:none;border:1.5px solid var(--mist);border-radius:6px;padding:7px 12px;font:600 .82rem var(--sans);color:var(--ink);cursor:pointer;transition:transform .4s var(--spring)}
+.copy:active{transform:scale(.94)}
+
+/* builds */
+.builds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+@media (max-width:820px){.builds{grid-template-columns:minmax(0,1fr)}}
+.build h3{font-size:var(--h3)}
+.build>p{color:var(--steel);margin-top:12px;max-width:34rem}
+.build ul{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--mist)}
+.build li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--mist)}
+.build li span{color:var(--steel);font-size:.9rem;text-align:right}
+.build .bar{height:4px;width:56px;background:var(--ember);border-radius:2px;margin-bottom:20px}
+.build:nth-child(2) .bar{background:var(--navy)}
+
+/* case */
+.case{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end}
+@media (max-width:900px){.case{grid-template-columns:minmax(0,1fr)}}
+.case h2{font-size:var(--h2)}
+.case h2 em{font-style:normal;color:var(--ember)}
+.case p{color:var(--steel);font-size:var(--lead);line-height:1.5;margin-top:20px;max-width:36rem}
+.facts{display:grid;gap:0;border-top:1.5px solid var(--navy)}
+.fact{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--mist);align-items:baseline}
+.fact b{font-size:var(--h3);letter-spacing:-.03em;min-width:3.2ch}
+.fact span{color:var(--steel)}
+.tagnote{font-size:.8rem;color:var(--steel);margin-top:14px}
+
+/* industries */
+.inds{display:flex;flex-wrap:wrap;gap:10px}
+.ind{padding:14px 20px;border-radius:999px;background:var(--paper);border:1.5px solid var(--mist);font-weight:500;transition:transform .5s var(--spring),border-color .2s}
+.ind:hover{transform:translateY(-3px);border-color:var(--ember)}
+
+/* founder */
+.founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:center}
+@media (max-width:820px){.founder{grid-template-columns:minmax(0,1fr)}}
+.photo{aspect-ratio:4/5;max-width:100%;border-radius:10px;background:var(--navy);display:grid;place-items:center;color:var(--steel-lt);font-size:.85rem;position:relative;overflow:hidden}
+.photo svg{width:42%;height:auto;color:var(--ember)}
+.photo small{position:absolute;bottom:14px;left:16px}
+.founder blockquote{margin:0;font-size:var(--h2);font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
+.founder blockquote em{font-style:normal;color:var(--ember)}
+.founder p{color:var(--steel);margin-top:22px;max-width:34rem}
+
+/* cta */
+.cta{background:var(--navy);color:#F7F7F4}
+.cta .wrap{display:grid;gap:28px}
+.cta h2{font-size:var(--h1);max-width:14ch}
+.mail{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.mail code{font:600 var(--lead) var(--sans);user-select:all;color:#fff;padding:10px 0}
+.cta .copy{color:#F7F7F4;border-color:rgba(169,182,198,.45)}
+footer{background:var(--navy);color:var(--steel-lt);font-size:.85rem;border-top:1px solid rgba(255,255,255,.07)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:22px}
+footer nav{display:flex;gap:20px}
+
+/* spring reveal: everything is visible at rest; entering the viewport replays a short settle */
+.js .rv.go-in{animation:rise .9s var(--spring) both;animation-delay:calc(var(--d,0) * 70ms)}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
+.proto{background:var(--ember);color:var(--navy);font-size:.8rem;font-weight:600;text-align:center;padding:6px var(--gut)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .play .arch{stroke-dashoffset:0}.play .truss{opacity:1}.play .hanger,.play .deck-l,.play .deck-r,.play .glow{transform:none}
+  .rot span.on{transform:none;opacity:1}
+}
+</style>
+
+<div class="proto">Prototype for review. Layout, copy and motion only; numbers and photos are placeholders.</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Bay1 Consulting Group home">
+      <svg viewBox="0 0 294 328" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0.0 269.8L0.0 211.5L17.8 199.9C27.5 193.5 46.1 181.3 59.0 172.9C71.9 164.4 92.7 150.8 105.2 142.5C117.7 134.2 131.9 125.0 136.7 121.9C175.0 97.3 231.9 60.8 238.5 56.5C256.1 45.1 255.0 45.6 256.6 47.7C260.4 52.5 266.3 65.8 267.6 72.7C272.5 98.6 263.4 122.0 241.8 138.7C230.8 147.1 205.0 158.6 190.2 161.5C188.5 161.9 187.0 162.5 187.0 162.9C187.0 163.2 190.9 164.1 195.8 164.8C214.3 167.3 235.0 173.6 250.5 181.3C266.4 189.2 277.9 199.1 285.3 211.3C293.6 224.9 295.7 243.5 290.9 261.5C290.3 263.7 288.0 269.1 285.7 273.5C276.1 292.1 252.6 309.5 224.5 318.9L215.5 321.9L215.2 313.5L214.9 305.0L193.5 305.0L172.0 305.0L172.0 224.0L172.0 143.0L153.4 143.0L134.7 143.0L113.1 157.0C101.2 164.8 90.5 171.9 89.2 172.8C87.0 174.5 87.0 175.0 87.2 189.3L87.5 204.1L109.0 190.8C120.8 183.4 131.1 177.1 131.8 176.6C132.7 176.0 133.0 189.1 133.0 240.4L133.0 305.0L109.5 305.0L86.0 305.0L86.0 316.5L86.0 328.0L43.0 328.0L0.0 328.0L0.0 269.8ZM-0.0 156.1L-0.0 134.2L20.2 120.9C31.4 113.6 49.7 101.5 61.0 94.0C72.3 86.6 91.6 74.0 104.0 66.0C116.4 58.1 131.4 48.4 137.5 44.5C143.6 40.6 151.9 35.3 156.0 32.6C160.1 30.0 170.0 23.7 178.0 18.6L192.5 9.3L197.5 10.7C205.1 12.9 214.5 16.8 224.4 21.7L233.3 26.2L222.9 32.9C217.2 36.7 200.1 47.7 185.0 57.5C141.4 85.7 139.7 86.8 115.0 102.9C102.1 111.3 84.1 123.1 75.0 129.0C53.7 143.0 15.2 168.2 4.8 174.9L-0.0 177.9L-0.0 156.1ZM0.0 96.2C0.0 88.8 3.0 72.7 6.0 64.3C16.1 35.1 39.8 14.0 72.3 5.1C86.9 1.1 96.5 -0.0 116.5 0.0C136.1 0.0 151.0 0.8 151.0 1.9C151.0 2.2 144.0 7.0 135.5 12.5C126.9 18.0 114.4 26.1 107.7 30.5C101.0 34.9 87.8 43.4 78.5 49.4C69.1 55.4 57.1 63.3 51.6 66.9C46.2 70.5 38.1 75.9 33.7 78.8C29.2 81.7 20.1 87.6 13.4 92.0C6.7 96.4 1.0 100.0 0.6 100.0C0.3 100.0 0.0 98.3 0.0 96.2Z"/></svg>
+      <div><b>BAY1</b><span>CONSULTING GROUP</span></div>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a class="hide-sm" href="#demo">Try a build</a>
+      <a class="hide-sm" href="#work">Work</a>
+      <a class="hide-sm" href="#founder">About</a>
+      <a class="btn btn-ember mag" href="#start">Start a project</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding-block:0">
+    <div class="wrap">
+      <div class="label">Web development · AI builds · Bayonne, NJ</div>
+      <h1>Websites and AI tools that
+        <span class="rot" aria-live="polite"><span class="on">book more jobs.</span><span>answer every lead.</span><span>write your quotes.</span><span>give you Fridays back.</span></span>
+      </h1>
+      <p class="lead">Bay1 Consulting Group builds fast websites and practical AI tools for small businesses. You work directly with the person building it, from first call to launch.</p>
+      <div class="ctas">
+        <a class="btn btn-ember mag" href="#start">Start a project</a>
+        <a class="btn btn-line" href="#demo">Try a live build</a>
+      </div>
+      <svg class="bridge play" id="bridge" viewBox="0 0 1200 260" role="img" aria-label="Line drawing of a steel arch bridge over the water">
+        <rect class="water" x="0" y="236" width="1200" height="24"/>
+        <rect class="pier" x="96" y="210" width="44" height="40"/><rect class="pier" x="1060" y="210" width="44" height="40"/>
+        <path class="arch" d="M118 214 Q600 -86 1082 214" stroke-width="4" style="--len:1300"/>
+        <path class="arch" d="M150 214 Q600 -30 1050 214" stroke-width="1.6" style="--len:1150"/>
+        <g class="truss" stroke-width="1.1" id="truss"></g>
+        <g id="hangers"></g>
+        <g>
+          <rect class="deck deck-l" x="40" y="178" width="561" height="7"/>
+          <rect class="deck deck-r" x="599" y="178" width="561" height="7"/>
+          <rect class="glow" x="40" y="185" width="1120" height="2.5"/>
+        </g>
+      </svg>
+      <button class="replay" id="replay" type="button">Replay the build</button>
+    </div>
+  </section>
+
+  <section class="story" id="how" aria-label="How we build">
+    <div class="story-pin">
+      <div class="wrap story-grid">
+        <div class="story-copy">
+          <div class="label">How we build</div>
+          <h2>Every project comes together the same way.</h2>
+          <ol class="steps" id="steps">
+            <li class="on"><b>Listen</b><p>We start with a call about how your week actually runs and where the time goes.</p></li>
+            <li><b>Plan</b><p>You get a short plan: what to build first, what it costs, and what it should save you.</p></li>
+            <li><b>Build</b><p>We build in small pieces you can see and try along the way. No black box.</p></li>
+            <li><b>Launch</b><p>We launch, show your team how to use it, and stay on call to keep it running.</p></li>
+          </ol>
+          <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+        </div>
+        <div class="stage" id="logo3d" data-d="M0.0 269.8L0.0 211.5L17.8 199.9C27.5 193.5 46.1 181.3 59.0 172.9C71.9 164.4 92.7 150.8 105.2 142.5C117.7 134.2 131.9 125.0 136.7 121.9C175.0 97.3 231.9 60.8 238.5 56.5C256.1 45.1 255.0 45.6 256.6 47.7C260.4 52.5 266.3 65.8 267.6 72.7C272.5 98.6 263.4 122.0 241.8 138.7C230.8 147.1 205.0 158.6 190.2 161.5C188.5 161.9 187.0 162.5 187.0 162.9C187.0 163.2 190.9 164.1 195.8 164.8C214.3 167.3 235.0 173.6 250.5 181.3C266.4 189.2 277.9 199.1 285.3 211.3C293.6 224.9 295.7 243.5 290.9 261.5C290.3 263.7 288.0 269.1 285.7 273.5C276.1 292.1 252.6 309.5 224.5 318.9L215.5 321.9L215.2 313.5L214.9 305.0L193.5 305.0L172.0 305.0L172.0 224.0L172.0 143.0L153.4 143.0L134.7 143.0L113.1 157.0C101.2 164.8 90.5 171.9 89.2 172.8C87.0 174.5 87.0 175.0 87.2 189.3L87.5 204.1L109.0 190.8C120.8 183.4 131.1 177.1 131.8 176.6C132.7 176.0 133.0 189.1 133.0 240.4L133.0 305.0L109.5 305.0L86.0 305.0L86.0 316.5L86.0 328.0L43.0 328.0L0.0 328.0L0.0 269.8ZM-0.0 156.1L-0.0 134.2L20.2 120.9C31.4 113.6 49.7 101.5 61.0 94.0C72.3 86.6 91.6 74.0 104.0 66.0C116.4 58.1 131.4 48.4 137.5 44.5C143.6 40.6 151.9 35.3 156.0 32.6C160.1 30.0 170.0 23.7 178.0 18.6L192.5 9.3L197.5 10.7C205.1 12.9 214.5 16.8 224.4 21.7L233.3 26.2L222.9 32.9C217.2 36.7 200.1 47.7 185.0 57.5C141.4 85.7 139.7 86.8 115.0 102.9C102.1 111.3 84.1 123.1 75.0 129.0C53.7 143.0 15.2 168.2 4.8 174.9L-0.0 177.9L-0.0 156.1ZM0.0 96.2C0.0 88.8 3.0 72.7 6.0 64.3C16.1 35.1 39.8 14.0 72.3 5.1C86.9 1.1 96.5 -0.0 116.5 0.0C136.1 0.0 151.0 0.8 151.0 1.9C151.0 2.2 144.0 7.0 135.5 12.5C126.9 18.0 114.4 26.1 107.7 30.5C101.0 34.9 87.8 43.4 78.5 49.4C69.1 55.4 57.1 63.3 51.6 66.9C46.2 70.5 38.1 75.9 33.7 78.8C29.2 81.7 20.1 87.6 13.4 92.0C6.7 96.4 1.0 100.0 0.6 100.0C0.3 100.0 0.0 98.3 0.0 96.2Z">
+          <svg class="stage-fallback" viewBox="0 0 294 328" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0.0 269.8L0.0 211.5L17.8 199.9C27.5 193.5 46.1 181.3 59.0 172.9C71.9 164.4 92.7 150.8 105.2 142.5C117.7 134.2 131.9 125.0 136.7 121.9C175.0 97.3 231.9 60.8 238.5 56.5C256.1 45.1 255.0 45.6 256.6 47.7C260.4 52.5 266.3 65.8 267.6 72.7C272.5 98.6 263.4 122.0 241.8 138.7C230.8 147.1 205.0 158.6 190.2 161.5C188.5 161.9 187.0 162.5 187.0 162.9C187.0 163.2 190.9 164.1 195.8 164.8C214.3 167.3 235.0 173.6 250.5 181.3C266.4 189.2 277.9 199.1 285.3 211.3C293.6 224.9 295.7 243.5 290.9 261.5C290.3 263.7 288.0 269.1 285.7 273.5C276.1 292.1 252.6 309.5 224.5 318.9L215.5 321.9L215.2 313.5L214.9 305.0L193.5 305.0L172.0 305.0L172.0 224.0L172.0 143.0L153.4 143.0L134.7 143.0L113.1 157.0C101.2 164.8 90.5 171.9 89.2 172.8C87.0 174.5 87.0 175.0 87.2 189.3L87.5 204.1L109.0 190.8C120.8 183.4 131.1 177.1 131.8 176.6C132.7 176.0 133.0 189.1 133.0 240.4L133.0 305.0L109.5 305.0L86.0 305.0L86.0 316.5L86.0 328.0L43.0 328.0L0.0 328.0L0.0 269.8ZM-0.0 156.1L-0.0 134.2L20.2 120.9C31.4 113.6 49.7 101.5 61.0 94.0C72.3 86.6 91.6 74.0 104.0 66.0C116.4 58.1 131.4 48.4 137.5 44.5C143.6 40.6 151.9 35.3 156.0 32.6C160.1 30.0 170.0 23.7 178.0 18.6L192.5 9.3L197.5 10.7C205.1 12.9 214.5 16.8 224.4 21.7L233.3 26.2L222.9 32.9C217.2 36.7 200.1 47.7 185.0 57.5C141.4 85.7 139.7 86.8 115.0 102.9C102.1 111.3 84.1 123.1 75.0 129.0C53.7 143.0 15.2 168.2 4.8 174.9L-0.0 177.9L-0.0 156.1ZM0.0 96.2C0.0 88.8 3.0 72.7 6.0 64.3C16.1 35.1 39.8 14.0 72.3 5.1C86.9 1.1 96.5 -0.0 116.5 0.0C136.1 0.0 151.0 0.8 151.0 1.9C151.0 2.2 144.0 7.0 135.5 12.5C126.9 18.0 114.4 26.1 107.7 30.5C101.0 34.9 87.8 43.4 78.5 49.4C69.1 55.4 57.1 63.3 51.6 66.9C46.2 70.5 38.1 75.9 33.7 78.8C29.2 81.7 20.1 87.6 13.4 92.0C6.7 96.4 1.0 100.0 0.6 100.0C0.3 100.0 0.0 98.3 0.0 96.2Z"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="off">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="label">Try a build</div>
+        <h2>Watch an AI tool do a job you do every week.</h2>
+        <p>Describe a real job and pick what you need. This demo runs entirely on this page, so it's a taste of the custom tools we build, trained on your business instead of a template.</p>
+      </div>
+      <div class="demo">
+        <form class="panel rv" id="demo-form" novalidate>
+          <div class="field">
+            <label for="job">Describe the job</label>
+            <textarea id="job" rows="4">Replace an old 100 amp fuse box with a 200 amp breaker panel for a homeowner in Wayne, NJ</textarea>
+            <div class="presets">Try another:
+              <button type="button" data-p="Spring cleanup and mulching for a two-acre property in Montclair, NJ">Landscaper</button>
+              <button type="button" data-p="Catering trays for a 40-person office lunch in Jersey City, NJ">Bakery</button>
+              <button type="button" data-p="Deep clean of a three-bedroom apartment after move-out in Hoboken, NJ">Cleaning crew</button>
+            </div>
+          </div>
+          <div class="field">
+            <span id="kind-label" style="font-weight:600;font-size:.9rem">What do you need?</span>
+            <div class="chips" role="group" aria-labelledby="kind-label">
+              <button type="button" class="chip" aria-pressed="true" data-k="quote">Customer quote</button>
+              <button type="button" class="chip" aria-pressed="false" data-k="post">Google post</button>
+              <button type="button" class="chip" aria-pressed="false" data-k="text">Follow-up text</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="biz">Your business name</label>
+            <input id="biz" type="text" value="Luminous Electric">
+          </div>
+          <button class="btn btn-ink go mag" type="submit">Write the draft</button>
+          <div class="err" id="err" role="alert"></div>
+        </form>
+        <div class="panel rv" style="--d:1" id="out-panel">
+          <div class="out-head"><strong id="out-title">Customer quote</strong><span class="status"><i class="dot"></i><span id="status">Sample draft</span></span></div>
+          <div class="out" id="out" aria-live="polite"></div>
+          <div class="out-foot"><span>Demo only. Nothing you type leaves your browser.</span><button class="copy" type="button" id="copy">Copy draft</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="build">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="label">What we build</div>
+        <h2>Two things, done properly.</h2>
+      </div>
+      <div class="builds">
+        <div class="build rv">
+          <div class="bar"></div>
+          <h3>Web development</h3>
+          <p>Fast, clear websites that turn visitors into calls, wired into the tools you already use so no lead slips through.</p>
+          <ul>
+            <li>Business websites<span>Design, build, launch</span></li>
+            <li>Booking and quote forms<span>Straight to your inbox or CRM</span></li>
+            <li>Rebuilds of tired sites<span>Same domain, new engine</span></li>
+          </ul>
+        </div>
+        <div class="build rv" style="--d:1">
+          <div class="bar"></div>
+          <h3>AI builds</h3>
+          <p>Custom AI tools and automations that take repeat work off your team, built around how your business already runs.</p>
+          <ul>
+            <li>Content systems<span>Blog and Google posts on schedule</span></li>
+            <li>Quote and intake assistants<span>Drafts in seconds, you approve</span></li>
+            <li>Internal tools<span>Replace copy-paste and spreadsheets</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="off">
+    <div class="wrap case">
+      <div class="rv">
+        <div class="label">Featured client</div>
+        <h2 style="margin-top:16px">Luminous Electric <em>publishes every week</em> without writing a word.</h2>
+        <p>A New Jersey electrician with no time to post. We built an AI system that turns what customers search for and the jobs the crew actually finished into a blog post and Google updates every week, checked against the owner's rules before anything goes live.</p>
+      </div>
+      <div class="rv" style="--d:1">
+        <div class="facts">
+          <div class="fact"><b>1</b><span>blog post written and published every week</span></div>
+          <div class="fact"><b>3</b><span>Google Business Profile updates, at most, each week</span></div>
+          <div class="fact"><b>Rules</b><span>banned claims and service area enforced before publishing</span></div>
+          <div class="fact"><b>Report</b><span>a plain summary emailed to the owner after every run</span></div>
+        </div>
+        <p class="tagnote">Results figures to be added once confirmed with the client.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="label">Who we work with</div>
+        <h2>Small businesses that run on word of mouth and a full calendar.</h2>
+      </div>
+      <div class="inds rv">
+        <span class="ind">Electricians and trades</span><span class="ind">Home services</span><span class="ind">Landscaping</span><span class="ind">Cleaning crews</span><span class="ind">Bakeries and catering</span><span class="ind">Salons and studios</span><span class="ind">Professional offices</span><span class="ind">Local retail</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder" class="off">
+    <div class="wrap founder">
+      <div class="photo rv" aria-label="Placeholder for Francis's photo">
+        <svg viewBox="0 0 294 328" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M86.0 316.5L86.0 305.0L109.5 305.0L133.0 305.0L133.0 240.4C133.0 189.1 132.7 176.0 131.8 176.6C131.1 177.1 120.8 183.4 109.0 190.8L87.5 204.1L87.2 189.3C87.0 175.0 87.0 174.5 89.2 172.8C90.5 171.9 101.2 164.8 113.1 157.0L134.7 143.0L153.4 143.0L172.0 143.0L172.0 224.0L172.0 305.0L193.5 305.0L214.9 305.0L215.2 313.5L215.5 321.9L224.5 318.9C252.6 309.5 276.1 292.1 285.8 273.4C289.7 265.8 292.3 257.2 293.3 249.0C293.5 247.1 293.8 264.1 293.8 286.8L294.0 328.0L190.0 328.0L86.0 328.0L86.0 316.5ZM292.7 233.8C291.8 225.0 289.7 218.5 285.3 211.2C273.4 191.7 250.2 177.5 216.5 169.0C209.9 167.3 200.6 165.4 195.8 164.8C190.9 164.1 187.0 163.2 187.0 162.9C187.0 162.5 188.5 161.9 190.2 161.5C205.0 158.6 230.8 147.1 241.8 138.7C263.4 122.0 272.5 98.6 267.6 72.7C266.3 65.8 260.4 52.5 256.6 47.7C255.0 45.6 256.1 45.1 238.5 56.5C231.9 60.8 175.0 97.3 136.7 121.9C131.9 125.0 117.7 134.2 105.2 142.5C92.7 150.8 75.3 162.2 66.5 167.9C57.7 173.7 39.4 185.7 25.7 194.7C12.1 203.7 0.7 211.0 0.5 211.0C0.2 211.0 0.0 203.6 0.0 194.5L0.0 178.0L11.2 170.7C17.4 166.6 26.3 160.9 31.0 157.8C43.9 149.5 67.2 134.2 89.5 119.5C106.8 108.1 121.5 98.5 151.0 79.5C173.9 64.7 214.1 38.7 222.9 32.9L233.3 26.2L224.4 21.7C214.5 16.8 205.1 12.9 197.5 10.7L192.5 9.3L178.0 18.6C170.0 23.7 160.1 30.0 156.0 32.6C151.9 35.3 144.2 40.2 139.0 43.6C133.8 46.9 120.5 55.5 109.5 62.5C84.4 78.6 75.4 84.5 35.0 111.1C17.1 122.9 1.9 132.9 1.2 133.4C0.3 134.0 0.0 130.5 0.0 117.3L0.0 100.5L5.3 97.2C10.7 93.8 34.2 78.4 51.6 66.9C57.0 63.3 69.1 55.4 78.5 49.4C87.8 43.4 101.0 34.9 107.7 30.5C114.4 26.1 126.9 18.0 135.5 12.5C144.0 7.0 151.0 2.2 151.0 1.8C151.0 1.4 148.6 0.9 145.8 0.7C142.9 0.5 175.0 0.3 217.2 0.2L294.0 0.0L294.0 120.0C294.0 186.0 293.8 240.0 293.6 240.0C293.4 240.0 293.0 237.2 292.7 233.8ZM0.1 45.2L0.0 0.0L47.8 0.1C90.8 0.2 94.8 0.3 88.1 1.5C60.5 6.5 40.1 16.6 24.9 32.8C12.6 45.9 4.5 63.0 1.6 81.8C0.3 89.9 0.2 87.2 0.1 45.2Z"/></svg>
+        <small>Francis's photo goes here</small>
+      </div>
+      <div class="rv" style="--d:1">
+        <div class="label">Founder</div>
+        <blockquote style="margin-top:16px">Small businesses deserve <em>the same tools</em> the big firms use.</blockquote>
+        <p>Francis John Libutti started Bay1 Consulting Group in Bayonne to bring practical AI and well-built websites to the businesses that keep a town running. Every project is scoped, built and supported by him directly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="start" class="cta">
+    <div class="wrap">
+      <div class="label rv" style="color:var(--steel-lt)">Start a project</div>
+      <h2 class="rv">Have a project in mind? Let's talk.</h2>
+      <div class="mail rv"><code id="email">francis@bay1cg.com</code><button class="copy" type="button" id="copy-mail">Copy email</button></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>&copy; 2026 Bay1 Consulting Group, Bayonne, NJ</span><nav><a href="#top">Privacy policy</a><a href="#top">Terms of service</a></nav></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* bridge: build truss and hangers from the arch curve */
+(function(){
+  const q=(t,a,b,c)=>(1-t)*(1-t)*a+2*t*(1-t)*b+t*t*c;
+  const outer=t=>[q(t,118,600,1082),q(t,214,-86,214)], inner=t=>[q(t,150,600,1050),q(t,214,-30,214)];
+  const ns='http://www.w3.org/2000/svg', truss=document.getElementById('truss'), hg=document.getElementById('hangers');
+  let d='';
+  for(let i=1;i<24;i++){const t=i/24,[x1,y1]=outer(t),[x2,y2]=inner(i%2?t+1/48:t-1/48);d+=`M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}`}
+  const p=document.createElementNS(ns,'path');p.setAttribute('d',d);truss.appendChild(p);
+  let k=0;
+  for(let i=3;i<=21;i++){const [x,y]=inner(i/24);if(y>176)continue;const l=document.createElementNS(ns,'line');
+    l.setAttribute('x1',x.toFixed(1));l.setAttribute('x2',x.toFixed(1));l.setAttribute('y1',y.toFixed(1));l.setAttribute('y2','178');
+    l.setAttribute('class','hanger');l.setAttribute('stroke-width','1.2');l.style.setProperty('--i',k++);hg.appendChild(l)}
+  const svg=document.getElementById('bridge');
+  document.getElementById('replay').onclick=()=>{svg.classList.remove('play');void svg.getBoundingClientRect();svg.classList.add('play')};
+  if(!reduce){addEventListener('scroll',()=>{const y=Math.min(scrollY,400);svg.style.transform=`translateY(${(-y*0.06).toFixed(1)}px)`},{passive:true})}
+})();
+
+/* pinned logo story: the B mark as extruded layers that assemble on scroll */
+(function(){
+  const host=document.getElementById('logo3d'), section=document.getElementById('how');
+  const steps=[...document.querySelectorAll('#steps li')], meter=document.getElementById('meter');
+  let stage=0;
+  function readStage(){
+    const r=section.getBoundingClientRect(), span=r.height-innerHeight;
+    const p=Math.min(1,Math.max(0,-r.top/Math.max(1,span)));
+    meter.style.width=(p*100).toFixed(1)+'%';
+    return Math.min(3,Math.floor(p*4.0001));
+  }
+  function setStage(s){if(s===stage)return;stage=s;steps.forEach((li,i)=>li.classList.toggle('on',i===s))}
+  addEventListener('scroll',()=>setStage(readStage()),{passive:true});
+  setStage(readStage());
+  if(!window.THREE)return;
+  let gl;try{const c=document.createElement('canvas');gl=c.getContext('webgl')||c.getContext('experimental-webgl')}catch(_){}
+  if(!gl)return;
+
+  // SVG path (M/L/C/Z, absolute) to THREE shapes, holes assigned by winding
+  const d=host.dataset.d, polys=[];
+  d.replace(/([MLCZ])([^MLCZ]*)/g,(_,c,a)=>{const n=a.trim()?a.trim().split(/[\s,]+/).map(Number):[];polys.length&&0;
+    if(c==='M'){polys.push({path:new THREE.Path(),pts:[]});const P=polys[polys.length-1];P.path.moveTo(n[0],-n[1]);P.pts.push([n[0],-n[1]])}
+    else if(c==='L'){const P=polys[polys.length-1];P.path.lineTo(n[0],-n[1]);P.pts.push([n[0],-n[1]])}
+    else if(c==='C'){const P=polys[polys.length-1];P.path.bezierCurveTo(n[0],-n[1],n[2],-n[3],n[4],-n[5]);P.pts.push([n[4],-n[5]])}
+    return ''});
+  const area=pts=>{let s=0;for(let i=0;i<pts.length;i++){const[a,b]=pts[i],[c,e]=pts[(i+1)%pts.length];s+=a*e-c*b}return s/2};
+  const inside=(pt,pts)=>{let o=false;for(let i=0,j=pts.length-1;i<pts.length;j=i++){const[xi,yi]=pts[i],[xj,yj]=pts[j];if((yi>pt[1])!==(yj>pt[1])&&pt[0]<(xj-xi)*(pt[1]-yi)/(yj-yi)+xi)o=!o}return o};
+  polys.forEach(p=>p.a=area(p.pts));
+  const big=polys.reduce((m,p)=>Math.abs(p.a)>Math.abs(m.a)?p:m), sign=Math.sign(big.a);
+  const outers=polys.filter(p=>Math.sign(p.a)===sign), holes=polys.filter(p=>Math.sign(p.a)!==sign);
+  const shapes=outers.map(o=>{const s=new THREE.Shape();s.curves=o.path.curves;s.currentPoint=o.path.currentPoint;
+    if(sign<0)s.curves=s.curves; s.holes=holes.filter(h=>inside(h.pts[0],o.pts)).map(h=>h.path);return {s,c:o.pts.reduce((m,[x,y])=>[m[0]+x/o.pts.length,m[1]+y/o.pts.length],[0,0])}});
+
+  const LAYERS=5, SCALE=1/100, CX=147, CY=-164;
+  const scene=new THREE.Scene(), cam=new THREE.PerspectiveCamera(32,1,0.1,100); cam.position.set(0,0,11);
+  const ren=new THREE.WebGLRenderer({antialias:true,alpha:true}); ren.setPixelRatio(Math.min(devicePixelRatio,1.75));
+  host.appendChild(ren.domElement); host.classList.add('gl');
+  scene.add(new THREE.AmbientLight(0xffffff,.55));
+  const key=new THREE.DirectionalLight(0xffffff,1.05);key.position.set(3,4,6);scene.add(key);
+  const rim=new THREE.DirectionalLight(0x8ea2b9,.9);rim.position.set(-5,-2,-4);scene.add(rim);
+  const group=new THREE.Group();scene.add(group);
+  const tones=[0x6E230A,0x8A2C0B,0xB33A0F,0xCF4716,0xE8531E];
+  const mats=tones.map(t=>new THREE.MeshStandardMaterial({color:t,roughness:.42,metalness:.12,emissive:0xE8531E,emissiveIntensity:0}));
+  const rnd=(i,k)=>{const x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)};
+  const items=[];
+  shapes.forEach(({s,c},pi)=>{
+    const geo=new THREE.ExtrudeGeometry(s,{depth:12,bevelEnabled:true,bevelThickness:1.2,bevelSize:1,bevelSegments:2,curveSegments:10});
+    geo.translate(-c[0],-c[1],-6);
+    for(let l=0;l<LAYERS;l++){
+      const m=new THREE.Mesh(geo,mats[l]);m.scale.setScalar(SCALE);group.add(m);
+      const off=[(c[0]-CX)*SCALE,(c[1]-CY)*SCALE];
+      const k=pi*LAYERS+l;
+      const poses=[
+        {p:[(rnd(k,1)-.5)*5.2,(rnd(k,2)-.5)*3.8,(rnd(k,3)-.5)*3],r:[(rnd(k,4)-.5)*2.2,(rnd(k,5)-.5)*2.2,(rnd(k,6)-.5)*1.6],s:.62},
+        {p:[off[0]+(pi-1)*.18,off[1]+(pi-1)*.12,(l-2)*.62],r:[0,0,0],s:.92},
+        {p:[off[0],off[1],(l-2)*.13],r:[0,0,0],s:1},
+        {p:[off[0],off[1],(l-2)*.13],r:[0,0,0],s:1.04},
+      ];
+      const st={x:[...poses[0].p,...poses[0].r,poses[0].s],v:new Array(7).fill(0)};
+      items.push({m,poses,st,delay:(pi*LAYERS+l)*0.035});
+    }
+  });
+  const gPose=[{r:[.15,-.5,0]},{r:[.32,-.78,0]},{r:[.08,-.22,0]},{r:[.05,0,0]}];
+  const g={x:[.15,-.5,0],v:[0,0,0]};
+  function size(){const w=host.clientWidth,h=host.clientHeight;ren.setSize(w,h,false);cam.aspect=w/h;
+    cam.position.z=w<500?13.5:11;cam.updateProjectionMatrix()}
+  size();addEventListener('resize',size);
+  const K=reduce?0:120, C=reduce?0:13; let last=performance.now(), t0=last, idle=0, ptr=[0,0], stageAt=last;
+  addEventListener('pointermove',e=>{ptr=[e.clientX/innerWidth-.5,e.clientY/innerHeight-.5]},{passive:true});
+  let prevStage=stage;
+  function spring(x,v,target,dt){const a=K*(target-x)-C*v;v+=a*dt;x+=v*dt;return[x,v]}
+  function frame(now){
+    const dt=Math.min(.033,(now-last)/1000);last=now;
+    if(stage!==prevStage){prevStage=stage;stageAt=now}
+    const since=(now-stageAt)/1000;
+    items.forEach(it=>{const P=it.poses[stage],T=[...P.p,...P.r,P.s];
+      if(reduce||since<it.delay&&false){it.st.x=T.slice()}
+      else if(since>=it.delay){for(let i=0;i<7;i++){const[x,v]=spring(it.st.x[i],it.st.v[i],T[i],dt);it.st.x[i]=x;it.st.v[i]=v}}
+      const x=it.st.x;it.m.position.set(x[0],x[1],x[2]);it.m.rotation.set(x[3],x[4],x[5]);it.m.scale.setScalar(x[6]*SCALE)});
+    idle=stage===3&&!reduce?idle+dt*.35:idle*0.94;
+    const GT=gPose[stage].r;
+    for(let i=0;i<3;i++){const tgt=GT[i]+(i===1?Math.sin(idle)*.5+ptr[0]*.25:0)+(i===0?ptr[1]*.12:0);
+      if(reduce){g.x[i]=tgt}else{const[x,v]=spring(g.x[i],g.v[i],tgt,dt);g.x[i]=x;g.v[i]=v}}
+    group.rotation.set(g.x[0],g.x[1],g.x[2]);
+    const glow=stage===3?.22+Math.sin((now-t0)/700)*.06:0;mats.forEach(m=>m.emissiveIntensity+=(glow-m.emissiveIntensity)*.08);
+    const r=host.getBoundingClientRect();
+    if(r.bottom>0&&r.top<innerHeight)ren.render(scene,cam);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* rotating outcome words */
+(function(){
+  const words=[...document.querySelectorAll('.rot span')];let i=0;
+  if(reduce)return;
+  setInterval(()=>{const cur=words[i];cur.classList.remove('on');cur.classList.add('out');i=(i+1)%words.length;const nx=words[i];nx.classList.remove('out');
+    void nx.offsetWidth;nx.classList.add('on');setTimeout(()=>cur.classList.remove('out'),600)},2600);
+})();
+
+/* magnetic buttons */
+if(!reduce && matchMedia('(pointer:fine)').matches){
+  document.querySelectorAll('.mag').forEach(b=>{
+    b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.18}px,${(e.clientY-r.top-r.height/2)*0.3}px)`});
+    b.addEventListener('mouseleave',()=>{b.style.transform=''});
+  });
+}
+
+/* spring reveal on scroll (content is visible at rest) */
+if(!reduce && 'IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('go-in');io.unobserve(e.target)}}),{rootMargin:'0px 0px 12% 0px'});
+  const fold=innerHeight;
+  document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top>fold)io.observe(el)});
+}
+
+/* demo */
+(function(){
+  const form=document.getElementById('demo-form'), job=document.getElementById('job'), biz=document.getElementById('biz');
+  const out=document.getElementById('out'), title=document.getElementById('out-title'), status=document.getElementById('status'), panel=document.getElementById('out-panel'), err=document.getElementById('err');
+  let kind='quote', timer=null;
+  const titles={quote:'Customer quote',post:'Google post',text:'Follow-up text'};
+  document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));kind=c.dataset.k;title.textContent=titles[kind]});
+  document.querySelectorAll('.presets button').forEach(b=>b.onclick=()=>{job.value=b.dataset.p;err.textContent='';job.focus()});
+  job.addEventListener('input',()=>err.textContent='');
+
+  function parse(s){
+    s=s.trim().replace(/\s+/g,' ');
+    const m=s.match(/\bin ([A-Z][A-Za-z.]*(?: [A-Z][A-Za-z.]*)*)(?:, ?([A-Z]{2}))?/);
+    const town=m?m[1]:'your area';
+    let what=(m?s.slice(0,m.index):s).replace(/\s+for (a|an|the) [^,]+$/i,'').replace(/[.,\s]+$/,'');
+    const who=(s.match(/for (a|an|the) ([a-z0-9\- ]+?)(?= in |$)/i)||[])[2]||'';
+    what=what.charAt(0).toLowerCase()+what.slice(1);
+    return {what,town,who};
+  }
+  function draft(){
+    const {what,town,who}=parse(job.value), name=biz.value.trim()||'Our team';
+    const Cap=what.charAt(0).toUpperCase()+what.slice(1);
+    if(kind==='quote') return `Hi there,\n\nThanks for reaching out to ${name}. Here's our quote for the job${town!=='your area'?` in ${town}`:''}:\n${Cap}.\n\nWhat's included\n- A walkthrough to confirm the scope before we start\n- All labor and standard materials for the job\n- Cleanup when we're done, so you'd never know we were there\n\nPrice: [your rate here]\nTimeline: we can usually start within the week.\n\nReply to this email or call us to lock in a date.\n\n${name}`;
+    if(kind==='post') return `${Cap} in ${town}\n\nJust finished in ${town}: ${what}${who?` for a ${who}`:''}. Jobs like this are what we do every week, and they're done right the first time.\n\nThinking about something similar? Get a quote from ${name} today.\n\n[Call now]`;
+    return `Hi! It's ${name} following up on your quote${town!=='your area'?` for the job in ${town}`:''} (${what}). Any questions we can answer? We have openings next week if you'd like to get on the schedule. Just reply here.`;
+  }
+  function run(e){
+    e&&e.preventDefault();
+    if(job.value.trim().length<12){err.textContent='Describe the job in a few more words, for example what you did and the town.';job.focus();return}
+    clearInterval(timer);const text=draft();
+    panel.classList.remove('done');panel.classList.add('busy');status.textContent='Writing...';
+    if(reduce){out.textContent=text;finish();return}
+    out.textContent='';let i=0;const cur=document.createElement('span');cur.className='cursor';
+    timer=setInterval(()=>{i+=Math.max(1,Math.round(text.length/180));out.textContent=text.slice(0,i);out.appendChild(cur);if(i>=text.length){clearInterval(timer);cur.remove();finish()}},16);
+  }
+  function finish(){panel.classList.remove('busy');panel.classList.add('done');status.textContent='Draft ready'}
+  form.addEventListener('submit',run);
+  out.textContent=draft();
+  const copy=(btn,txt)=>{const done=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent=btn.dataset.l,1400)};btn.dataset.l=btn.textContent;
+    try{navigator.clipboard.writeText(txt).then(done,()=>{sel(btn)})}catch(_){sel(btn)}};
+  const sel=btn=>{const r=document.createRange();r.selectNodeContents(btn.id==='copy'?out:document.getElementById('email'));const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected, press Ctrl+C'};
+  document.getElementById('copy').onclick=e=>copy(e.currentTarget,out.textContent);
+  document.getElementById('copy-mail').onclick=e=>copy(e.currentTarget,'francis@bay1cg.com');
+})();
+</script>

@@ -1,6 +1,6 @@
 # Agent guide: bay1cg site
 
-Marketing site for Bay1 Consulting Group (AI strategy, AI training, web development). Never call it "Bay1" alone; use the full name or "bay1cg". Next.js 16 App Router,
+Marketing site for Bay1 Consulting Group (web development and AI builds for small businesses). Never call it "Bay1" alone; use the full name or "bay1cg". Next.js 16 App Router,
 React 19, Tailwind 4, deployed on Vercel from `main`.
 
 Read `DESIGN.md` before touching anything visual or writing copy. It is binding.
@@ -14,7 +14,8 @@ Read `DESIGN.md` before touching anything visual or writing copy. It is binding.
 ## Layout
 
 - `src/app/`: routes. `/`, `/services`, `/work`, `/about`, `/contact`, `/privacy`, `/terms`.
-- `src/components/`: UI. `scene/` holds the three.js home scene (client only, loaded with `ssr: false`).
+- `src/components/`: UI. `scene/` holds the three.js logo story (client only, loaded with `ssr: false`).
+- `docs/prototype/bay1cg-prototype.html`: the v3 reference prototype. Match it.
 - `src/data/`: all copy that lists things (services, work, builds, experience). Edit data here, not in JSX.
 - `src/lib/site.ts`: name, email, location, social links. One place to change contact details.
 
