@@ -12,8 +12,6 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => setOpen(false), [pathname]);
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -35,7 +33,12 @@ export default function Nav() {
       )}
     >
       <div className="wrap flex h-16 items-center justify-between md:h-20">
-        <Link href="/" aria-label="Bay1 Consulting Group, home" className="relative z-10">
+        <Link
+          href="/"
+          aria-label="Bay1 Consulting Group, home"
+          className="relative z-10"
+          onClick={() => setOpen(false)}
+        >
           <Wordmark />
         </Link>
 
@@ -73,7 +76,12 @@ export default function Nav() {
       >
         <nav className="wrap flex flex-col gap-6" aria-label="Mobile">
           {[...nav, { href: "/contact", label: "Contact" }].map((item, i) => (
-            <Link key={item.href} href={item.href} className="display flex items-baseline gap-4 text-[12vw]">
+            <Link
+              key={item.href}
+              href={item.href}
+              className="display flex items-baseline gap-4 text-[12vw]"
+              onClick={() => setOpen(false)}
+            >
               <span className="label text-stone">0{i + 1}</span>
               {item.label}
             </Link>

@@ -50,12 +50,12 @@ function readStage(sections: HTMLElement[]) {
 
 const mix = (a: V3, b: V3, t: number): V3 => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
 
-function Mark({ reduced, wrapper }: { reduced: boolean; wrapper: React.RefObject<HTMLDivElement | null> }) {
+function Mark({ reduced }: { reduced: boolean }) {
   const group = useRef<THREE.Group>(null);
   const slats = useRef<(THREE.Mesh | null)[]>([]);
   const spin = useRef(0);
   const sections = useRef<HTMLElement[]>([]);
-  const geometry = useMemo(makeSlat, []);
+  const geometry = useMemo(() => makeSlat(), []);
 
   useEffect(() => {
     sections.current = Array.from(document.querySelectorAll<HTMLElement>("[data-stage]"));
@@ -109,7 +109,8 @@ function Mark({ reduced, wrapper }: { reduced: boolean; wrapper: React.RefObject
     );
 
     // On phones the mark sits behind text after the hero, so it steps back.
-    if (wrapper.current) wrapper.current.style.opacity = narrow && stage > 0.5 ? "0.28" : "1";
+    const parentContainer = state.gl.domElement.parentElement;
+    if (parentContainer) parentContainer.style.opacity = narrow && stage > 0.5 ? "0.28" : "1";
   });
 
   return (
@@ -162,7 +163,7 @@ export default function Scene() {
           <Lightformer form="rect" intensity={1.2} position={[-6, 1, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} color="#ece6dc" />
           <Lightformer form="rect" intensity={1.4} position={[6, -1, 2]} rotation-y={-Math.PI / 2} scale={[8, 1.5, 1]} color="#e2471b" />
         </Environment>
-        <Mark reduced={reduced} wrapper={wrapper} />
+        <Mark reduced={reduced} />
       </Canvas>
     </div>
   );
