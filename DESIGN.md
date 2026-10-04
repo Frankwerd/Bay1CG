@@ -6,7 +6,7 @@ file and the prototype disagree on a visual detail, the prototype wins.
 
 ## Brand in one line
 
-Bay1 Consulting Group builds fast websites and practical AI tools for small businesses, from Bayonne, NJ.
+Bay1 Consulting Group designs and builds websites for small businesses, from Bayonne, NJ, and adds practical AI tools when they save real time. **Web design is the business; AI is the add-on.**
 Professional and current, with a bit of bounce: a modern advisory firm that is easy to work with. Not
 regal, not an engineering studio, not playful-goofy.
 
@@ -15,12 +15,14 @@ regal, not an engineering studio, not playful-goofy.
 Always "Bay1 Consulting Group" in prose, or "bay1cg" as the short form. Never "Bay1" alone. The logo lockup
 (BAY1 over CONSULTING GROUP) is the only exception.
 
-## Services (only these two)
+## Services (in priority order)
 
-1. **Web development**: business websites, booking and quote forms, rebuilds of tired sites.
-2. **AI builds**: content systems, quote and intake assistants, internal tools.
+1. **Web design and development** (primary, leads every page): custom website design, booking and quote
+   forms, rebuilds of tired sites, care plans (updates, fixes, small changes).
+2. **AI add-ons** (secondary): content systems, quote and intake assistants, internal tools.
 
-No SEO service, no AI training or strategy as products.
+No SEO service, no AI training or strategy as products. Headlines, the hero and the primary CTA are about
+websites; AI appears as an extra, never as the lead.
 
 ## Color
 
@@ -92,14 +94,14 @@ assembled.
 
 ## Page structure (home)
 
-Hero with bridge, How we build (logo story), Try a build (live demo), What we build (two services),
-Featured client (Luminous), Who we work with (industries), Founder, Start a project (CTA), footer with
-Privacy and Terms.
+Hero with bridge, How we build (logo story), What we build (web first, wider column; AI add-ons second),
+Featured client (Luminous), AI add-ons (live demo), Who we work with (industries), Founder, Start a project
+(CTA), footer with Privacy and Terms.
 
 ## Voice
 
-Plain, confident, specific. Lead with outcomes a small-business owner feels ("book more jobs", "give you
-Fridays back"). Short sentences. No em dashes, no "it's not X, it's Y", no "seamless", "leverage",
+Plain, confident, specific. Lead with outcomes a small-business owner feels from their website ("book more
+jobs", "win more quotes", "look as good as your work"). Short sentences. No em dashes, no "it's not X, it's Y", no "seamless", "leverage",
 "unlock", "revolutionize". Numbers only when real and confirmed.
 
 ## Leads

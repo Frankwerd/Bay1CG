@@ -9,7 +9,8 @@ the other pages to match. Delete this file in your final commit. Keep `docs/prot
 
 - Never write "Bay1" alone in any text, alt text, aria-label or metadata. Use "Bay1 Consulting Group" or
   "bay1cg". The logo lockup is the only exception.
-- Only two services now: Web development and AI builds. No SEO, AI training or AI strategy offerings.
+- Web design is the main business and leads everywhere. AI is a secondary add-on. No SEO, AI training or
+  AI strategy offerings.
 - No new dependencies except what is already in `package.json` (`three`, `@react-three/fiber`,
   `@react-three/drei`, `lenis`). No icon libraries, no stock photos.
 - Every number on the site must already be in `src/data/`. Don't invent results.
@@ -33,9 +34,10 @@ the other pages to match. Delete this file in your final commit. Keep `docs/prot
 
 ## 2. Data
 
-- `src/data/services.ts`: replace with two services exactly as in the prototype's "What we build" section:
-  Web development (Business websites, Booking and quote forms, Rebuilds of tired sites) and AI builds
-  (Content systems, Quote and intake assistants, Internal tools), each item with its short note.
+- `src/data/services.ts`: replace with two services exactly as in the prototype's "What we build" section,
+  in this order: Web design and development (Custom website design, Booking and quote forms, Rebuilds of
+  tired sites, Care plans) as the primary service, then AI add-ons (Content systems, Quote and intake
+  assistants, Internal tools), each item with its short note. Add a `primary: boolean` field.
 - `src/data/work.ts`: keep Luminous (featured) and CareerSuite. Move Handshake out of `cases` into
   `src/data/experience.ts` as an experience entry (AI model training work); it no longer appears on the home
   page.
@@ -60,12 +62,11 @@ Port each section from the prototype as its own component in `src/components/hom
    - Step list and progress meter on the left, exactly as in the prototype; phone layout puts the canvas on
      top. Static SVG mark fallback when WebGL is missing. Delete the old `poses.ts`, `Scene.tsx` and
      `HomeScene.tsx` slat scene.
-3. **Try a build** (off-white): the demo form and output panel with identical template logic, presets,
-   chips, typing effect, validation message and copy button. It stays a scripted demo labeled as such; do not
-   call any API.
-4. **What we build**: the two services.
-5. **Featured client**: Luminous, with the four facts and the "results to be added" note.
-6. **Who we work with**: industry pills.
+3. **What we build**: web design (wide column, bigger heading) and AI add-ons (narrow column).
+4. **Featured client** (off-white): Luminous, with the four facts and the "results to be added" note.
+5. **AI add-ons**: the demo form and output panel with identical template logic, presets, chips, typing
+   effect, validation message and copy button. It stays a scripted demo labeled as such; do not call any API.
+6. **Who we work with** (off-white): industry pills.
 7. **Founder**: placeholder photo block with the inverted mark, quote, paragraph.
 8. **Start a project** (navy): headline, email shown as selectable text with a copy button, and a "Start a
    project" button to `/contact`.
@@ -78,12 +79,13 @@ everywhere (static bridge, assembled logo, no rotation, no reveals).
 Restyle `/services`, `/work`, `/about`, `/contact`, `/privacy`, `/terms` and `not-found` in the v3 look (white
 and off-white sections, navy page header band, Instrument Sans, ember accents only on actions).
 
-- `/services`: the two services in depth, each ending with "Start a project".
+- `/services`: web design and development first and in depth (what's included, how a project runs, care
+  plans), then AI add-ons as a shorter section. End with "Start a project".
 - `/work`: Luminous and CareerSuite case write-ups, then the builds list from `src/data/projects.ts`.
 - `/about`: Francis John Libutti, founder, Bayonne; experience list (including Handshake AI model training);
   education.
 - `/contact`: h1 "Start a project". Form: name, email (required), business name, "What do you need?" (select:
-  A new website, An AI build, Both, Not sure yet), details (required). Submit builds a `mailto:` to
+  A new website, A website rebuild, A care plan, An AI add-on, Not sure yet), details (required). Submit builds a `mailto:` to
   `site.email` with subject `New project: <business>` and a readable body; inline validation errors. Side
   column shows the email as selectable text with a copy button and "Based in Bayonne, NJ".
 
