@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Home page script ported verbatim from the approved prototype.
+    "public/fun/**",
+    // Prototypes are reference specs, not app code.
+    "docs/**",
   ]),
 ]);
 

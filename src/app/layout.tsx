@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import Motion from "@/components/Motion";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -42,10 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
-        <Nav />
-        <Motion />
         {children}
-        <Footer />
         <Analytics />
       </body>
     </html>
