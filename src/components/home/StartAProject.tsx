@@ -24,11 +24,11 @@ export default function StartAProject() {
     <section id="start" className="cta bg-navy text-[#F7F7F4] py-[clamp(72px,9vw,140px)]">
       <div className="wrap grid gap-[28px]">
         <div className="label rv text-steel-lt">Start a project</div>
-        <h2 className="rv text-[var(--h1)] max-w-[14ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+        <h2 className="rv text-[length:var(--h1)] max-w-[14ch] font-semibold leading-[1.02] tracking-[-0.035em]">
           Have a project in mind? Let&apos;s talk.
         </h2>
         <div className="mail rv flex flex-wrap gap-[12px] items-center">
-          <code id="email" className="font-semibold text-[var(--lead)] select-all text-white py-[10px]">
+          <code id="email" className="font-semibold text-[length:var(--lead)] select-all text-white py-[10px]">
             {site.email}
           </code>
           <button

@@ -60,10 +60,10 @@ export default function ContactPage() {
       <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
         <div className="wrap">
           <div className="label text-steel-lt">Contact</div>
-          <h1 className="text-[var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h1 className="text-[length:var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
             Start a project
           </h1>
-          <p className="text-[var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
+          <p className="text-[length:var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
             Tell us about your business and what you want to build. You&apos;ll get a plain response directly from Francis within 24 hours.
           </p>
         </div>

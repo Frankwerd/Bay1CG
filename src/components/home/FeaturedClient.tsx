@@ -8,11 +8,11 @@ export default function FeaturedClient() {
       <div className="wrap case grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-[clamp(24px,4vw,64px)] items-end">
         <div className="rv">
           <div className="label">Featured client</div>
-          <h2 className="text-[var(--h2)] mt-4 font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h2 className="text-[length:var(--h2)] mt-4 font-semibold leading-[1.02] tracking-[-0.035em]">
             Luminous Electric has a website that{" "}
             <em className="not-italic text-ember">stays fresh every week.</em>
           </h2>
-          <p className="text-steel text-[var(--lead)] leading-[1.5] mt-[20px] max-w-[36rem]">
+          <p className="text-steel text-[length:var(--lead)] leading-[1.5] mt-[20px] max-w-[36rem]">
             {luminous.summary}
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function FeaturedClient() {
                 key={fact.label}
                 className="fact grid grid-cols-[auto_minmax(0,1fr)] gap-4 py-[18px] border-b border-mist items-baseline"
               >
-                <b className="text-[var(--h3)] tracking-[-0.03em] min-w-[3.2ch] font-semibold">{fact.label}</b>
+                <b className="text-[length:var(--h3)] tracking-[-0.03em] min-w-[3.2ch] font-semibold">{fact.label}</b>
                 <span className="text-steel">{fact.text}</span>
               </div>
             ))}

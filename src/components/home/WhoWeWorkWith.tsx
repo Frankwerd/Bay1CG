@@ -6,7 +6,7 @@ export default function WhoWeWorkWith() {
       <div className="wrap">
         <div className="sec-head rv grid gap-4 max-w-[46rem] mb-[clamp(36px,5vw,64px)]">
           <div className="label">Who we work with</div>
-          <h2 className="text-[var(--h2)] font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h2 className="text-[length:var(--h2)] font-semibold leading-[1.02] tracking-[-0.035em]">
             Small businesses that run on word of mouth and a full calendar.
           </h2>
         </div>

@@ -98,7 +98,7 @@ export default function Hero() {
     <section className="bg-navy text-[#F7F7F4] overflow-hidden pt-12 pb-0 md:pt-20">
       <div className="wrap">
         <div className="label text-steel-lt">Web design and development · {site.location}</div>
-        <h1 className="text-[var(--h1)] mt-[22px] max-w-[15ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+        <h1 className="text-[length:var(--h1)] mt-[22px] max-w-[15ch] font-semibold leading-[1.02] tracking-[-0.035em]">
           Websites that{" "}
           <span className="block relative h-[1.06em] overflow-hidden text-ember" aria-live="polite">
             {rotWords.map((word, idx) => {
@@ -121,7 +121,7 @@ export default function Hero() {
             })}
           </span>
         </h1>
-        <p className="text-[var(--lead)] text-steel-lt max-w-[38rem] mt-[24px] leading-[1.5]">
+        <p className="text-[length:var(--lead)] text-steel-lt max-w-[38rem] mt-[24px] leading-[1.5]">
           {site.name}{" "}designs and builds fast, good-looking websites for small businesses, and adds practical AI tools when they&apos;ll save you time. You work directly with the person building it.
         </p>
         <div className="flex flex-wrap gap-3 mt-[32px]">

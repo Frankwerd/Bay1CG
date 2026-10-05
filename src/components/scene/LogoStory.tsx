@@ -354,7 +354,7 @@ export default function LogoStory() {
         <div className="wrap grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-[clamp(20px,4vw,64px)] items-center w-full">
           <div className="story-copy">
             <div className="label text-steel-lt">How we build</div>
-            <h2 className="text-[var(--h2)] mt-4 max-w-[13ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-4 max-w-[13ch] font-semibold leading-[1.02] tracking-[-0.035em]">
               Every project comes together the same way.
             </h2>
             <ol className="steps list-none m-0 mt-[clamp(20px,3vw,36px)] p-0 grid gap-1 [counter-reset:s]">
@@ -375,7 +375,7 @@ export default function LogoStory() {
                       0{idx + 1}
                     </span>
                     <b
-                      className={`text-[var(--h3)] font-semibold tracking-[-0.025em] block leading-snug transition-transform duration-550 origin-left ${
+                      className={`text-[length:var(--h3)] font-semibold tracking-[-0.025em] block leading-snug transition-transform duration-550 origin-left ${
                         isOn ? "scale-[1.04]" : ""
                       }`}
                     >

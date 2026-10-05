@@ -17,7 +17,7 @@ export default function Founder() {
 
         <div className="rv [animation-delay:70ms]">
           <div className="label">Founder</div>
-          <blockquote className="text-[var(--h2)] font-semibold tracking-[-0.035em] leading-[1.05] mt-4 m-0 text-balance">
+          <blockquote className="text-[length:var(--h2)] font-semibold tracking-[-0.035em] leading-[1.05] mt-4 m-0 text-balance">
             Small businesses deserve{" "}
             <em className="not-italic text-ember">the same tools</em> the big firms use.
           </blockquote>
