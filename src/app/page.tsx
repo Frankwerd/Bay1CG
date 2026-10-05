@@ -1,9 +1,9 @@
 import Hero from "@/components/home/Hero";
-import LogoStorySection from "@/components/home/LogoStorySection";
-import WhatWeBuild from "@/components/home/WhatWeBuild";
+import Marquee from "@/components/home/Marquee";
 import FeaturedClient from "@/components/home/FeaturedClient";
+import ProblemPicker from "@/components/home/ProblemPicker";
+import LogoStorySection from "@/components/home/LogoStorySection";
 import Demo from "@/components/home/Demo";
-import WhoWeWorkWith from "@/components/home/WhoWeWorkWith";
 import Founder from "@/components/home/Founder";
 import StartAProject from "@/components/home/StartAProject";
 
@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <main id="top">
       <Hero />
-      <LogoStorySection />
-      <WhatWeBuild />
+      <Marquee />
       <FeaturedClient />
+      <ProblemPicker />
+      <LogoStorySection />
       <Demo />
-      <WhoWeWorkWith />
       <Founder />
       <StartAProject />
     </main>

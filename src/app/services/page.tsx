@@ -18,10 +18,10 @@ export default function ServicesPage() {
       <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
         <div className="wrap">
           <div className="label text-steel-lt">Services</div>
-          <h1 className="text-[var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h1 className="text-[length:var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
             Web design first. AI when it saves real time.
           </h1>
-          <p className="text-[var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
+          <p className="text-[length:var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
             We build websites that look as good as your work and bring in new customers, then add custom AI tools when they simplify how your business runs.
           </p>
         </div>
@@ -32,10 +32,10 @@ export default function ServicesPage() {
         <div className="wrap">
           <div className="max-w-[46rem]">
             <div className="label text-ember font-semibold">Primary service</div>
-            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
               {webDev.title}
             </h2>
-            <p className="text-steel text-[var(--lead)] mt-4 leading-relaxed">
+            <p className="text-steel text-[length:var(--lead)] mt-4 leading-relaxed">
               {webDev.summary}
             </p>
           </div>
@@ -43,14 +43,14 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
             {webDev.items.map((item) => (
               <div key={item.title} className="p-6 rounded-[10px] bg-off border border-mist">
-                <h3 className="text-[var(--h3)] font-semibold tracking-tight">{item.title}</h3>
+                <h3 className="text-[length:var(--h3)] font-semibold tracking-tight">{item.title}</h3>
                 <p className="text-steel mt-2 text-[0.95rem]">{item.note}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-12 p-8 rounded-[10px] bg-paper border border-mist">
-            <h3 className="text-[var(--h3)] font-semibold">What&apos;s included in every web build</h3>
+            <h3 className="text-[length:var(--h3)] font-semibold">What&apos;s included in every web build</h3>
             <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-steel">
               <li className="flex gap-3 items-baseline">
                 <span className="text-ember font-bold">—</span>
@@ -78,10 +78,10 @@ export default function ServicesPage() {
         <div className="wrap">
           <div className="max-w-[46rem]">
             <div className="label text-steel font-semibold">Secondary add-on</div>
-            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
               {aiAddons.title}
             </h2>
-            <p className="text-steel text-[var(--lead)] mt-4 leading-relaxed">
+            <p className="text-steel text-[length:var(--lead)] mt-4 leading-relaxed">
               {aiAddons.summary}
             </p>
           </div>
@@ -102,7 +102,7 @@ export default function ServicesPage() {
         <div className="wrap flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div>
             <div className="label text-steel-lt">Ready to start?</div>
-            <h2 className="text-[var(--h2)] mt-2 font-semibold tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-2 font-semibold tracking-[-0.035em]">
               Let&apos;s build a website that works for you.
             </h2>
           </div>

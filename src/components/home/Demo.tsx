@@ -134,10 +134,10 @@ export default function Demo() {
       <div className="wrap">
         <div className="sec-head rv grid gap-4 max-w-[46rem] mb-[clamp(36px,5vw,64px)]">
           <div className="label">AI add-ons</div>
-          <h2 className="text-[var(--h2)] font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h2 className="text-[length:var(--h2)] font-semibold leading-[1.02] tracking-[-0.035em]">
             Want more than a website? Try an AI add-on.
           </h2>
-          <p className="text-steel text-[var(--lead)] leading-[1.5]">
+          <p className="text-steel text-[length:var(--lead)] leading-[1.5]">
             Describe a real job and pick what you need. This demo runs right here on the page; the add-ons we build are set up for your business, your prices and your voice.
           </p>
         </div>

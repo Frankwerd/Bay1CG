@@ -31,7 +31,7 @@ export function DisplayHeading({
   className?: string;
 }) {
   return (
-    <As className={cx("text-[var(--h2)] font-semibold tracking-[-0.035em] leading-[1.02]", className)}>
+    <As className={cx("text-[length:var(--h2)] font-semibold tracking-[-0.035em] leading-[1.02]", className)}>
       {lines ? lines.join(" ") : children}
     </As>
   );

@@ -19,10 +19,10 @@ export default function WorkPage() {
       <section className="bg-navy text-[#F7F7F4] py-16 md:py-24">
         <div className="wrap">
           <div className="label text-steel-lt">Work</div>
-          <h1 className="text-[var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h1 className="text-[length:var(--h1)] mt-4 max-w-[16ch] font-semibold leading-[1.02] tracking-[-0.035em]">
             Recent projects and client systems.
           </h1>
-          <p className="text-[var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
+          <p className="text-[length:var(--lead)] text-steel-lt mt-6 max-w-[38rem] leading-relaxed">
             From electrician websites to custom AI application backends, here is what we&apos;ve built and how it runs.
           </p>
         </div>
@@ -33,11 +33,11 @@ export default function WorkPage() {
         <div className="wrap grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-7">
             <div className="label text-ember font-semibold">Featured case study</div>
-            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
               {luminous.title}
             </h2>
             <p className="text-steel text-[0.95rem] mt-2 font-medium">{luminous.sector}</p>
-            <p className="text-steel text-[var(--lead)] mt-6 leading-relaxed">
+            <p className="text-steel text-[length:var(--lead)] mt-6 leading-relaxed">
               {luminous.summary}
             </p>
 
@@ -89,10 +89,10 @@ export default function WorkPage() {
         <div className="wrap">
           <div className="max-w-[46rem]">
             <div className="label text-steel font-semibold">Product case study</div>
-            <h2 className="text-[var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-3 font-semibold leading-[1.02] tracking-[-0.035em]">
               {careersuite.title}
             </h2>
-            <p className="text-steel text-[var(--lead)] mt-4 leading-relaxed">
+            <p className="text-steel text-[length:var(--lead)] mt-4 leading-relaxed">
               {careersuite.summary}
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function WorkPage() {
         <div className="wrap">
           <div className="sec-head mb-10">
             <div className="label text-steel">Open Source & Tools</div>
-            <h2 className="text-[var(--h2)] font-semibold tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] font-semibold tracking-[-0.035em]">
               Recent builds and repositories
             </h2>
           </div>
@@ -179,7 +179,7 @@ export default function WorkPage() {
         <div className="wrap flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div>
             <div className="label text-steel-lt">Have a project in mind?</div>
-            <h2 className="text-[var(--h2)] mt-2 font-semibold tracking-[-0.035em]">
+            <h2 className="text-[length:var(--h2)] mt-2 font-semibold tracking-[-0.035em]">
               Let&apos;s build something that lasts.
             </h2>
           </div>

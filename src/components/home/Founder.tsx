@@ -1,29 +1,69 @@
-import { Mark } from "../Logo";
 import { site } from "@/lib/site";
 
 export default function Founder() {
   return (
-    <section id="founder" className="py-[clamp(72px,9vw,140px)]">
-      <div className="wrap founder grid grid-cols-1 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-[clamp(24px,4vw,64px)] items-center">
-        <div
-          className="photo rv aspect-[4/5] max-w-full rounded-[10px] bg-navy grid place-items-center text-steel-lt text-[0.85rem] relative overflow-hidden"
-          aria-label="Placeholder for Francis's photo"
-        >
-          <Mark className="w-[42%] h-auto text-ember" />
-          <small className="absolute bottom-[14px] left-[16px]">
-            Francis&apos;s photo goes here
-          </small>
+    <section id="hi" className="py-[clamp(72px,9vw,140px)] bg-off overflow-hidden">
+      <div className="wrap grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[340px_1fr] gap-[clamp(32px,5vw,72px)] items-center">
+        {/* Tilted Polaroid Frame */}
+        <div className="relative group justify-self-center md:justify-self-start">
+          {/* Top Tape */}
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-7 bg-[#E8E3D5]/80 shadow-xs -rotate-2 z-10 pointer-events-none" />
+
+          <div className="bg-paper p-4 pb-6 rounded-xs shadow-xl rotate-[-2.5deg] group-hover:rotate-0 transition-transform duration-300 w-[280px] sm:w-[300px]">
+            <div className="aspect-[4/5] bg-navy rounded-xs relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+              <span className="text-ember font-bold text-2xl tracking-wide mb-1">
+                BAY1CG
+              </span>
+              <span className="text-mist text-xs tracking-wider uppercase">
+                Bayonne, NJ
+              </span>
+              <span className="absolute bottom-3 right-3 text-mist/30 text-[10px]">
+                EST. 2024
+              </span>
+            </div>
+            <div className="mt-4 text-center">
+              <p className="hand text-navy text-2xl font-bold leading-tight">
+                Francis John Libutti
+              </p>
+              <p className="text-steel text-xs font-mono uppercase tracking-wider mt-0.5">
+                Founder & Lead Engineer
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="rv [animation-delay:70ms]">
-          <div className="label">Founder</div>
-          <blockquote className="text-[var(--h2)] font-semibold tracking-[-0.035em] leading-[1.05] mt-4 m-0 text-balance">
-            Small businesses deserve{" "}
-            <em className="not-italic text-ember">the same tools</em> the big firms use.
-          </blockquote>
-          <p className="text-steel mt-[22px] max-w-[34rem] text-[1.05rem] leading-relaxed">
-            {site.founder} started {site.name} in Bayonne to bring practical AI and well-built websites to the businesses that keep a town running. Every project is scoped, built and supported by him directly.
-          </p>
+        {/* Bio Content */}
+        <div>
+          <div className="label">WHO RUNS THIS</div>
+          <h2 className="text-[length:var(--h2)] font-extrabold text-navy leading-[1.05] tracking-tight mt-3 mb-6">
+            Small businesses deserve the <span className="i">same leverage</span> as enterprise software teams.
+          </h2>
+
+          <div className="space-y-4 text-steel text-[1.05rem] leading-relaxed max-w-2xl">
+            <p>
+              I&apos;m Francis. I started {site.name} right here in Bayonne, New Jersey.
+            </p>
+            <p>
+              When you hire us, you don&apos;t get passed off to an account manager, a junior dev, or a third-party agency offshore. I personally design, code, and deploy every project we build.
+            </p>
+            <p>
+              We focus on fast, conversion-driven websites and custom AI automations that actually save you time and bring in new local business.
+            </p>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-mist/40 flex flex-wrap gap-2">
+            <span className="text-xs text-steel font-medium uppercase tracking-wider mr-2 self-center">
+              Industries served:
+            </span>
+            {["Contractors", "Law Firms", "Medical", "Local Services", "Retail"].map((ind) => (
+              <span
+                key={ind}
+                className="bg-paper border border-mist text-navy text-xs font-semibold px-3 py-1 rounded-full"
+              >
+                {ind}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

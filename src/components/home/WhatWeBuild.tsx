@@ -9,7 +9,7 @@ export default function WhatWeBuild() {
       <div className="wrap">
         <div className="sec-head rv grid gap-4 max-w-[46rem] mb-[clamp(36px,5vw,64px)]">
           <div className="label">What we build</div>
-          <h2 className="text-[var(--h2)] font-semibold leading-[1.02] tracking-[-0.035em]">
+          <h2 className="text-[length:var(--h2)] font-semibold leading-[1.02] tracking-[-0.035em]">
             Websites first. AI when it earns its keep.
           </h2>
         </div>
@@ -37,7 +37,7 @@ export default function WhatWeBuild() {
           {/* Secondary service: AI add-ons */}
           <div className="build rv [animation-delay:70ms]">
             <div className="bar h-[4px] w-[56px] bg-navy rounded-sm mb-5" />
-            <h3 className="text-[var(--h3)] font-semibold tracking-[-0.035em] leading-[1.02]">
+            <h3 className="text-[length:var(--h3)] font-semibold tracking-[-0.035em] leading-[1.02]">
               {aiAddons.title}
             </h3>
             <p className="text-steel mt-3 max-w-[34rem]">
