@@ -1,8 +1,36 @@
-# Bay1 Consulting Group: design system (v3, "Blend")
+# Bay1 Consulting Group: design system (v4, "Blend, with soul")
 
 Source of truth for how bay1cg looks, moves and sounds. Code tokens live in `src/app/globals.css` (`@theme`)
-and must match. The working reference implementation is `docs/prototype/bay1cg-prototype.html`: when this
-file and the prototype disagree on a visual detail, the prototype wins.
+and must match. The working reference implementation is `docs/prototype/bay1cg-fun-prototype.html` (v4). When this file
+and the prototype disagree on a visual detail, the prototype wins. `bay1cg-prototype.html` is the older, plainer
+v3 reference, kept for comparison only.
+
+## v4: putting the soul back
+
+v3 was correct but lifeless. v4 keeps the same palette, logo and type base and adds personality. These rules
+override anything below that conflicts.
+
+- **Type with character.** Hero and CTA headlines are huge (`mega`: `clamp(3rem, 1.2rem + 7.6vw, 8.6rem)`,
+  h2 up to 4.6rem). One phrase per headline is set in **Instrument Serif italic** for warmth ("The proof is
+  *in the pixels.*"). Handwritten notes use **Caveat 700** in ember, sparingly: short asides next to real
+  work, the bridge, the founder signature. Never for body copy.
+- **Show the work.** The site is selling web design, so it shows websites: real screenshots of client sites in a
+  browser frame and phone frame (`public/work/`), with a gentle 3D tilt on hover and handwritten callouts.
+- **A living bridge.** After the arch builds, small cars keep crossing the deck. Clicking the bridge sends a
+  line-art container ship under it. A rotating "MADE IN BAYONNE · NEW JERSEY · WEB DESIGN" badge sits beside
+  the hero copy.
+- **Color blocking.** A tilted ember marquee band under the hero (Websites, Booking forms, Rebuilds, Care
+  plans, AI add-ons, Made in Bayonne). A warm cream (`#FFF4EC`) showcase section. The final CTA is a full
+  ember block with navy text.
+- **Problem picker instead of a service list.** "What's bugging you about your website?" Five big tappable
+  problems; the answer panel springs in with what we'd build, tagged Web design, Care plan or AI add-on.
+- **A human voice.** The founder section is first person ("Hi, I'm Francis. I build every site myself."),
+  a tilted polaroid with tape, a handwritten signature. The CTA promises a reply within a day.
+- **Playful but controlled motion.** Pill-shaped buttons, springy presses, a small ember cursor dot on desktop
+  that grows over links, chips and pills that tilt slightly when active. Everything still respects reduced
+  motion.
+- Allowed now (exceptions to the "never ship" list): pill buttons and 12 to 18px card radii; the handwritten
+  "↓ ↗ ↘" characters inside Caveat notes (static, never animated); the ✶ separator in the marquee.
 
 ## Brand in one line
 
