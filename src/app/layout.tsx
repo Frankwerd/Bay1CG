@@ -1,41 +1,45 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import type { Metadata, Viewport } from "next";
+import { Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { site } from "@/lib/site";
+import "./globals.css";
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-instrument-sans",
 });
 
 export const metadata: Metadata = {
-  title: "Bay1 Consulting Group | Enterprise Systems & AI Strategy",
-  description: "Advanced systems automation, operational efficiency, and scalable technical architecture for the modern enterprise.",
+  title: {
+    default: `${site.name} | Web design and development · Bayonne, NJ`,
+    template: `%s | ${site.short}`,
+  },
+  description: site.description,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: "#0F1E33",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={instrumentSans.variable} suppressHydrationWarning>
       <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js');",
+          }}
         />
       </head>
-      <body
-        className={`${inter.variable} font-inter antialiased min-h-screen flex flex-col bg-background text-foreground`}
-      >
-        <Navbar />
-        <main className="flex-grow pt-24">
-          {children}
-        </main>
-        <Footer />
+      <body className="min-h-screen">
+        <a
+          href="#top"
+          className="label sr-only z-[60] bg-ember p-3 text-navy focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+        >
+          Skip to content
+        </a>
+        {children}
         <Analytics />
       </body>
     </html>

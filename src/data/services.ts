@@ -1,59 +1,82 @@
+export interface ServiceItem {
+  title: string;
+  note: string;
+}
+
 export interface Service {
   id: string;
+  index: string;
   title: string;
-  description: string;
-  tools: string[];
-  outcomes: string[];
-  icon: string;
+  heading: [string, string];
+  summary: string;
+  primary: boolean;
+  forWho: string;
+  deliverables: string[];
+  items: ServiceItem[];
 }
 
 export const services: Service[] = [
   {
-    id: "ai-architecture",
-    title: "AI & System Architecture",
-    description: "Designing end-to-end serverless solutions leveraging LLMs (GPT-4, Gemini, Groq) and Human-in-the-Loop workflows to automate complex business problems.",
-    tools: ["GPT-4", "Gemini", "Vercel AI SDK", "Multi-LLM HITL"],
-    outcomes: ["95% Manual Effort Reduction", "Modular Architecture", "System Resilience"],
-    icon: "psychology"
+    id: "web-development",
+    index: "01",
+    title: "Web design and development",
+    heading: ["Web design and", "development"],
+    summary:
+      "Custom websites that look as good as your work, load fast on any phone, and turn visitors into calls and booked jobs.",
+    primary: true,
+    forWho: "Small businesses looking for a fast, modern website that generates real leads.",
+    deliverables: [
+      "Custom website design built around your business",
+      "Booking and quote forms straight to your inbox or CRM",
+      "Rebuilds of tired sites on modern framework",
+      "Care plans for ongoing updates and fixes",
+    ],
+    items: [
+      {
+        title: "Custom website design",
+        note: "Built around your business",
+      },
+      {
+        title: "Booking and quote forms",
+        note: "Straight to your inbox or CRM",
+      },
+      {
+        title: "Rebuilds of tired sites",
+        note: "Same domain, new engine",
+      },
+      {
+        title: "Care plans",
+        note: "Updates, fixes and small changes",
+      },
+    ],
   },
   {
-    id: "full-stack-dev",
-    title: "Full-Stack Development",
-    description: "Engineering scalable web applications and Chrome extensions with robust backends using Google Apps Script and modern frontend frameworks.",
-    tools: ["Next.js", "React", "Chrome Extension APIs", "Docker"],
-    outcomes: ["Custom ERP Solutions", "Automated OMS Workflows", "Dynamic UI/UX"],
-    icon: "code"
+    id: "ai-add-ons",
+    index: "02",
+    title: "AI add-ons",
+    heading: ["AI add-ons for", "your workflow"],
+    summary:
+      "When it saves real time, we add AI tools to your site and back office, built around how your business already runs.",
+    primary: false,
+    forWho: "Businesses wanting to automate content, intake, or routine office tasks.",
+    deliverables: [
+      "Content systems for blogs and profile updates",
+      "Quote and intake assistants for quick drafts",
+      "Internal tools replacing spreadsheets and copy-paste",
+    ],
+    items: [
+      {
+        title: "Content systems",
+        note: "Blog and Google posts on schedule",
+      },
+      {
+        title: "Quote and intake assistants",
+        note: "Drafts in seconds, you approve",
+      },
+      {
+        title: "Internal tools",
+        note: "Replace copy-paste and spreadsheets",
+      },
+    ],
   },
-  {
-    id: "data-analytics",
-    title: "Data Analysis & BI",
-    description: "Translating complex data into actionable insights through SQL-based forecasting, Tableau dashboards, and advanced modeling.",
-    tools: ["Tableau", "SQL", "Python", "JSON-LD"],
-    outcomes: ["KPI Reporting", "Financial Forecasting", "AEO/GEO Optimization"],
-    icon: "monitoring"
-  },
-  {
-    id: "project-mgmt",
-    title: "Project & Product Management",
-    description: "Leading cross-functional teams using Agile methodologies (Scrum, Kanban) to deliver high-stakes projects on time and on budget.",
-    tools: ["JIRA", "Asana", "Agile", "Roadmapping"],
-    outcomes: ["$2M+ Grant Portfolios", "100% On-time Submission", "Workflow Optimization"],
-    icon: "account_tree"
-  },
-  {
-    id: "biz-strategy",
-    title: "Business Strategy & Ops",
-    description: "Validating product-market fit, conducting market analysis, and architecting operational frameworks for early-stage startups.",
-    tools: ["Shopify Liquid", "HubSpot CRM", "Zapier", "Market Analysis"],
-    outcomes: ["Market Penetration", "Scalability Assessment", "Operational Efficiency"],
-    icon: "strategy"
-  },
-  {
-    id: "leadership",
-    title: "Leadership & Communication",
-    description: "Managing cross-functional teams, directing philanthropic strategy, and facilitating executive-level stakeholder reporting.",
-    tools: ["Public Speaking", "Grant Writing", "Team Leadership"],
-    outcomes: ["$2M+ Managed Portfolio", "Strategic Partnerships", "Team Mentorship"],
-    icon: "groups"
-  }
 ];
