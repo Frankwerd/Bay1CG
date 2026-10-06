@@ -18,7 +18,7 @@ export default function Nav() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#1C1F5E]/95 backdrop-blur-sm border-b border-white/10">
+    <header className="sticky top-0 z-50 bg-[#0F1E33]/95 backdrop-blur-sm border-b border-white/10">
       <div className="wrap flex h-[68px] items-center justify-between gap-4">
         <Link
           href="/"

@@ -67,7 +67,7 @@ export function ButtonLink({
   const resolvedVariant = variant === "solid" ? "ember" : variant;
 
   const styles = {
-    ember: "bg-ember text-navy hover:bg-[#F7623A]",
+    ember: "bg-ember text-navy hover:bg-[#F0682F]",
     line: "bg-transparent text-[#F7F7F4] shadow-[inset_0_0_0_1.5px_rgba(169,182,198,0.55)] hover:shadow-[inset_0_0_0_1.5px_#F7F7F4]",
     ink: "bg-navy text-white hover:bg-navy-2",
   };
@@ -91,7 +91,7 @@ export function Button({
   const resolvedVariant = variant === "solid" ? "ember" : variant;
 
   const styles = {
-    ember: "bg-ember text-navy hover:bg-[#F7623A]",
+    ember: "bg-ember text-navy hover:bg-[#F0682F]",
     line: "bg-transparent text-[#F7F7F4] shadow-[inset_0_0_0_1.5px_rgba(169,182,198,0.55)] hover:shadow-[inset_0_0_0_1.5px_#F7F7F4]",
     ink: "bg-navy text-white hover:bg-navy-2",
   };

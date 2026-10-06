@@ -17,7 +17,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchM
   let k=0;for(let i=3;i<=21;i++){const[x,y]=inner(i/24);if(y>176)continue;const l=document.createElementNS(ns,'line');
     l.setAttribute('x1',x.toFixed(1));l.setAttribute('x2',x.toFixed(1));l.setAttribute('y1',y.toFixed(1));l.setAttribute('y2','178');l.setAttribute('class','hanger');l.setAttribute('stroke-width','1.2');l.style.setProperty('--i',k++);hg.appendChild(l)}
   const list=[];for(let i=0;i<7;i++){const r=document.createElementNS(ns,'rect');const dir=i%2?1:-1;r.setAttribute('y',dir>0?171:172);r.setAttribute('width',14);r.setAttribute('height',5);r.setAttribute('rx',2);
-    r.setAttribute('fill',i%3===0?'#F24A1D':'#F7F7F4');cars.appendChild(r);list.push({r,dir,x:Math.random()*1160+20,v:(70+Math.random()*60)*dir})}
+    r.setAttribute('fill',i%3===0?'#E8531E':'#F7F7F4');cars.appendChild(r);list.push({r,dir,x:Math.random()*1160+20,v:(70+Math.random()*60)*dir})}
   let last=performance.now();
   function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!reduce)list.forEach(c=>{c.x+=c.v*dt;if(c.x>1170)c.x=20;if(c.x<20)c.x=1170;c.r.setAttribute('x',c.x.toFixed(1))});requestAnimationFrame(tick)}
   list.forEach(c=>c.r.setAttribute('x',c.x.toFixed(1)));requestAnimationFrame(tick);
@@ -107,8 +107,8 @@ if(!reduce&&'IntersectionObserver' in window){const io=new IntersectionObserver(
   const key=new THREE.DirectionalLight(0xffffff,1.05);key.position.set(3,4,6);scene.add(key);
   const rim=new THREE.DirectionalLight(0x8ea2b9,.9);rim.position.set(-5,-2,-4);scene.add(rim);
   const group=new THREE.Group();scene.add(group);
-  const tones=[0x76200A,0x95290C,0xC2360E,0xDC4015,0xF24A1D];
-  const mats=tones.map(t=>new THREE.MeshStandardMaterial({color:t,roughness:.42,metalness:.12,emissive:0xF24A1D,emissiveIntensity:0}));
+  const tones=[0x6E230A,0x8A2C0B,0xB33A0F,0xCF4716,0xE8531E];
+  const mats=tones.map(t=>new THREE.MeshStandardMaterial({color:t,roughness:.42,metalness:.12,emissive:0xE8531E,emissiveIntensity:0}));
   const rnd=(i,k)=>{const x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)};
   const items=[];
   shapes.forEach(({s,c},pi)=>{

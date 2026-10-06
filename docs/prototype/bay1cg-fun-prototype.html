@@ -3,8 +3,8 @@
 <style>
 /* Layout: same Blend base (navy, white, ember, Instrument Sans) with soul added: bigger type, italic accents, a handwritten voice for notes, real work on screen, color-blocked bands, and toys you can poke. Single committed look. */
 :root{
-  --navy:#1C1F5E; --navy-2:#272B78; --steel:#5C6B7E; --steel-lt:#A9B6C6;
-  --mist:#E3E7EC; --paper:#FFFFFF; --off:#F5F6F4; --ember:#F24A1D; --ember-ink:#C2360E; --cream:#FFF4EC;
+  --navy:#0F1E33; --navy-2:#16294A; --steel:#5C6B7E; --steel-lt:#A9B6C6;
+  --mist:#E3E7EC; --paper:#FFFFFF; --off:#F5F6F4; --ember:#E8531E; --ember-ink:#B33A0F; --cream:#FFF4EC;
   --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --serif:"Instrument Serif",Georgia,serif; --hand:"Caveat","Comic Sans MS",cursive;
   --spring:cubic-bezier(.34,1.56,.64,1); --settle:cubic-bezier(.22,1,.36,1);
   --gut:clamp(16px,4vw,48px); --max:1320px;
@@ -24,7 +24,7 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .hand{font-family:var(--hand);font-weight:700;color:var(--ember);line-height:1.05}
 :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:4px}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border-radius:999px;font:600 1rem var(--sans);text-decoration:none;cursor:pointer;border:0;transition:transform .45s var(--spring),background .2s,color .2s;will-change:transform}
-.btn-ember{background:var(--ember);color:var(--navy)} .btn-ember:hover{background:#F7623A}
+.btn-ember{background:var(--ember);color:var(--navy)} .btn-ember:hover{background:#F0682F}
 .btn-line{background:transparent;color:#F7F7F4;box-shadow:inset 0 0 0 1.5px rgba(169,182,198,.55)} .btn-line:hover{box-shadow:inset 0 0 0 1.5px #F7F7F4}
 .btn-navy{background:var(--navy);color:#fff} .btn-navy:hover{background:var(--navy-2)}
 .btn:active{transform:scale(.95)}
@@ -70,7 +70,7 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .bridge .arch{fill:none;stroke:#8EA2B9;stroke-linecap:round}
 .bridge .truss{fill:none;stroke:#6F849C}
 .bridge .hanger{stroke:#6F849C;transform-box:fill-box;transform-origin:top}
-.bridge .deck{fill:#F7F7F4} .bridge .glow{fill:var(--ember)} .bridge .water{fill:var(--navy-2)} .bridge .pier{fill:#343A86}
+.bridge .deck{fill:#F7F7F4} .bridge .glow{fill:var(--ember)} .bridge .water{fill:var(--navy-2)} .bridge .pier{fill:#2B3F5E}
 .bridge .car{transform-box:fill-box}
 .play .arch{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.6s var(--settle) .2s forwards}
 .play .truss{opacity:0;animation:fade .6s ease 1.3s forwards}
@@ -197,7 +197,7 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .polaroid .ph{aspect-ratio:4/5;background:var(--navy);display:grid;place-items:center;color:var(--ember)}
 .polaroid .ph svg{width:40%}
 .polaroid .cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:1.5rem}
-.tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(242,74,29,.25);transform:translateX(-50%) rotate(2deg)}
+.tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(232,83,30,.25);transform:translateX(-50%) rotate(2deg)}
 .founder h2{font-size:var(--h2)}
 .founder p{color:var(--steel);margin-top:18px;max-width:36rem;font-size:var(--lead);line-height:1.55}
 .sig{font-size:2.4rem;margin-top:18px;transform:rotate(-3deg);display:inline-block}
@@ -211,9 +211,9 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .cta h2 em.i{color:#fff}
 .cta p{font-size:var(--lead);max-width:34rem;margin-top:20px;line-height:1.5}
 .cta .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:30px}
-.cta code{font:600 var(--lead) var(--sans);user-select:all;background:rgba(28,31,94,.08);padding:8px 14px;border-radius:999px}
+.cta code{font:600 var(--lead) var(--sans);user-select:all;background:rgba(15,30,51,.08);padding:8px 14px;border-radius:999px}
 .cta .copy{border-color:var(--navy);color:var(--navy)}
-.cta .big-mark{position:absolute;right:-4%;bottom:-12%;width:clamp(200px,30vw,420px);color:rgba(28,31,94,.1);transform:rotate(-12deg)}
+.cta .big-mark{position:absolute;right:-4%;bottom:-12%;width:clamp(200px,30vw,420px);color:rgba(15,30,51,.1);transform:rotate(-12deg)}
 footer{background:var(--navy);color:var(--steel-lt);font-size:.85rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:22px}
 footer nav{display:flex;gap:20px}
@@ -273,10 +273,10 @@ footer nav{display:flex;gap:20px}
         <svg class="bridge play" id="bridge" viewBox="0 0 1200 260" role="img" aria-label="Line drawing of the Bayonne Bridge with cars crossing. Click to send a ship under it.">
           <rect class="water" x="0" y="236" width="1200" height="24"/>
           <g id="ship" class="ship" transform="translate(-260 0)">
-            <rect x="0" y="214" width="190" height="20" rx="3" fill="#12143F"/><rect x="0" y="230" width="190" height="4" fill="#F24A1D"/>
-            <rect x="14" y="200" width="22" height="14" fill="#F24A1D"/><rect x="38" y="200" width="22" height="14" fill="#A9B6C6"/><rect x="62" y="200" width="22" height="14" fill="#F7F7F4"/><rect x="86" y="200" width="22" height="14" fill="#F24A1D"/><rect x="110" y="200" width="22" height="14" fill="#5C6B7E"/>
-            <rect x="26" y="186" width="22" height="14" fill="#5C6B7E"/><rect x="50" y="186" width="22" height="14" fill="#F24A1D"/><rect x="74" y="186" width="22" height="14" fill="#A9B6C6"/><rect x="98" y="186" width="22" height="14" fill="#F7F7F4"/>
-            <rect x="148" y="180" width="24" height="34" fill="#F7F7F4"/><rect x="152" y="172" width="8" height="10" fill="#F24A1D"/>
+            <rect x="0" y="214" width="190" height="20" rx="3" fill="#0B1626"/><rect x="0" y="230" width="190" height="4" fill="#E8531E"/>
+            <rect x="14" y="200" width="22" height="14" fill="#E8531E"/><rect x="38" y="200" width="22" height="14" fill="#A9B6C6"/><rect x="62" y="200" width="22" height="14" fill="#F7F7F4"/><rect x="86" y="200" width="22" height="14" fill="#E8531E"/><rect x="110" y="200" width="22" height="14" fill="#5C6B7E"/>
+            <rect x="26" y="186" width="22" height="14" fill="#5C6B7E"/><rect x="50" y="186" width="22" height="14" fill="#E8531E"/><rect x="74" y="186" width="22" height="14" fill="#A9B6C6"/><rect x="98" y="186" width="22" height="14" fill="#F7F7F4"/>
+            <rect x="148" y="180" width="24" height="34" fill="#F7F7F4"/><rect x="152" y="172" width="8" height="10" fill="#E8531E"/>
           </g>
           <rect class="pier" x="96" y="210" width="44" height="40"/><rect class="pier" x="1060" y="210" width="44" height="40"/>
           <path class="arch" d="M118 214 Q600 -86 1082 214" stroke-width="4" style="--len:1300"/>
@@ -450,7 +450,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchM
   let k=0;for(let i=3;i<=21;i++){const[x,y]=inner(i/24);if(y>176)continue;const l=document.createElementNS(ns,'line');
     l.setAttribute('x1',x.toFixed(1));l.setAttribute('x2',x.toFixed(1));l.setAttribute('y1',y.toFixed(1));l.setAttribute('y2','178');l.setAttribute('class','hanger');l.setAttribute('stroke-width','1.2');l.style.setProperty('--i',k++);hg.appendChild(l)}
   const list=[];for(let i=0;i<7;i++){const r=document.createElementNS(ns,'rect');const dir=i%2?1:-1;r.setAttribute('y',dir>0?171:172);r.setAttribute('width',14);r.setAttribute('height',5);r.setAttribute('rx',2);
-    r.setAttribute('fill',i%3===0?'#F24A1D':'#F7F7F4');cars.appendChild(r);list.push({r,dir,x:Math.random()*1160+20,v:(70+Math.random()*60)*dir})}
+    r.setAttribute('fill',i%3===0?'#E8531E':'#F7F7F4');cars.appendChild(r);list.push({r,dir,x:Math.random()*1160+20,v:(70+Math.random()*60)*dir})}
   let last=performance.now();
   function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!reduce)list.forEach(c=>{c.x+=c.v*dt;if(c.x>1170)c.x=20;if(c.x<20)c.x=1170;c.r.setAttribute('x',c.x.toFixed(1))});requestAnimationFrame(tick)}
   list.forEach(c=>c.r.setAttribute('x',c.x.toFixed(1)));requestAnimationFrame(tick);
@@ -540,8 +540,8 @@ if(!reduce&&'IntersectionObserver' in window){const io=new IntersectionObserver(
   const key=new THREE.DirectionalLight(0xffffff,1.05);key.position.set(3,4,6);scene.add(key);
   const rim=new THREE.DirectionalLight(0x8ea2b9,.9);rim.position.set(-5,-2,-4);scene.add(rim);
   const group=new THREE.Group();scene.add(group);
-  const tones=[0x76200A,0x95290C,0xC2360E,0xDC4015,0xF24A1D];
-  const mats=tones.map(t=>new THREE.MeshStandardMaterial({color:t,roughness:.42,metalness:.12,emissive:0xF24A1D,emissiveIntensity:0}));
+  const tones=[0x6E230A,0x8A2C0B,0xB33A0F,0xCF4716,0xE8531E];
+  const mats=tones.map(t=>new THREE.MeshStandardMaterial({color:t,roughness:.42,metalness:.12,emissive:0xE8531E,emissiveIntensity:0}));
   const rnd=(i,k)=>{const x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x)};
   const items=[];
   shapes.forEach(({s,c},pi)=>{

@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #1C1F5E;
-  --color-navy-2: #272B78;
+  --color-navy: #0F1E33;
+  --color-navy-2: #16294A;
   --color-steel: #5C6B7E;
   --color-steel-lt: #A9B6C6;
   --color-mist: #E3E7EC;
   --color-off: #F5F6F4;
   --color-paper: #FFFFFF;
-  --color-ink: #1C1F5E;
-  --color-ember: #F24A1D;
-  --color-ember-ink: #C2360E;
+  --color-ink: #0F1E33;
+  --color-ember: #E8531E;
+  --color-ember-ink: #B33A0F;
 
   --font-sans: var(--font-instrument-sans), "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
 
@@ -19,16 +19,16 @@
 }
 
 :root {
-  --navy: #1C1F5E;
-  --navy-2: #272B78;
+  --navy: #0F1E33;
+  --navy-2: #16294A;
   --steel: #5C6B7E;
   --steel-lt: #A9B6C6;
   --mist: #E3E7EC;
   --off: #F5F6F4;
   --paper: #FFFFFF;
-  --ink: #1C1F5E;
-  --ember: #F24A1D;
-  --ember-ink: #C2360E;
+  --ink: #0F1E33;
+  --ember: #E8531E;
+  --ember-ink: #B33A0F;
   --sans: var(--font-instrument-sans), "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
   --spring: cubic-bezier(.34, 1.56, .64, 1);
   --settle: cubic-bezier(.22, 1, .36, 1);
