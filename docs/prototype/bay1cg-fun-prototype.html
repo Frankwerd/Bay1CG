@@ -50,7 +50,7 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .hero{background:var(--navy);color:#F7F7F4;position:relative;overflow:hidden}
 .hero .wrap{padding-top:clamp(20px,3vw,44px);position:relative}
 .hero .label{color:var(--steel-lt)}
-.hero h1{font-size:clamp(3rem,min(1.2rem + 7.6vw,12vh),8.6rem);margin-top:12px;max-width:12ch}
+.hero h1{font-size:clamp(3rem,min(1.2rem + 7.6vw,12vh),8.6rem);margin-top:12px;max-width:none}
 .rot{display:block;position:relative;height:1.08em;overflow:hidden;color:var(--ember)}
 .rot span{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(110%) rotate(4deg);opacity:0;transition:transform .75s var(--spring),opacity .25s}
 .rot span.on{transform:none;opacity:1}
@@ -461,7 +461,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchM
 })();
 
 /* rotating words */
-(function(){const w=[...document.querySelectorAll('.rot span')];let i=0;if(reduce)return;
+(function(){const w=[...document.querySelectorAll('.rot span')];let i=0;const rot=document.querySelector('.rot');function fit(){if(!rot)return;rot.style.fontSize='';const avail=rot.clientWidth;const widest=Math.max(...w.map(s=>s.scrollWidth));if(avail>0&&widest>avail)rot.style.fontSize=(avail/widest*0.98)+'em'}fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('resize',fit);if(reduce)return;
   setInterval(()=>{const c=w[i];c.classList.remove('on');c.classList.add('out');i=(i+1)%w.length;const n=w[i];n.classList.remove('out');void n.offsetWidth;n.classList.add('on');setTimeout(()=>c.classList.remove('out'),600)},2400)})();
 
 /* tilt showcase */

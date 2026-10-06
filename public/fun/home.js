@@ -28,7 +28,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchM
 })();
 
 /* rotating words */
-(function(){const w=[...document.querySelectorAll('.rot span')];let i=0;if(reduce)return;
+(function(){const w=[...document.querySelectorAll('.rot span')];let i=0;const rot=document.querySelector('.rot');function fit(){if(!rot)return;rot.style.fontSize='';const avail=rot.clientWidth;const widest=Math.max(...w.map(s=>s.scrollWidth));if(avail>0&&widest>avail)rot.style.fontSize=(avail/widest*0.98)+'em'}fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('resize',fit);if(reduce)return;
   setInterval(()=>{const c=w[i];c.classList.remove('on');c.classList.add('out');i=(i+1)%w.length;const n=w[i];n.classList.remove('out');void n.offsetWidth;n.classList.add('on');setTimeout(()=>c.classList.remove('out'),600)},2400)})();
 
 /* tilt showcase */
