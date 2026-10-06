@@ -31,10 +31,28 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchM
 (function(){const w=[...document.querySelectorAll('.rot span')];let i=0;const rot=document.querySelector('.rot');function fit(){if(!rot)return;rot.style.fontSize='';const avail=rot.clientWidth;const widest=Math.max(...w.map(s=>s.scrollWidth));if(avail>0&&widest>avail)rot.style.fontSize=(avail/widest*0.98)+'em'}fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('resize',fit);if(reduce)return;
   setInterval(()=>{const c=w[i];c.classList.remove('on');c.classList.add('out');i=(i+1)%w.length;const n=w[i];n.classList.remove('out');void n.offsetWidth;n.classList.add('on');setTimeout(()=>c.classList.remove('out'),600)},2400)})();
 
-/* tilt showcase */
-(function(){const box=document.getElementById('tilt'), b=document.getElementById('browser');if(reduce||!fine)return;
-  box.addEventListener('mousemove',e=>{const r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform=`rotateY(${x*8}deg) rotateX(${-y*6}deg)`});
-  box.addEventListener('mouseleave',()=>b.style.transform='')})();
+/* showcase carousel + tilt */
+(function(){
+  const track=document.getElementById('car-track'); if(!track)return;
+  const slides=[...track.children], n=slides.length, count=document.getElementById('count'), dots=document.getElementById('dots'), region=document.getElementById('carousel');
+  let i=0, inView=false;
+  slides.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Show '+s.dataset.name);b.onclick=()=>go(k);dots.appendChild(b)});
+  function play(){slides.forEach((s,k)=>s.querySelectorAll('video').forEach(v=>{if(k===i&&inView&&!reduce){v.play().catch(()=>{})}else{v.pause()}}))}
+  function go(k){i=(k+n)%n;track.style.transform=`translateX(${-i*100}%)`;
+    slides.forEach((s,k2)=>{const on=k2===i;s.inert=!on;s.setAttribute('aria-hidden',String(!on))});
+    count.textContent=`${i+1} / ${n}`;[...dots.children].forEach((d,k2)=>d.setAttribute('aria-current',String(k2===i)));play()}
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  region.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();go(i-1)}if(e.key==='ArrowRight'){e.preventDefault();go(i+1)}});
+  let x0=null;region.addEventListener('pointerdown',e=>{x0=e.clientX});
+  region.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>50)go(i+(dx<0?1:-1))});
+  if(reduce)slides.forEach(s=>s.querySelectorAll('video').forEach(v=>v.controls=true));
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>{inView=es[0].isIntersecting;play()},{threshold:.25}).observe(region)}else{inView=true}
+  go(0);
+  if(!reduce&&fine)slides.forEach(s=>{const box=s.querySelector('.stagebox'),b=s.querySelector('.browser');
+    box.addEventListener('mousemove',e=>{const r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform=`rotateY(${x*8}deg) rotateX(${-y*6}deg)`});
+    box.addEventListener('mouseleave',()=>b.style.transform='')});
+})();
 
 /* problem picker */
 (function(){
