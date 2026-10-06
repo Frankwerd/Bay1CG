@@ -47,25 +47,25 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 
 /* hero */
 .hero{background:var(--navy);color:#F7F7F4;position:relative;overflow:hidden}
-.hero .wrap{padding-top:clamp(48px,7vw,104px);position:relative}
+.hero .wrap{padding-top:clamp(20px,3vw,44px);position:relative}
 .hero .label{color:var(--steel-lt)}
-.hero h1{font-size:var(--mega);margin-top:20px;max-width:12ch}
+.hero h1{font-size:clamp(3rem,min(1.2rem + 7.6vw,12vh),8.6rem);margin-top:12px;max-width:12ch}
 .rot{display:block;position:relative;height:1.08em;overflow:hidden;color:var(--ember)}
 .rot span{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(110%) rotate(4deg);opacity:0;transition:transform .75s var(--spring),opacity .25s}
 .rot span.on{transform:none;opacity:1}
 .rot span.out{transform:translateY(-110%) rotate(-3deg);opacity:0;transition:transform .5s var(--settle),opacity .3s}
-.hero-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;margin-top:26px}
+.hero-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;margin-top:16px}
 @media (max-width:820px){.hero-row{grid-template-columns:minmax(0,1fr)}}
 .hero .lead{font-size:var(--lead);color:var(--steel-lt);max-width:36rem;line-height:1.5}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 .badge{width:clamp(110px,12vw,150px);aspect-ratio:1;position:relative;justify-self:end}
-.badge svg.ring{width:100%;height:100%;animation:spin 18s linear infinite}
+.badge svg.badge-ring{width:100%;height:100%;animation:spin 18s linear infinite}
 .badge text{font:600 10.5px var(--sans);letter-spacing:.24em;fill:#F7F7F4}
 .badge .mid{position:absolute;inset:30%;color:var(--ember)}
 .badge .mid svg{width:100%;height:100%}
 @keyframes spin{to{transform:rotate(360deg)}}
-.bridge-wrap{position:relative;margin-top:clamp(28px,5vw,56px)}
-.bridge{display:block;width:100%;height:auto;cursor:pointer}
+.bridge-wrap{position:relative;margin-top:clamp(4px,1.5vw,16px)}
+.bridge{display:block;width:100%;height:auto;max-height:30vh;cursor:pointer}
 .bridge .arch{fill:none;stroke:#8EA2B9;stroke-linecap:round}
 .bridge .truss{fill:none;stroke:#6F849C}
 .bridge .hanger{stroke:#6F849C;transform-box:fill-box;transform-origin:top}
