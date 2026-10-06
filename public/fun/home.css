@@ -32,11 +32,11 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 /* nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#F7F7F4}
+.brand{display:flex;align-items:center;gap:10px;line-height:1;text-decoration:none;color:#F7F7F4}
 .brand svg{height:28px;width:auto;color:var(--ember);transition:transform .6s var(--spring)}
 .brand:hover svg{transform:rotate(-8deg) scale(1.08)}
-.brand b{font-weight:700;letter-spacing:.08em;font-size:.95rem;display:block;line-height:1.1}
-.brand span{font-weight:500;letter-spacing:.14em;font-size:.6rem;color:var(--steel-lt)}
+.brand b{font-weight:700;letter-spacing:.08em;font-size:.95rem;display:block;line-height:1}
+.brand span{display:block;font-weight:500;letter-spacing:.14em;font-size:.6rem;line-height:1;margin-top:1px;color:var(--steel-lt)}
 .links{display:flex;align-items:center;gap:26px;font-size:.92rem;color:var(--steel-lt)}
 .links a{text-decoration:none;transition:color .2s} .links a:hover{color:#fff}
 .open{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;color:#F7F7F4}
