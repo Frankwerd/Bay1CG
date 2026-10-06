@@ -2,8 +2,8 @@
 /* bay1cg home page, ported verbatim from docs/prototype/bay1cg-fun-prototype.html */
 /* Layout: same Blend base (navy, white, ember, Instrument Sans) with soul added: bigger type, italic accents, a handwritten voice for notes, real work on screen, color-blocked bands, and toys you can poke. Single committed look. */
 :root{
-  --navy:#0F1E33; --navy-2:#16294A; --steel:#5C6B7E; --steel-lt:#A9B6C6;
-  --mist:#E3E7EC; --paper:#FFFFFF; --off:#F5F6F4; --ember:#E8531E; --ember-ink:#B33A0F; --cream:#FFF4EC;
+  --navy:#1C1F5E; --navy-2:#272B78; --steel:#5C6B7E; --steel-lt:#A9B6C6;
+  --mist:#E3E7EC; --paper:#FFFFFF; --off:#F5F6F4; --ember:#F24A1D; --ember-ink:#C2360E; --cream:#FFF4EC;
   --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --serif:"Instrument Serif",Georgia,serif; --hand:"Caveat","Comic Sans MS",cursive;
   --spring:cubic-bezier(.34,1.56,.64,1); --settle:cubic-bezier(.22,1,.36,1);
   --gut:clamp(16px,4vw,48px); --max:1320px;
@@ -23,7 +23,7 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .hand{font-family:var(--hand);font-weight:700;color:var(--ember);line-height:1.05}
 :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:4px}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border-radius:999px;font:600 1rem var(--sans);text-decoration:none;cursor:pointer;border:0;transition:transform .45s var(--spring),background .2s,color .2s;will-change:transform}
-.btn-ember{background:var(--ember);color:var(--navy)} .btn-ember:hover{background:#F0682F}
+.btn-ember{background:var(--ember);color:var(--navy)} .btn-ember:hover{background:#F7623A}
 .btn-line{background:transparent;color:#F7F7F4;box-shadow:inset 0 0 0 1.5px rgba(169,182,198,.55)} .btn-line:hover{box-shadow:inset 0 0 0 1.5px #F7F7F4}
 .btn-navy{background:var(--navy);color:#fff} .btn-navy:hover{background:var(--navy-2)}
 .btn:active{transform:scale(.95)}
@@ -69,7 +69,7 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .bridge .arch{fill:none;stroke:#8EA2B9;stroke-linecap:round}
 .bridge .truss{fill:none;stroke:#6F849C}
 .bridge .hanger{stroke:#6F849C;transform-box:fill-box;transform-origin:top}
-.bridge .deck{fill:#F7F7F4} .bridge .glow{fill:var(--ember)} .bridge .water{fill:var(--navy-2)} .bridge .pier{fill:#2B3F5E}
+.bridge .deck{fill:#F7F7F4} .bridge .glow{fill:var(--ember)} .bridge .water{fill:var(--navy-2)} .bridge .pier{fill:#343A86}
 .bridge .car{transform-box:fill-box}
 .play .arch{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.6s var(--settle) .2s forwards}
 .play .truss{opacity:0;animation:fade .6s ease 1.3s forwards}
@@ -196,7 +196,7 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .polaroid .ph{aspect-ratio:4/5;background:var(--navy);display:grid;place-items:center;color:var(--ember)}
 .polaroid .ph svg{width:40%}
 .polaroid .cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:1.5rem}
-.tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(232,83,30,.25);transform:translateX(-50%) rotate(2deg)}
+.tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(242,74,29,.25);transform:translateX(-50%) rotate(2deg)}
 .founder h2{font-size:var(--h2)}
 .founder p{color:var(--steel);margin-top:18px;max-width:36rem;font-size:var(--lead);line-height:1.55}
 .sig{font-size:2.4rem;margin-top:18px;transform:rotate(-3deg);display:inline-block}
@@ -210,9 +210,9 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .cta h2 em.i{color:#fff}
 .cta p{font-size:var(--lead);max-width:34rem;margin-top:20px;line-height:1.5}
 .cta .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:30px}
-.cta code{font:600 var(--lead) var(--sans);user-select:all;background:rgba(15,30,51,.08);padding:8px 14px;border-radius:999px}
+.cta code{font:600 var(--lead) var(--sans);user-select:all;background:rgba(28,31,94,.08);padding:8px 14px;border-radius:999px}
 .cta .copy{border-color:var(--navy);color:var(--navy)}
-.cta .big-mark{position:absolute;right:-4%;bottom:-12%;width:clamp(200px,30vw,420px);color:rgba(15,30,51,.1);transform:rotate(-12deg)}
+.cta .big-mark{position:absolute;right:-4%;bottom:-12%;width:clamp(200px,30vw,420px);color:rgba(28,31,94,.1);transform:rotate(-12deg)}
 footer{background:var(--navy);color:var(--steel-lt);font-size:.85rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:22px}
 footer nav{display:flex;gap:20px}

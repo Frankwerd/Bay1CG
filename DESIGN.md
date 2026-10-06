@@ -5,6 +5,12 @@ and must match. The working reference implementation is `docs/prototype/bay1cg-f
 and the prototype disagree on a visual detail, the prototype wins. `bay1cg-prototype.html` is the older, plainer
 v3 reference, kept for comparison only.
 
+## Palette update (2026-10-05)
+
+Navy deepened to indigo `#1C1F5E` (navy-2 `#272B78`) and ember warmed to red-orange `#F24A1D` (ember-ink
+`#C2360E`, hover `#F7623A`) to match Francis's reference. Logo and social kit files still use the earlier
+`#0F1E33` / `#E8531E` until they are regenerated.
+
 ## v4: putting the soul back
 
 v3 was correct but lifeless. v4 keeps the same palette, logo and type base and adds personality. These rules
@@ -56,15 +62,15 @@ websites; AI appears as an extra, never as the lead.
 
 | Token      | Hex       | Use                                                       |
 | ---------- | --------- | --------------------------------------------------------- |
-| `navy`     | `#0F1E33` | Hero, story section, CTA, footer, primary text on light   |
-| `navy-2`   | `#16294A` | Raised dark surfaces, water                               |
+| `navy`     | `#1C1F5E` | Hero, story section, CTA, footer, primary text on light   |
+| `navy-2`   | `#272B78` | Raised dark surfaces, water                               |
 | `steel`    | `#5C6B7E` | Secondary text on light                                   |
 | `steel-lt` | `#A9B6C6` | Secondary text on dark, bridge linework (`#8EA2B9`, `#6F849C`) |
 | `mist`     | `#E3E7EC` | Borders, hairlines, input borders                         |
 | `off`      | `#F5F6F4` | Alternate light sections, inputs                          |
 | `paper`    | `#FFFFFF` | Main light background                                     |
-| `ember`    | `#E8531E` | The one accent: logo, primary buttons, active states      |
-| `ember-ink`| `#B33A0F` | Ember used as small text on light                         |
+| `ember`    | `#F24A1D` | The one accent: logo, primary buttons, active states      |
+| `ember-ink`| `#C2360E` | Ember used as small text on light                         |
 
 Ember is the only saturated color. Light sections dominate; navy frames the page (hero, story, CTA, footer).
 
