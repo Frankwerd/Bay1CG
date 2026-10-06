@@ -37,7 +37,17 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchM
   const slides=[...track.children], n=slides.length, count=document.getElementById('count'), dots=document.getElementById('dots'), region=document.getElementById('carousel');
   let i=0, inView=false;
   slides.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Show '+s.dataset.name);b.onclick=()=>go(k);dots.appendChild(b)});
-  function play(){slides.forEach((s,k)=>s.querySelectorAll('video').forEach(v=>{if(k===i&&inView&&!reduce){v.play().catch(()=>{})}else{v.pause()}}))}
+  function play(){live();slides.forEach((s,k)=>s.querySelectorAll('video').forEach(v=>{if(k===i&&inView&&!reduce&&!v.closest('.is-live')){v.play().catch(()=>{})}else{v.pause()}}))}
+  /* live previews: on desktop, slides marked data-live swap the desktop recording for the real site once shown */
+  function live(){const s=slides[i];if(!fine||reduce||!inView||!s.hasAttribute('data-live')||s.dataset.loaded)return;s.dataset.loaded='1';
+    const b=s.querySelector('.browser'),v=b.querySelector('video'),box=document.createElement('div'),f=document.createElement('iframe');
+    box.className='live';f.src=s.querySelector('.visit').href;f.title=s.dataset.name+', live website';
+    f.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
+    f.addEventListener('load',()=>{fit(b);b.classList.add('is-live');v.pause()});
+    f.addEventListener('mouseenter',()=>{const c=document.getElementById('cur');if(c)c.style.opacity=0});
+    box.appendChild(f);v.after(box);fit(b)}
+  function fit(b){const box=b.querySelector('.live'),v=b.querySelector('video');if(!box)return;box.style.top=v.offsetTop+'px';box.style.setProperty('--s',v.clientWidth/1280)}
+  addEventListener('resize',()=>slides.forEach(s=>fit(s.querySelector('.browser'))));
   function go(k){i=(k+n)%n;track.style.transform=`translateX(${-i*100}%)`;
     slides.forEach((s,k2)=>{const on=k2===i;s.inert=!on;s.setAttribute('aria-hidden',String(!on))});
     count.textContent=`${i+1} / ${n}`;[...dots.children].forEach((d,k2)=>d.setAttribute('aria-current',String(k2===i)));play()}
