@@ -50,6 +50,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Nothing may widen the page: no sideways scrolling on phones. clip (not hidden) keeps sticky working. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   background: var(--paper);

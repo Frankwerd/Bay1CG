@@ -13,7 +13,8 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--navy);font-family:var(--sans);font-size:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--navy);font-family:var(--sans);font-size:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip}
+html{overflow-x:clip} #hi{overflow-x:clip}
 .wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
 p{margin:0}
@@ -227,6 +228,7 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .polaroid .cap .c2,.polaroid.torn .cap .c1{display:none} .polaroid.torn .cap .c2{display:inline}
 .tear-hint{position:absolute;right:-18px;top:-38px;transform:rotate(6deg);font-size:1.7rem;pointer-events:none;transition:opacity .3s}
 .polaroid.torn .tear-hint{opacity:0}
+@media (max-width:640px){.tear-hint{right:4px;top:-34px;font-size:1.4rem}}
 @media (prefers-reduced-motion:reduce){.polaroid .ph .half,.polaroid.torn .ph .half{transition:opacity .2s;transform:none}}
 .tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(232,83,30,.25);transform:translateX(-50%) rotate(2deg)}
 .founder h2{font-size:var(--h2)}
