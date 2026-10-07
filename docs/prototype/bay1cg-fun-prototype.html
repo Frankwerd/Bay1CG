@@ -27,6 +27,8 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .btn-ember{background:var(--ember);color:var(--navy)} .btn-ember:hover{background:#F0682F}
 .btn-line{background:transparent;color:#F7F7F4;box-shadow:inset 0 0 0 1.5px rgba(169,182,198,.55)} .btn-line:hover{box-shadow:inset 0 0 0 1.5px #F7F7F4}
 .btn-navy{background:var(--navy);color:#fff} .btn-navy:hover{background:var(--navy-2)}
+.btn-ghost{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)} .btn-ghost:hover{background:var(--navy);color:#F7F7F4}
+.more{margin-top:clamp(28px,4vw,44px)} .more.center{display:flex;justify-content:center}
 .btn:active{transform:scale(.95)}
 .proto{background:var(--ember);color:var(--navy);font-size:.8rem;font-weight:600;text-align:center;padding:6px var(--gut)}
 
@@ -266,7 +268,7 @@ footer nav{display:flex;gap:20px}
       <a class="hide-sm" href="#work">Work</a>
       <a class="hide-sm" href="#fix">Services</a>
       <a class="hide-sm" href="#hi">About</a>
-      <a class="btn btn-ember mag" href="#start">Start a project</a>
+      <a class="btn btn-ember mag" href="/contact">Start a project</a>
     </nav>
   </div>
 </header>
@@ -281,7 +283,7 @@ footer nav{display:flex;gap:20px}
       <div class="hero-row">
         <div>
           <p class="lead">Bay1 Consulting Group designs and builds websites for small businesses that work as hard as you do. Fast, good-looking, and easy to update. AI add-ons when they'll save you time.</p>
-          <div class="ctas"><a class="btn btn-ember mag" href="#start">Start a project</a><a class="btn btn-line" href="#work">See the work</a></div>
+          <div class="ctas"><a class="btn btn-ember mag" href="/contact">Start a project</a><a class="btn btn-line" href="#work">See the work</a></div>
         </div>
         <div class="badge" aria-hidden="true">
           <svg class="badge-ring" viewBox="0 0 150 150"><defs><path id="circ" d="M75 75 m-58 0 a58 58 0 1 1 116 0 a58 58 0 1 1 -116 0"/></defs><text><textPath href="#circ">MADE IN BAYONNE · NEW JERSEY · WEB DESIGN · </textPath></text></svg>
@@ -395,6 +397,7 @@ footer nav{display:flex;gap:20px}
         </div>
       </div>
       <div class="dots" id="dots" aria-label="Choose a website"></div>
+      <div class="more rv center"><a class="btn btn-ghost mag" href="/work">See all our work &rarr;</a></div>
     </div>
   </section>
 
@@ -415,6 +418,7 @@ footer nav{display:flex;gap:20px}
         </div>
         <div class="answer rv" style="--d:1" id="answer" aria-live="polite"></div>
       </div>
+      <div class="more rv"><a class="btn btn-ghost mag" href="/services">See all services &rarr;</a></div>
     </div>
   </section>
 
@@ -489,6 +493,7 @@ footer nav{display:flex;gap:20px}
         <div class="inds" aria-label="Who we work with">
           <span class="ind">Electricians and trades</span><span class="ind">Home services</span><span class="ind">Landscaping</span><span class="ind">Cleaning crews</span><span class="ind">Bakeries and catering</span><span class="ind">Salons and studios</span><span class="ind">Professional offices</span><span class="ind">Local retail</span>
         </div>
+        <div class="more rv"><a class="btn btn-ghost mag" href="/about">More about Bay1 &rarr;</a></div>
       </div>
     </div>
   </section>
@@ -499,7 +504,7 @@ footer nav{display:flex;gap:20px}
       <div class="label rv" style="color:var(--navy)">Start a project</div>
       <h2 class="rv" style="margin-top:14px">Let's build <em class="i">something good.</em></h2>
       <p class="rv">Tell me about your business and what your website should be doing for you. I'll reply within a day with ideas and a rough price.</p>
-      <div class="row rv"><a class="btn btn-navy mag" href="#start">Start a project</a><code id="email">francis@bay1cg.com</code><button class="copy" type="button" id="copy-mail">Copy email</button></div>
+      <div class="row rv"><a class="btn btn-navy mag" href="/contact">Start a project</a><code id="email">francis@bay1cg.com</code><button class="copy" type="button" id="copy-mail">Copy email</button></div>
     </div>
   </section>
 </main>
