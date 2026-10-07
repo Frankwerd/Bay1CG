@@ -27,6 +27,8 @@ em.i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 .btn-ember{background:var(--ember);color:var(--navy)} .btn-ember:hover{background:#F0682F}
 .btn-line{background:transparent;color:#F7F7F4;box-shadow:inset 0 0 0 1.5px rgba(169,182,198,.55)} .btn-line:hover{box-shadow:inset 0 0 0 1.5px #F7F7F4}
 .btn-navy{background:var(--navy);color:#fff} .btn-navy:hover{background:var(--navy-2)}
+.btn-ghost{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)} .btn-ghost:hover{background:var(--navy);color:#F7F7F4}
+.more{margin-top:clamp(28px,4vw,44px)} .more.center{display:flex;justify-content:center}
 .btn:active{transform:scale(.95)}
 .proto{background:var(--ember);color:var(--navy);font-size:.8rem;font-weight:600;text-align:center;padding:6px var(--gut)}
 
@@ -215,8 +217,20 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .polaroid{background:#fff;padding:14px 14px 56px;border:1px solid var(--mist);transform:rotate(-3deg);max-width:420px;position:relative;transition:transform .6s var(--spring)}
 .polaroid:hover{transform:rotate(0) scale(1.02)}
 .polaroid .ph{aspect-ratio:4/5;background:var(--navy);display:grid;place-items:center;color:var(--ember)}
-.polaroid .ph svg{width:40%}
+.polaroid .ph svg{width:40%} .polaroid .ph img{display:block;width:100%;height:100%;object-fit:cover}
 .polaroid .cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:1.5rem}
+.polaroid button.ph{display:block;position:relative;width:100%;padding:0;border:0;cursor:pointer;overflow:visible;background:var(--navy)}
+.polaroid .ph .under,.polaroid .ph .half{position:absolute;inset:0;width:100%;height:100%}
+.polaroid .ph .half{transition:transform .5s var(--spring),opacity .3s;pointer-events:none}
+.polaroid .ph .l{clip-path:polygon(0 0,53% 0,48% 9%,55% 18%,47% 28%,54% 37%,46% 47%,55% 56%,47% 66%,53% 75%,46% 85%,52% 93%,49% 100%,0 100%)}
+.polaroid .ph .r{clip-path:polygon(53% 0,100% 0,100% 100%,49% 100%,52% 93%,46% 85%,53% 75%,47% 66%,55% 56%,46% 47%,54% 37%,47% 28%,55% 18%,48% 9%)}
+.polaroid.torn .ph .half{transition:transform .9s cubic-bezier(.55,0,.8,.4),opacity .5s .35s;opacity:0}
+.polaroid.torn .ph .l{transform:translate(-34%,26%) rotate(-16deg)}
+.polaroid.torn .ph .r{transform:translate(34%,32%) rotate(13deg)}
+.polaroid .cap .c2,.polaroid.torn .cap .c1{display:none} .polaroid.torn .cap .c2{display:inline}
+.tear-hint{position:absolute;right:-18px;top:-38px;transform:rotate(6deg);font-size:1.7rem;pointer-events:none;transition:opacity .3s}
+.polaroid.torn .tear-hint{opacity:0}
+@media (prefers-reduced-motion:reduce){.polaroid .ph .half,.polaroid.torn .ph .half{transition:opacity .2s;transform:none}}
 .tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(232,83,30,.25);transform:translateX(-50%) rotate(2deg)}
 .founder h2{font-size:var(--h2)}
 .founder p{color:var(--steel);margin-top:18px;max-width:36rem;font-size:var(--lead);line-height:1.55}
@@ -266,7 +280,7 @@ footer nav{display:flex;gap:20px}
       <a class="hide-sm" href="#work">Work</a>
       <a class="hide-sm" href="#fix">Services</a>
       <a class="hide-sm" href="#hi">About</a>
-      <a class="btn btn-ember mag" href="#start">Start a project</a>
+      <a class="btn btn-ember mag" href="/contact">Start a project</a>
     </nav>
   </div>
 </header>
@@ -281,7 +295,7 @@ footer nav{display:flex;gap:20px}
       <div class="hero-row">
         <div>
           <p class="lead">Bay1 Consulting Group designs and builds websites for small businesses that work as hard as you do. Fast, good-looking, and easy to update. AI add-ons when they'll save you time.</p>
-          <div class="ctas"><a class="btn btn-ember mag" href="#start">Start a project</a><a class="btn btn-line" href="#work">See the work</a></div>
+          <div class="ctas"><a class="btn btn-ember mag" href="/contact">Start a project</a><a class="btn btn-line" href="#work">See the work</a></div>
         </div>
         <div class="badge" aria-hidden="true">
           <svg class="badge-ring" viewBox="0 0 150 150"><defs><path id="circ" d="M75 75 m-58 0 a58 58 0 1 1 116 0 a58 58 0 1 1 -116 0"/></defs><text><textPath href="#circ">MADE IN BAYONNE · NEW JERSEY · WEB DESIGN · </textPath></text></svg>
@@ -395,6 +409,7 @@ footer nav{display:flex;gap:20px}
         </div>
       </div>
       <div class="dots" id="dots" aria-label="Choose a website"></div>
+      <div class="more rv center"><a class="btn btn-ghost mag" href="/work">See all our work &rarr;</a></div>
     </div>
   </section>
 
@@ -415,6 +430,7 @@ footer nav{display:flex;gap:20px}
         </div>
         <div class="answer rv" style="--d:1" id="answer" aria-live="polite"></div>
       </div>
+      <div class="more rv"><a class="btn btn-ghost mag" href="/services">See all services &rarr;</a></div>
     </div>
   </section>
 
@@ -480,7 +496,7 @@ footer nav{display:flex;gap:20px}
 
   <section id="hi">
     <div class="wrap founder">
-      <div class="polaroid rv"><span class="tape"></span><div class="ph"><svg viewBox="0 0 294 328" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M86.0 316.5L86.0 305.0L109.5 305.0L133.0 305.0L133.0 240.4C133.0 189.1 132.7 176.0 131.8 176.6C131.1 177.1 120.8 183.4 109.0 190.8L87.5 204.1L87.2 189.3C87.0 175.0 87.0 174.5 89.2 172.8C90.5 171.9 101.2 164.8 113.1 157.0L134.7 143.0L153.4 143.0L172.0 143.0L172.0 224.0L172.0 305.0L193.5 305.0L214.9 305.0L215.2 313.5L215.5 321.9L224.5 318.9C252.6 309.5 276.1 292.1 285.8 273.4C289.7 265.8 292.3 257.2 293.3 249.0C293.5 247.1 293.8 264.1 293.8 286.8L294.0 328.0L190.0 328.0L86.0 328.0L86.0 316.5ZM292.7 233.8C291.8 225.0 289.7 218.5 285.3 211.2C273.4 191.7 250.2 177.5 216.5 169.0C209.9 167.3 200.6 165.4 195.8 164.8C190.9 164.1 187.0 163.2 187.0 162.9C187.0 162.5 188.5 161.9 190.2 161.5C205.0 158.6 230.8 147.1 241.8 138.7C263.4 122.0 272.5 98.6 267.6 72.7C266.3 65.8 260.4 52.5 256.6 47.7C255.0 45.6 256.1 45.1 238.5 56.5C231.9 60.8 175.0 97.3 136.7 121.9C131.9 125.0 117.7 134.2 105.2 142.5C92.7 150.8 75.3 162.2 66.5 167.9C57.7 173.7 39.4 185.7 25.7 194.7C12.1 203.7 0.7 211.0 0.5 211.0C0.2 211.0 0.0 203.6 0.0 194.5L0.0 178.0L11.2 170.7C17.4 166.6 26.3 160.9 31.0 157.8C43.9 149.5 67.2 134.2 89.5 119.5C106.8 108.1 121.5 98.5 151.0 79.5C173.9 64.7 214.1 38.7 222.9 32.9L233.3 26.2L224.4 21.7C214.5 16.8 205.1 12.9 197.5 10.7L192.5 9.3L178.0 18.6C170.0 23.7 160.1 30.0 156.0 32.6C151.9 35.3 144.2 40.2 139.0 43.6C133.8 46.9 120.5 55.5 109.5 62.5C84.4 78.6 75.4 84.5 35.0 111.1C17.1 122.9 1.9 132.9 1.2 133.4C0.3 134.0 0.0 130.5 0.0 117.3L0.0 100.5L5.3 97.2C10.7 93.8 34.2 78.4 51.6 66.9C57.0 63.3 69.1 55.4 78.5 49.4C87.8 43.4 101.0 34.9 107.7 30.5C114.4 26.1 126.9 18.0 135.5 12.5C144.0 7.0 151.0 2.2 151.0 1.8C151.0 1.4 148.6 0.9 145.8 0.7C142.9 0.5 175.0 0.3 217.2 0.2L294.0 0.0L294.0 120.0C294.0 186.0 293.8 240.0 293.6 240.0C293.4 240.0 293.0 237.2 292.7 233.8ZM0.1 45.2L0.0 0.0L47.8 0.1C90.8 0.2 94.8 0.3 88.1 1.5C60.5 6.5 40.1 16.6 24.9 32.8C12.6 45.9 4.5 63.0 1.6 81.8C0.3 89.9 0.2 87.2 0.1 45.2Z"/></svg></div><span class="hand cap">your photo here, Francis</span></div>
+      <div class="polaroid rv"><span class="tape"></span><span class="hand tear-hint" aria-hidden="true">tear me</span><button class="ph" type="button" aria-pressed="false" aria-label="Tear the photo to see another one of Francis"><img class="under" src="../../public/brand/francis-boat.jpg" alt="Francis driving a boat" width="720" height="900" loading="lazy" decoding="async"><img class="half l" src="../../public/brand/francis.jpg" alt="Francis LiButti in front of Sungnyemun Gate in Seoul" width="720" height="900" loading="lazy" decoding="async"><img class="half r" src="../../public/brand/francis.jpg" alt="" width="720" height="900" loading="lazy" decoding="async"></button><span class="hand cap"><span class="c1">Francis, in Seoul</span><span class="c2">Francis, driving a boat</span></span></div>
       <div class="rv" style="--d:1">
         <div class="label">The person behind it</div>
         <h2 style="margin-top:14px">Hi, I'm Francis. <em class="i">I build every site myself.</em></h2>
@@ -489,6 +505,7 @@ footer nav{display:flex;gap:20px}
         <div class="inds" aria-label="Who we work with">
           <span class="ind">Electricians and trades</span><span class="ind">Home services</span><span class="ind">Landscaping</span><span class="ind">Cleaning crews</span><span class="ind">Bakeries and catering</span><span class="ind">Salons and studios</span><span class="ind">Professional offices</span><span class="ind">Local retail</span>
         </div>
+        <div class="more rv"><a class="btn btn-ghost mag" href="/about">More about Bay1 &rarr;</a></div>
       </div>
     </div>
   </section>
@@ -499,7 +516,7 @@ footer nav{display:flex;gap:20px}
       <div class="label rv" style="color:var(--navy)">Start a project</div>
       <h2 class="rv" style="margin-top:14px">Let's build <em class="i">something good.</em></h2>
       <p class="rv">Tell me about your business and what your website should be doing for you. I'll reply within a day with ideas and a rough price.</p>
-      <div class="row rv"><a class="btn btn-navy mag" href="#start">Start a project</a><code id="email">francis@bay1cg.com</code><button class="copy" type="button" id="copy-mail">Copy email</button></div>
+      <div class="row rv"><a class="btn btn-navy mag" href="/contact">Start a project</a><code id="email">francis@bay1cg.com</code><button class="copy" type="button" id="copy-mail">Copy email</button></div>
     </div>
   </section>
 </main>
@@ -738,6 +755,9 @@ if(!reduce&&'IntersectionObserver' in window){const io=new IntersectionObserver(
   const sel=btn=>{const r=document.createRange();r.selectNodeContents(btn.id==='copy'?out:document.getElementById('email'));const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected, press Ctrl+C'};
   document.getElementById('copy').onclick=e=>copy(e.currentTarget,out.textContent);
   document.getElementById('copy-mail').onclick=e=>copy(e.currentTarget,'francis@bay1cg.com');
+  /* polaroid: click to tear the photo and show the one underneath; click again to put it back */
+  const pol=document.querySelector('.polaroid'), tear=pol&&pol.querySelector('button.ph');
+  if(tear) tear.onclick=()=>{const t=pol.classList.toggle('torn');tear.setAttribute('aria-pressed',String(t))};
 })();
 
 </script>
