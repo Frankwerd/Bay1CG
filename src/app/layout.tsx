@@ -11,11 +11,14 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.bay1cg.com"),
   title: {
     default: `${site.name} | Web design and development · Bayonne, NJ`,
     template: `%s | ${site.short}`,
   },
   description: site.description,
+  openGraph: { siteName: site.name, type: "website" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
