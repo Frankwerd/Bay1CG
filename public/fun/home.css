@@ -216,6 +216,18 @@ textarea:focus,input:focus{outline:none;border-color:var(--ember)}
 .polaroid .ph{aspect-ratio:4/5;background:var(--navy);display:grid;place-items:center;color:var(--ember)}
 .polaroid .ph svg{width:40%} .polaroid .ph img{display:block;width:100%;height:100%;object-fit:cover}
 .polaroid .cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:1.5rem}
+.polaroid button.ph{display:block;position:relative;width:100%;padding:0;border:0;cursor:pointer;overflow:visible;background:var(--navy)}
+.polaroid .ph .under,.polaroid .ph .half{position:absolute;inset:0;width:100%;height:100%}
+.polaroid .ph .half{transition:transform .5s var(--spring),opacity .3s;pointer-events:none}
+.polaroid .ph .l{clip-path:polygon(0 0,53% 0,48% 9%,55% 18%,47% 28%,54% 37%,46% 47%,55% 56%,47% 66%,53% 75%,46% 85%,52% 93%,49% 100%,0 100%)}
+.polaroid .ph .r{clip-path:polygon(53% 0,100% 0,100% 100%,49% 100%,52% 93%,46% 85%,53% 75%,47% 66%,55% 56%,46% 47%,54% 37%,47% 28%,55% 18%,48% 9%)}
+.polaroid.torn .ph .half{transition:transform .9s cubic-bezier(.55,0,.8,.4),opacity .5s .35s;opacity:0}
+.polaroid.torn .ph .l{transform:translate(-34%,26%) rotate(-16deg)}
+.polaroid.torn .ph .r{transform:translate(34%,32%) rotate(13deg)}
+.polaroid .cap .c2,.polaroid.torn .cap .c1{display:none} .polaroid.torn .cap .c2{display:inline}
+.tear-hint{position:absolute;right:-18px;top:-38px;transform:rotate(6deg);font-size:1.7rem;pointer-events:none;transition:opacity .3s}
+.polaroid.torn .tear-hint{opacity:0}
+@media (prefers-reduced-motion:reduce){.polaroid .ph .half,.polaroid.torn .ph .half{transition:opacity .2s;transform:none}}
 .tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(232,83,30,.25);transform:translateX(-50%) rotate(2deg)}
 .founder h2{font-size:var(--h2)}
 .founder p{color:var(--steel);margin-top:18px;max-width:36rem;font-size:var(--lead);line-height:1.55}

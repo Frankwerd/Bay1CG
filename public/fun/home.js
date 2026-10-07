@@ -232,5 +232,8 @@ if(!reduce&&'IntersectionObserver' in window){const io=new IntersectionObserver(
   const sel=btn=>{const r=document.createRange();r.selectNodeContents(btn.id==='copy'?out:document.getElementById('email'));const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected, press Ctrl+C'};
   document.getElementById('copy').onclick=e=>copy(e.currentTarget,out.textContent);
   document.getElementById('copy-mail').onclick=e=>copy(e.currentTarget,'francis@bay1cg.com');
+  /* polaroid: click to tear the photo and show the one underneath; click again to put it back */
+  const pol=document.querySelector('.polaroid'), tear=pol&&pol.querySelector('button.ph');
+  if(tear) tear.onclick=()=>{const t=pol.classList.toggle('torn');tear.setAttribute('aria-pressed',String(t))};
 })();
 })();
